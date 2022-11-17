@@ -3,8 +3,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem "phlex", github: "joeldrapper/phlex"
 gem "phlex-rails", github: "joeldrapper/phlex-rails"
-gem "phlex", github: "joeldrapper/phlex", require: ["phlex", "phlex/markdown"]
+gem "phlex-markdown", github: "joeldrapper/phlex-markdown"
 
 gem "capybara"
 gem "rails"
