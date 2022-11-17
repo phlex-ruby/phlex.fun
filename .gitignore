@@ -9,7 +9,7 @@
 /spec/examples.txt
 /spec/internal/**/log/*
 node_modules
-/docs/dist
+/dist
 Gemfile.lock
 .rubocop-*
 .covered.db

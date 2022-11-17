@@ -5,51 +5,8 @@ on:
   pull_request:
     branches: ['main']
 jobs:
-  specs:
-    strategy:
-      matrix:
-        os: ['ubuntu-latest', 'macos-latest']
-        ruby-version: ['2.7', '3.0', '3.1', 'head']
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: phlex/setup
-        uses: ruby/setup-ruby@v1
-        with:
-          working-directory: ./phlex
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-
-      - name: phlex/tests
-        run: bundle exec sus
-        working-directory: ./phlex
-
-      - name: phlex/type-check
-        run: bundle exec solargraph typecheck --level typed
-        working-directory: ./phlex
-
-      - name: phlex/rubocop
-        run: bundle exec rubocop
-        working-directory: ./phlex
-
-
-      - name: phlex-rails/setup
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-          working-directory: ./phlex-rails
-
-      - name: phlex-rails/tests
-        run: bundle exec sus
-        working-directory: ./phlex-rails
-
-  docs:
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./docs
 
     steps:
       - uses: actions/checkout@v3
@@ -57,7 +14,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          working-directory: ./docs
           ruby-version: "3.2"
           bundler-cache: true
 
