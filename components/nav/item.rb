@@ -2,14 +2,14 @@
 
 module Components
 	class Nav::Item < Phlex::HTML
-		def initialize(text, to:, active_page:)
+		def initialize(text, to:)
 			@text = text
 			@to = to
 		end
 
 		def template
 			li do
-				a(**link_classes, href: "/#{link}") { @text }
+				a(**link_classes, href: "/#{link}/") { @text }
 			end
 		end
 
