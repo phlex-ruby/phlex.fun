@@ -21,30 +21,30 @@ module Components
 
 		def guide
 			render Nav::Group.new("Guide") do |g|
-				g.item("Introduction", to: Pages::Index, active_page: @_parent)
-				g.item("Views", to: Pages::Views, active_page: @_parent)
-				g.item("Templates", to: Pages::Templates, active_page: @_parent)
-				g.item("Helpers", to: Pages::Helpers, active_page: @_parent)
-				g.item("Translations", to: Pages::Translations, active_page: @_parent)
+				g.item("Introduction", to: Pages::Index)
+				g.item("Views", to: Pages::Views)
+				g.item("Templates", to: Pages::Templates)
+				g.item("Helpers", to: Pages::Helpers)
+				g.item("Translations", to: Pages::Translations)
 			end
 		end
 
 		def testing
 			render Nav::Group.new("Testing") do |g|
-				g.item("Getting Started", to: Pages::Testing::GettingStarted, active_page: @_parent)
-				g.item("Nokogiri", to: Pages::Testing::Nokogiri, active_page: @_parent)
-				g.item("Capybara", to: Pages::Testing::Capybara, active_page: @_parent)
-				g.item("Rails", to: Pages::Testing::Rails, active_page: @_parent)
+				g.item("Getting Started", to: Pages::Testing::GettingStarted)
+				g.item("Nokogiri", to: Pages::Testing::Nokogiri)
+				g.item("Capybara", to: Pages::Testing::Capybara)
+				g.item("Rails", to: Pages::Testing::Rails)
 			end
 		end
 
 		def rails
 			render Nav::Group.new("Rails") do |g|
-				g.item("Getting started", to: Pages::Rails::GettingStarted, active_page: @_parent)
-				g.item("Rendering views", to: Pages::Rails::RenderingViews, active_page: @_parent)
-				g.item("Layouts", to: Pages::Rails::Layouts, active_page: @_parent)
-				g.item("Helpers", to: Pages::Rails::Helpers, active_page: @_parent)
-				g.item("Migrating to Phlex", to: Pages::Rails::Migrating, active_page: @_parent)
+				g.item("Getting started", to: Pages::Rails::GettingStarted)
+				g.item("Rendering views", to: Pages::Rails::RenderingViews)
+				g.item("Layouts", to: Pages::Rails::Layouts)
+				g.item("Helpers", to: Pages::Rails::Helpers)
+				g.item("Migrating to Phlex", to: Pages::Rails::Migrating)
 			end
 		end
 	end
