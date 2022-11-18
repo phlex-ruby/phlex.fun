@@ -41,38 +41,7 @@ module Components
 
 						div do
 							div class: "flex flex-row" do
-								input type: "checkbox", id: "nav-toggle", class: "flex-0 peer hidden"
-								label for: "nav-toggle", class: "top-0 bottom-0 left-0 right-0 bg-gray-900 opacity-0 transition-all peer-checked:fixed peer-checked:z-30 peer-checked:block peer-checked:opacity-50 lg:hidden lg:peer-checked:hidden"
-								nav class: "fixed lg:relative w-3/4 border-r-2 border-gray-100 lg:border-0 lg:w-1/4 text-lg lg:text-base h-full z-40 px-10 py-5 -left-full transition-all peer-checked:left-0 lg:left-0 bg-white" do
-									h2(class: "text-lg font-semibold pt-5") { "Guide" }
-
-									ul do
-										render Nav::Item.new("Introduction", to: Pages::Index, active_page: @_parent)
-										render Nav::Item.new("Views", to: Pages::Views, active_page: @_parent)
-										render Nav::Item.new("Templates", to: Pages::Templates, active_page: @_parent)
-										render Nav::Item.new("Helpers", to: Pages::Helpers, active_page: @_parent)
-										render Nav::Item.new("Translations", to: Pages::Translations, active_page: @_parent)
-									end
-
-									h2(class: "text-lg font-semibold pt-5") { "Testing" }
-
-									ul do
-										render Nav::Item.new("Getting Started", to: Pages::Testing::GettingStarted, active_page: @_parent)
-										render Nav::Item.new("Nokogiri", to: Pages::Testing::Nokogiri, active_page: @_parent)
-										render Nav::Item.new("Capybara", to: Pages::Testing::Capybara, active_page: @_parent)
-										render Nav::Item.new("Rails", to: Pages::Testing::Rails, active_page: @_parent)
-									end
-
-									h2(class: "text-lg font-semibold pt-5") { "Rails" }
-
-									ul do
-										render Nav::Item.new("Getting started", to: Pages::Rails::GettingStarted, active_page: @_parent)
-										render Nav::Item.new("Rendering views", to: Pages::Rails::RenderingViews, active_page: @_parent)
-										render Nav::Item.new("Layouts", to: Pages::Rails::Layouts, active_page: @_parent)
-										render Nav::Item.new("Helpers", to: Pages::Rails::Helpers, active_page: @_parent)
-										render Nav::Item.new("Migrating to Phlex", to: Pages::Rails::Migrating, active_page: @_parent)
-									end
-								end
+								render Nav.new
 
 								main class: "w-full lg:w-3/4 px-6 lg:px-20 py-5 border-0 lg:border-l-2 border-gray-100" do
 									div(class: "max-w-full lg:max-w-prose prose", &block)
