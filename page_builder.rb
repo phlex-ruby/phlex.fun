@@ -16,7 +16,7 @@ class PageBuilder
 	def call
 		puts "Building #{@page.name}"
 		FileUtils.mkdir_p(directory)
-		File.write(file, @page.new.call)
+		File.write(file, @page.new.call(view_context: { current_page: @page }))
 	end
 
 	private

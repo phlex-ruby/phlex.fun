@@ -16,7 +16,7 @@ module Components
 				end
 
 				div id: "#{unique_identifier}-panel", role: "tabpanel", aria_labelledby: "#{unique_identifier}-label", class: "tab hidden order-2 w-full border rounded-b rounded-tr overflow-hidden" do
-					@_parent.instance_exec(&block)
+					yield_content(&block)
 				end
 			end
 

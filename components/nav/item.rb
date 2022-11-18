@@ -5,7 +5,6 @@ module Components
 		def initialize(text, to:, active_page:)
 			@text = text
 			@to = to
-			@active_page = active_page
 		end
 
 		def template
@@ -27,7 +26,7 @@ module Components
 		end
 
 		def active?
-			@active_page.instance_of?(@to)
+			@to == helpers[:current_page]
 		end
 	end
 end
