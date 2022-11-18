@@ -9,7 +9,7 @@ module Components
 
 		def template
 			li do
-				a(**link_classes, href: "/#{link}") { @text }
+				a(**link_classes, href: "/#{link}/") { @text }
 			end
 		end
 
