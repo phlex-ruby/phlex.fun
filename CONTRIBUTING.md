@@ -1,23 +1,12 @@
-# Contributing to Phlex
+# Contributing to Phlex.fun
 
-## Priorities
-
-We’re trying to provide the best possible developer experience for the people using Phlex in their apps and the best possible performance for the users of those apps.
-
-Phlex is incredibly complex and requires a lot of meta-programming but when you use it, it feels simple. Phlex views feel like plain old Ruby objects. You just subclass and define a couple of methods. That’s it. That’s how it should be.
+Phlex.fun is powered by a custom static site builder that uses Phlex views.
 
 ## Setup
 
+- Install or activate the Ruby version specified in `.ruby-version`
 - Install dependencies `bundle install`
-- Run the tests `bundle exec sus`
-- Run Rubocop and auto-correct `bundle exec rubocop -A`
 
-## Tests
+## Preview
 
-We use the **[Sus](https://github.com/ioquatix/sus)** testing framework. It feels a bit like RSpec with a few small differences. There’s no documentation for Sus at the moment, but you should be able to pick up the basics from reading other tests or looking at the implementation in the Sus repo.
-
-You can run all the tests with `bundle exec sus`.
-
-## Documentation
-
-Documentation is deployed when it’s merged into the `latest` branch with a release. But you can build and preview the docs locally by running `bin/docs`.
+You can preview the website by running `bin/dev` and navigating to `http://127.0.0.1:8080` in your browser.
