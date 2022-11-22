@@ -42,7 +42,7 @@ module Pages
 				end
 
 				render Markdown.new(<<~MD)
-					## Implicit scoopes
+					## Implicit scopes
 
 					Start your translate key with a `.` to use the name of the view as an implicit scope.
 				MD
