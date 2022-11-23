@@ -10,15 +10,15 @@ You can create a view class by subclassing `Phlex::HTML` and defining a `templat
 
 ```phlex
 example do |e|
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def template
-				h1 { "👋 Hello World!" }
-			end
-		end
-	RUBY
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def template
+        h1 { "👋 Hello World!" }
+      end
+    end
+  RUBY
 
-	e.execute "Hello.new.call"
+  e.execute "Hello.new.call"
 end
 ```
 
@@ -32,19 +32,19 @@ We'll render this view with the arguments `name: "Joel"` and see what it produce
 
 ```phlex
 example do |e|
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def initialize(name:)
-				@name = name
-			end
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def initialize(name:)
+        @name = name
+      end
 
-			def template
-				h1 { "👋 Hello \#{@name}!" }
-			end
-		end
-	RUBY
+      def template
+        h1 { "👋 Hello \#{@name}!" }
+      end
+    end
+  RUBY
 
-	e.execute "Hello.new(name: 'Joel').call"
+  e.execute "Hello.new(name: 'Joel').call"
 end
 ```
 
@@ -54,28 +54,28 @@ Views can render other views in their templates using the `render` method. Let's
 
 ```phlex
 example do |e|
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			def template
-				render Hello.new(name: "Joel")
-				render Hello.new(name: "Alexandre")
-			end
-		end
-	RUBY
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      def template
+        render Hello.new(name: "Joel")
+        render Hello.new(name: "Alexandre")
+      end
+    end
+  RUBY
 
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def initialize(name:)
-				@name = name
-			end
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def initialize(name:)
+        @name = name
+      end
 
-			def template
-				h1 { "👋 Hello \#{@name}!" }
-			end
-		end
-	RUBY
+      def template
+        h1 { "👋 Hello \#{@name}!" }
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```
 
@@ -85,27 +85,27 @@ Views can also yield content blocks, which can be passed in when rendering. Let'
 
 ```phlex
 example do |e|
-	e.tab "card.rb", <<~RUBY
-		class Card < Phlex::HTML
-			def template(&content)
-				article(class: "drop-shadow") do
-					yield_content(&content)
-				end
-			end
-		end
-	RUBY
+  e.tab "card.rb", <<~RUBY
+    class Card < Phlex::HTML
+      def template(&content)
+        article(class: "drop-shadow") do
+          yield_content(&content)
+        end
+      end
+    end
+  RUBY
 
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			def template
-				render Card.new do
-					h1 { "👋 Hello!" }
-				end
-			end
-		end
-	RUBY
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      def template
+        render Card.new do
+          h1 { "👋 Hello!" }
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```
 
@@ -121,9 +121,9 @@ Since the block of content was the only thing we need in the `<article>` element
 
 ```ruby
 class Card < Phlex::HTML
-	def template(&content)
-		article(class: "drop-shadow", &content)
-	end
+  def template(&content)
+    article(class: "drop-shadow", &content)
+  end
 end
 ```
 
@@ -133,17 +133,17 @@ You can register custom elements with the `register_element` macro. The custom e
 
 ```phlex
 example do |e|
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			register_element :trix_editor
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      register_element :trix_editor
 
-			def template
-				trix_editor input: "content", autofocus: true
-			end
-		end
-	RUBY
+      def template
+        trix_editor input: "content", autofocus: true
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```
 
@@ -153,24 +153,24 @@ Include the `Phlex::Callbacks` module, and if you define `#before_rendering_temp
 
 ```phlex
 example do |e|
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			include Phlex::Callbacks
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      include Phlex::Callbacks
 
-			def before_rendering_template
-				h1 { "Hello" }
-			end
+      def before_rendering_template
+        h1 { "Hello" }
+      end
 
-			def template
-				h2 { "World" }
-			end
+      def template
+        h2 { "World" }
+      end
 
-			def after_rendering_template
-				h3 { "Bye" }
-			end
-		end
-	RUBY
+      def after_rendering_template
+        h3 { "Bye" }
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```

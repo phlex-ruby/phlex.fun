@@ -12,39 +12,39 @@ If layouts are Phlex views, they can be rendered just like any other view and ca
 
 ```phlex
 example do |e|
-	e.tab "layout.rb", <<~RUBY
-		module Views
-			class Layout < Phlex::HTML
-				def initialize(title:)
-					@title = title
-				end
+  e.tab "layout.rb", <<~RUBY
+    module Views
+      class Layout < Phlex::HTML
+        def initialize(title:)
+          @title = title
+        end
 
-				def template(&)
-					html do
-						head do
-							title { @title }
-						end
+        def template(&)
+          html do
+            head do
+              title { @title }
+            end
 
-						body(&)
-					end
-				end
-			end
-		end
-	RUBY
+            body(&)
+          end
+        end
+      end
+    end
+  RUBY
 
-	e.tab "index.rb", <<~RUBY
-		module Views
-			class Index < Phlex::HTML
-				def template
-					render Layout.new(title: "Hello") do
-						h1 { "👋" }
-					end
-				end
-			end
-		end
-	RUBY
+  e.tab "index.rb", <<~RUBY
+    module Views
+      class Index < Phlex::HTML
+        def template
+          render Layout.new(title: "Hello") do
+            h1 { "👋" }
+          end
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Views::Index.new.call"
+  e.execute "Views::Index.new.call"
 end
 ```
 

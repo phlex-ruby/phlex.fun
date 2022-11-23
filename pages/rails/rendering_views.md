@@ -12,16 +12,16 @@ Doing this allows you to design views without implicit dependencies on controlle
 
 ```ruby
 class ArticlesController < ApplicationController
-	def index
-		render Views::Articles::Index.new(
-			articles: Article.all.load_async
-		)
-	end
+  def index
+    render Views::Articles::Index.new(
+      articles: Article.all.load_async
+    )
+  end
 
-	def show
-		render Views::Articles::Show.new(
-			article: Article.find(params[:id])
-		)
-	end
+  def show
+    render Views::Articles::Show.new(
+      article: Article.find(params[:id])
+    )
+  end
 end
 ```

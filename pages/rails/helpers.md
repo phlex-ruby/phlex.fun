@@ -10,15 +10,15 @@ You can use the `helpers` proxy to access any Rails helper from a Phlex view. Fo
 
 ```ruby
 module Views
-	class Hello < ApplicationView
-		delegate :t, to: :helpers
+  class Hello < ApplicationView
+    delegate :t, to: :helpers
 
-		def template
-			h1 do
-				t "hello"
-			end
-		end
-	end
+    def template
+      h1 do
+        t "hello"
+      end
+    end
+  end
 end
 ```
 
