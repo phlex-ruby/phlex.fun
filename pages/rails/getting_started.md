@@ -39,9 +39,9 @@ For example, running `rails g phlex:view Articles::Index` will create `app/views
 
 ```ruby
 module Views
-	class Articles::Index < ApplicationView
-		def template
-		end
-	end
+  class Articles::Index < ApplicationView
+    def template
+    end
+  end
 end
 ```

@@ -14,30 +14,30 @@ If your view represents a whole HTML document, you can require `phlex/testing/no
 
 ```phlex
 example do |e|
-	e.tab "test.rb", <<~RUBY
-		require "phlex/testing/nokogiri"
+  e.tab "test.rb", <<~RUBY
+    require "phlex/testing/nokogiri"
 
-		class TestExample < Minitest::Test
-			include Phlex::Testing::Nokogiri::DocumentHelper
+    class TestExample < Minitest::Test
+      include Phlex::Testing::Nokogiri::DocumentHelper
 
-			def test_example
-				output = render Example.new
-				assert_equal "Hello Joel", output.css("h1").text
-			end
-		end
-	RUBY
+      def test_example
+        output = render Example.new
+        assert_equal "Hello Joel", output.css("h1").text
+      end
+    end
+  RUBY
 
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def initialize(name)
-				@name = name
-			end
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def initialize(name)
+        @name = name
+      end
 
-			def template
-				h1 { "Hello \#{@name}" }
-			end
-		end
-	RUBY
+      def template
+        h1 { "Hello \#{@name}" }
+      end
+    end
+  RUBY
 end
 ```
 ## Fragments
@@ -46,29 +46,29 @@ If your view represents a fragment (partial), you can require `phlex/testing/nok
 
 ```phlex
 example do |e|
-	e.tab "test.rb", <<~RUBY
-		require "phlex/testing/nokogiri"
+  e.tab "test.rb", <<~RUBY
+    require "phlex/testing/nokogiri"
 
-		class TestExample < Minitest::Test
-			include Phlex::Testing::Nokogiri::FragmentHelper
+    class TestExample < Minitest::Test
+      include Phlex::Testing::Nokogiri::FragmentHelper
 
-			def test_example
-				output = render Example.new("Joel")
-				assert_equal "Hello Joel", output.css("h1").text
-			end
-		end
-	RUBY
+      def test_example
+        output = render Example.new("Joel")
+        assert_equal "Hello Joel", output.css("h1").text
+      end
+    end
+  RUBY
 
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def initialize(name)
-				@name = name
-			end
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def initialize(name)
+        @name = name
+      end
 
-			def template
-				h1 { "Hello \#{@name}" }
-			end
-		end
-	RUBY
+      def template
+        h1 { "Hello \#{@name}" }
+      end
+    end
+  RUBY
 end
 ```

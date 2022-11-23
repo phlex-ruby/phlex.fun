@@ -6,10 +6,10 @@ title: Translatoins
 
 ```phlex
 I18n.backend.store_translations(
-	"pt-BR", {
-		hello: "Olá",
-		views: { feedback: { welcome_message: { hello: "Olá" } } }
-	}
+  "pt-BR", {
+    hello: "Olá",
+    views: { feedback: { welcome_message: { hello: "Olá" } } }
+  }
 )
 I18n.locale = "pt-BR"
 ```
@@ -20,22 +20,22 @@ Just include `Phlex::Translation` in your view and use the `translate` method to
 
 ```phlex
 example do |e|
-	e.tab "welcome_message.rb", <<~RUBY
-		class WelcomeMessage < Phlex::HTML
-			include Phlex::Translation
+  e.tab "welcome_message.rb", <<~RUBY
+    class WelcomeMessage < Phlex::HTML
+      include Phlex::Translation
 
-			def template
-				h1 { translate("hello") }
-			end
-		end
-	RUBY
+      def template
+        h1 { translate("hello") }
+      end
+    end
+  RUBY
 
-	e.tab "pt-PR.yml", <<~YAML, syntax: :yaml
-		pt-BR:
-		  hello: "Olá"
-	YAML
+  e.tab "pt-PR.yml", <<~YAML, syntax: :yaml
+    pt-BR:
+      hello: "Olá"
+  YAML
 
-	e.execute "WelcomeMessage.new.call"
+  e.execute "WelcomeMessage.new.call"
 end
 ```
 
@@ -45,31 +45,31 @@ Start your translate key with a `.` to use the name of the view as an implicit s
 
 ```phlex
 example do |e|
-	e.tab "welcome_message.rb", <<~RUBY
-		module Views
-			module Feedback
-				class WelcomeMessage < Phlex::HTML
-					include Phlex::Translation
+  e.tab "welcome_message.rb", <<~RUBY
+    module Views
+      module Feedback
+        class WelcomeMessage < Phlex::HTML
+          include Phlex::Translation
 
-					def template
-						h1 { translate(".hello") }
-					end
-				end
-			end
-		end
-	RUBY
+          def template
+            h1 { translate(".hello") }
+          end
+        end
+      end
+    end
+  RUBY
 
-	e.tab "pt-BR.yml", <<~YAML, syntax: :yaml
-		pt-BR:
-		  views:
-		    feedback:
-		      welcome_message:
-		        hello: Olá
-	YAML
+  e.tab "pt-BR.yml", <<~YAML, syntax: :yaml
+    pt-BR:
+      views:
+        feedback:
+          welcome_message:
+            hello: Olá
+  YAML
 
-	e.execute <<~RUBY
-		Views::Feedback::WelcomeMessage.translation_path = 'views.feedback.welcome_message'
-		Views::Feedback::WelcomeMessage.new.call
-	RUBY
+  e.execute <<~RUBY
+    Views::Feedback::WelcomeMessage.translation_path = 'views.feedback.welcome_message'
+    Views::Feedback::WelcomeMessage.new.call
+  RUBY
 end
 ```

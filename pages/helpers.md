@@ -14,39 +14,39 @@ Here we have a `Link` view that produces an `<a>` tag with the CSS class `nav-it
 
 ```phlex
 render Example.new do |e|
-	e.tab "link.rb", <<~RUBY
-		class Link < Phlex::HTML
-			def initialize(text, to:, active:)
-				@text = text
-				@to = to
-				@active = active
-			end
+  e.tab "link.rb", <<~RUBY
+    class Link < Phlex::HTML
+      def initialize(text, to:, active:)
+        @text = text
+        @to = to
+        @active = active
+      end
 
-			def template
-				a(href: @to, class: tokens("nav-item",
-					active?: "nav-item-active")) { @text }
-			end
+      def template
+        a(href: @to, class: tokens("nav-item",
+          active?: "nav-item-active")) { @text }
+      end
 
-			private
+      private
 
-			def active? = @active
-		end
-	RUBY
+      def active? = @active
+    end
+  RUBY
 
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			def template
-				nav do
-					ul do
-						li { render Link.new("Home", to: "/", active: true) }
-						li { render Link.new("About", to: "/about", active: false) }
-					end
-				end
-			end
-		end
-	RUBY
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      def template
+        nav do
+          ul do
+            li { render Link.new("Home", to: "/", active: true) }
+            li { render Link.new("About", to: "/about", active: false) }
+          end
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```
 
@@ -54,38 +54,38 @@ You can also use the `classes` helper method to create a token list of classes. 
 
 ```phlex
 render Example.new do |e|
-	e.tab "link.rb", <<~RUBY
-		class Link < Phlex::HTML
-			def initialize(text, to:, active:)
-				@text = text
-				@to = to
-				@active = active
-			end
+  e.tab "link.rb", <<~RUBY
+    class Link < Phlex::HTML
+      def initialize(text, to:, active:)
+        @text = text
+        @to = to
+        @active = active
+      end
 
-			def template
-				a(href: @to, **classes("nav-item",
-					active?: "nav-item-active")) { @text }
-			end
+      def template
+        a(href: @to, **classes("nav-item",
+          active?: "nav-item-active")) { @text }
+      end
 
-			private
+      private
 
-			def active? = @active
-		end
-	RUBY
+      def active? = @active
+    end
+  RUBY
 
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			def template
-				nav do
-					ul do
-						li { render Link.new("Home", to: "/", active: true) }
-						li { render Link.new("About", to: "/about", active: false) }
-					end
-				end
-			end
-		end
-	RUBY
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      def template
+        nav do
+          ul do
+            li { render Link.new("Home", to: "/", active: true) }
+            li { render Link.new("About", to: "/about", active: false) }
+          end
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```

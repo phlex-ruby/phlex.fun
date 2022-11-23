@@ -10,29 +10,29 @@ The `render` method will return a `Capybara::Node::Simple` and set the `page` at
 
 ```phlex
 example do |e|
-	e.tab "test.rb", <<~RUBY
-		require "phlex/testing/capybara"
+  e.tab "test.rb", <<~RUBY
+    require "phlex/testing/capybara"
 
-		class TestExample < Minitest::Test
-			include Phlex::Testing::Capybara::ViewHelper
+    class TestExample < Minitest::Test
+      include Phlex::Testing::Capybara::ViewHelper
 
-			def test_example
-				render Example.new("Joel")
-				assert_select "h1", text: "Hello Joel"
-			end
-		end
-	RUBY
+      def test_example
+        render Example.new("Joel")
+        assert_select "h1", text: "Hello Joel"
+      end
+    end
+  RUBY
 
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def initialize(name)
-				@name = name
-			end
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def initialize(name)
+        @name = name
+      end
 
-			def template
-				h1 { "Hello \#{@name}" }
-			end
-		end
-	RUBY
+      def template
+        h1 { "Hello \#{@name}" }
+      end
+    end
+  RUBY
 end
 ```

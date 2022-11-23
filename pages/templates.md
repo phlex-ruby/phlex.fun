@@ -12,15 +12,15 @@ You can add attributes to HTML tags by passing keyword arguments to the tag meth
 
 ```phlex
 example do |e|
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def template
-				h1(class: "text-xl font-bold") { "👋 Hello World!" }
-			end
-		end
-	RUBY
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def template
+        h1(class: "text-xl font-bold") { "👋 Hello World!" }
+      end
+    end
+  RUBY
 
-	e.execute "Hello.new.call"
+  e.execute "Hello.new.call"
 end
 ```
 
@@ -30,17 +30,17 @@ If you pass a `Hash` as an attribute value, the hash will be flattened with a da
 
 ```phlex
 render Example.new do |e|
-	e.tab "hello.rb", <<~RUBY
-		class Hello < Phlex::HTML
-			def template
-				div(data: { controller: "hello" }) do
-					# ...
-				end
-			end
-		end
-	RUBY
+  e.tab "hello.rb", <<~RUBY
+    class Hello < Phlex::HTML
+      def template
+        div(data: { controller: "hello" }) do
+          # ...
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Hello.new.call"
+  e.execute "Hello.new.call"
 end
 ```
 
@@ -50,27 +50,27 @@ When `true`, the attribute will be rendered without a value; when _falsy_, the a
 
 ```phlex
 render Example.new do |e|
-	e.tab "channel_controls.rb", <<~RUBY
-		class ChannelControls < Phlex::HTML
-			def template
-				input(
-					value: "1",
-					name: "channel",
-					type: "radio",
-					checked: true
-				)
+  e.tab "channel_controls.rb", <<~RUBY
+    class ChannelControls < Phlex::HTML
+      def template
+        input(
+          value: "1",
+          name: "channel",
+          type: "radio",
+          checked: true
+        )
 
-				input(
-					value: "2",
-					name: "channel",
-					type: "radio",
-					checked: false
-				)
-			end
-		end
-	RUBY
+        input(
+          value: "2",
+          name: "channel",
+          type: "radio",
+          checked: false
+        )
+      end
+    end
+  RUBY
 
-	e.execute "ChannelControls.new.call"
+  e.execute "ChannelControls.new.call"
 end
 ```
 
@@ -80,17 +80,17 @@ Because the `template` method is used to define the view template itself, you'll
 
 ```phlex
 render Example.new do |e|
-	e.tab "example.rb", <<~RUBY
-		class Example < Phlex::HTML
-			def template
-				template_tag do
-					img src: "hidden.jpg", alt: "A hidden image."
-				end
-			end
-		end
-	RUBY
+  e.tab "example.rb", <<~RUBY
+    class Example < Phlex::HTML
+      def template
+        template_tag do
+          img src: "hidden.jpg", alt: "A hidden image."
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Example.new.call"
+  e.execute "Example.new.call"
 end
 ```
 
@@ -100,18 +100,18 @@ You can output text content without wrapping it in an element by using the `text
 
 ```phlex
 render Example.new do |e|
-	e.tab "heading.rb", <<~RUBY
-		class Heading < Phlex::HTML
-			def template
-				h1 do
-					strong { "Hello " }
-					text "World!"
-				end
-			end
-		end
-	RUBY
+  e.tab "heading.rb", <<~RUBY
+    class Heading < Phlex::HTML
+      def template
+        h1 do
+          strong { "Hello " }
+          text "World!"
+        end
+      end
+    end
+  RUBY
 
-	e.execute "Heading.new.call"
+  e.execute "Heading.new.call"
 end
 ```
 
@@ -121,18 +121,18 @@ The example output on this site is formatted for readability, but there is usual
 
 ```phlex
 render Example.new do |e|
-	e.tab "links.rb", <<~RUBY
-		class Links < Phlex::HTML
-			def template
-				a(href: "/") { "Home" }
-				whitespace
-				a(href: "/about") { "About" }
-				whitespace
-				a(href: "/contact") { "Contact" }
-			end
-		end
-	RUBY
+  e.tab "links.rb", <<~RUBY
+    class Links < Phlex::HTML
+      def template
+        a(href: "/") { "Home" }
+        whitespace
+        a(href: "/about") { "About" }
+        whitespace
+        a(href: "/contact") { "Contact" }
+      end
+    end
+  RUBY
 
-	e.execute "Links.new.call"
+  e.execute "Links.new.call"
 end
 ```
