@@ -21,30 +21,30 @@ module Components
 
 		def guide
 			render Nav::Group.new("Guide") do |g|
-				g.item("Introduction", to: Pages::Index)
-				g.item("Views", to: Pages::Views)
-				g.item("Templates", to: Pages::Templates)
-				g.item("Helpers", to: Pages::Helpers)
-				g.item("Translations", to: Pages::Translations)
+				g.item("Introduction", to: "/")
+				g.item("Views", to: "/views/")
+				g.item("Templates", to: "/templates/")
+				g.item("Helpers", to: "/helpers/")
+				g.item("Translations", to: "/translations/")
 			end
 		end
 
 		def testing
 			render Nav::Group.new("Testing") do |g|
-				g.item("Getting Started", to: Pages::Testing::GettingStarted)
-				g.item("Nokogiri", to: Pages::Testing::Nokogiri)
-				g.item("Capybara", to: Pages::Testing::Capybara)
-				g.item("Rails", to: Pages::Testing::Rails)
+				g.item("Getting Started", to: "/testing/getting-started/")
+				g.item("Nokogiri", to: "/testing/nokogiri/")
+				g.item("Capybara", to: "/testing/capybara/")
+				g.item("Rails", to: "/testing/rails/")
 			end
 		end
 
 		def rails
 			render Nav::Group.new("Rails") do |g|
-				g.item("Getting started", to: Pages::Rails::GettingStarted)
-				g.item("Rendering views", to: Pages::Rails::RenderingViews)
-				g.item("Layouts", to: Pages::Rails::Layouts)
-				g.item("Helpers", to: Pages::Rails::Helpers)
-				g.item("Migrating to Phlex", to: Pages::Rails::Migrating)
+				g.item("Getting started", to: "/rails/getting-started/")
+				g.item("Rendering views", to: "/rails/rendering-views/")
+				g.item("Layouts", to: "/rails/layouts/")
+				g.item("Helpers", to: "/rails/helpers/")
+				g.item("Migrating to Phlex", to: "/rails/migrating/")
 			end
 		end
 	end
