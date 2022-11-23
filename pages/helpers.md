@@ -13,7 +13,7 @@ The keyword arguments allow you to specify under which conditions certain tokens
 Here we have a `Link` view that produces an `<a>` tag with the CSS class `nav-item`. If the link is _active_, we also apply the CSS class `nav-item-active`.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "link.rb", <<~RUBY
     class Link < Phlex::HTML
       def initialize(text, to:, active:)
@@ -53,7 +53,7 @@ end
 You can also use the `classes` helper method to create a token list of classes. Since this method returns a hash, e.g. `{ class: "your CSS classes here" }`, you can destructure it into a `class:` keyword argument using the `**` prefix operator.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "link.rb", <<~RUBY
     class Link < Phlex::HTML
       def initialize(text, to:, active:)

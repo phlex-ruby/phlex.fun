@@ -29,7 +29,7 @@ end
 If you pass a `Hash` as an attribute value, the hash will be flattened with a dash between each section.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "hello.rb", <<~RUBY
     class Hello < Phlex::HTML
       def template
@@ -49,7 +49,7 @@ end
 When `true`, the attribute will be rendered without a value; when _falsy_, the attribute isn’t rendered at all. You can still use the strings `"true"` and `"false"` as values for non-boolean attributes.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "channel_controls.rb", <<~RUBY
     class ChannelControls < Phlex::HTML
       def template
@@ -79,7 +79,7 @@ end
 Because the `template` method is used to define the view template itself, you'll need to use the method `template_tag` if you want to to render an HTML `<template>` tag.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "example.rb", <<~RUBY
     class Example < Phlex::HTML
       def template
@@ -99,7 +99,7 @@ end
 You can output text content without wrapping it in an element by using the `text` helper method.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "heading.rb", <<~RUBY
     class Heading < Phlex::HTML
       def template
@@ -120,7 +120,7 @@ end
 The example output on this site is formatted for readability, but there is usually no whitespace between HTML tags in the output. If you need to add some whitespace, you can use the `whitespace` helper. This is useful for adding space between _inline_ elements to allow them to wrap.
 
 ```phlex
-render Example.new do |e|
+example do |e|
   e.tab "links.rb", <<~RUBY
     class Links < Phlex::HTML
       def template

@@ -20,7 +20,7 @@ require "minitest"
 PageBuilder.build_all
 
 if ARGV.include? "--watch"
-	Filewatcher.new("#{__dir__}/**/*rb").watch do |_changes|
+	Filewatcher.new(["#{__dir__}/**/*rb", "#{__dir__}/**/*md"]).watch do |_changes|
 		loader.reload
 		loader.eager_load
 		PageBuilder.build_all
