@@ -15,7 +15,15 @@ module Components
 		def code = super(class: "bg-stone-50 inline-block font-medium rounded border px-1 -mt-1")
 
 		def code_block(code, language)
-			render CodeBlock.new(code.gsub(/(?:^|\G) {4}/m, "	"), syntax: language)
+			if language == "phlex"
+				instance_eval(code)
+			else
+				render CodeBlock.new(code, syntax: language)
+			end
+		end
+
+		def example(&)
+			render(Example.new, &)
 		end
 	end
 end

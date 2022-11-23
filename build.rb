@@ -15,6 +15,8 @@ loader.enable_reloading
 loader.setup
 loader.eager_load
 
+require "minitest"
+
 PageBuilder.build_all
 
 if ARGV.include? "--watch"

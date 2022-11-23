@@ -7,6 +7,10 @@ module Components
 		def initialize(code, syntax:)
 			@code = code
 			@syntax = syntax
+
+			if @syntax == "ruby" || @syntax == "html"
+				@code = @code.gsub(/(?:^|\G) {4}/m, "	")
+			end
 		end
 
 		def template
