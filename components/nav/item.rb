@@ -9,7 +9,7 @@ module Components
 
 		def template
 			li do
-				a(**link_classes, href: "/#{link}/") { @text }
+				a(**link_classes, href: "/#{link}") { @text }
 			end
 		end
 
@@ -18,11 +18,11 @@ module Components
 		end
 
 		def link
-			path == "index" ? "" : path
+			path == "index/" ? "" : path
 		end
 
 		def path
-			@to.name.split("::")[1..].map { _1.gsub(/(.)([A-Z])/, '\1-\2') }.map(&:downcase).join("/")
+			@to.name.split("::")[1..].map { _1.gsub(/(.)([A-Z])/, '\1-\2') }.map(&:downcase).join("/") + "/"
 		end
 
 		def active?
