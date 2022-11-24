@@ -22,7 +22,7 @@ The ERB → Phlex converter, [Phlexing](https://www.phlexing.fun), can do the he
 
 If you're using ViewComponent, you might find you can convert components to Phlex views without even changing any call-sites.
 
-## Save the layout 'til last
+## Save the layout ’til last
 
 After everything I said about layouts in the previous section, I'll let you in on a little secret: Phlex actually does support `content_for` in one direction. You can't yield a `content_for` block in Phlex, but you can assign one.
 
