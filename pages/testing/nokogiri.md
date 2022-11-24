@@ -2,13 +2,18 @@
 title: Testing Phlex Views with Nokogiri
 ---
 
-# Testing with Nokogiri
+# Testing HTML Views with Nokogiri [beta]
 
-Phlex includes test helpers for working with rendered views as [Nokogiri](https://nokogiri.org) documents and fragments.
+The [`phlex-testing-nokogiri`](https://rubygems.org/gems/phlex-testing-nokogiri) gem provides helpers for working with rendered views as [Nokogiri](https://nokogiri.org) documents and fragments.
 
-Nokogiri is not a dependency of Phlex, so you’ll need to install that separately to use this helper.
+## Installation
+Add the following to the test group in your Gemfile and run `bundle install`.
 
-## Documents
+```ruby
+gem "phlex-testing-nokogiri"
+```
+
+## Testing Documents
 
 If your view represents a whole HTML document, you can require `phlex/testing/nokogiri` and include the `Phlex::Testing::Nokogiri::DocumentHelper` module to render your view as `Nokogiri::Document` using the `render` method.
 
@@ -40,7 +45,7 @@ example do |e|
   RUBY
 end
 ```
-## Fragments
+## Testing Fragments
 
 If your view represents a fragment (partial), you can require `phlex/testing/nokogiri` and include the `Phlex::Testing::Nokogiri::FragmentHelper` module to render your view as `Nokogiri::Fragment` with the `render` method.
 

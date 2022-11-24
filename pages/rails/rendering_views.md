@@ -8,8 +8,6 @@ You can render a `Phlex::HTML` from your Rails controller actions as well as oth
 
 Instead of implicitly rendering an ERB template with automatic access to all your controller instance variables, you need to explicitly render Phlex views from your controller action methods.
 
-Doing this allows you to design views without implicit dependencies on controller instance variables, making them much easier to test and reuse and reason about.
-
 ```ruby
 class ArticlesController < ApplicationController
   def index

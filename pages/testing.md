@@ -1,10 +1,12 @@
 ---
-title: Getting Started Testing Phlex Views
+title: Testing Phlex Views
 ---
 
-# Getting Started
+# Testing Phlex Views
 
 The `Phlex::Testing::ViewHelper` module defines `render` allowing you to render Phlex views directly in your tests and make assertions against the output.
+
+You’ll need to require `phlex/testing/view_helper` and include `Phlex::Testing::ViewHelper` your test.
 
 ```phlex
 example do |e|

@@ -6,10 +6,10 @@ module Components
 
 		def initialize(code, syntax:)
 			@code = code
-			@syntax = syntax
+			@syntax = syntax.to_sym
 
-			if @syntax == "ruby" || @syntax == "html"
-				@code = @code.gsub(/(?:^|\G) {4}/m, "	")
+			if @syntax == :ruby || @syntax == :html
+				@code = @code.gsub(/(?:^|\G) {2}/m, "	")
 			end
 		end
 

@@ -2,9 +2,22 @@
 title: Testing Phlex Views with Capybara
 ---
 
-# Testing with Capybara
+# Testing with Capybara [beta]
 
-Require `phlex/testing/capybara` and include `Phlex::Testing::Capybara::ViewHelper` to use [Capybara](http://teamcapybara.github.io/capybara/) matchers.
+
+The [`phlex-testing-capybara`](https://rubygems.org/gems/phlex-testing-capybara) gem provides a test helper that lets you use [Capybara](http://teamcapybara.github.io/capybara/) matchers.
+
+## Installation
+
+Add the following to the test group in your Gemfile and run `bundle install`.
+
+```ruby
+gem "phlex-testing-capybara"
+```
+
+## Usage
+
+You’ll need to require `phlex/testing/capybara` and include `Phlex::Testing::Capybara::ViewHelper`.
 
 The `render` method will return a `Capybara::Node::Simple` and set the `page` attribute to the result.
 
