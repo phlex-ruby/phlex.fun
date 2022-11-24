@@ -134,7 +134,6 @@ It’s a good idea to call `super` to allow for inherited callbacks.
 example do |e|
 	e.tab "example.rb", <<~RUBY
 		class Example < Phlex::HTML
-			include Phlex::Callbacks
 
 			def before_template
 				h1 { "Hello" }
