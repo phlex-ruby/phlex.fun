@@ -8,12 +8,8 @@ Bundler.require :default
 
 loader = Zeitwerk::Loader.new
 loader.push_dir(__dir__)
-loader.ignore(__FILE__)
-loader.ignore("#{__dir__}/vendor")
-loader.inflector.inflect("rspec" => "RSpec")
 loader.enable_reloading
 loader.setup
-loader.eager_load
 
 require "minitest"
 
