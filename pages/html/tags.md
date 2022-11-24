@@ -9,7 +9,7 @@ title: HTML Tags
 
 ## Content
 
-You pass content as a block to a tag method. If the return value of the block is a `String`, `Symbol`, `Integer` or `Float`, it will be output as *text*.
+You pass content as a block to a tag method. If the return value of the block is a `String`, `Symbol`, `Integer` or `Float` and no output methods were used, the return value will be output as *text*.
 
 ```phlex
 example do |e|
