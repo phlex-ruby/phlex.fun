@@ -127,7 +127,7 @@ end
 
 You can hook into the rendering process by overriding `before_template` and `after_template` which are called immediately before / after the template is rendered.
 
-It’s usually a good idea to call `super` to allow for inherited callbacks.
+It’s a good idea to call `super` to allow for inherited callbacks.
 
 
 ```phlex

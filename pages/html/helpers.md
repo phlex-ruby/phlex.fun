@@ -157,3 +157,9 @@ example do |e|
 	e.execute "Example.new.call"
 end
 ```
+
+## Unsafe output
+
+`unsafe_raw` takes a `String` and outputs it without any safety or HTML escaping. You should *never* use this method with any string that could come from an untrusted person. In fact, you should pretty much never use this method. If you do, don’t come crying when someone hacks your website.
+
+If you think you need to use `unsafe_raw`, maybe [open a discussion thread](https://github.com/joeldrapper/phlex/discussions/new) for other ideas.

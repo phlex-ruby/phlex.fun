@@ -30,7 +30,7 @@ ul {
 }
 ```
 
-Using these is equvalent to passing the output of the original Rails helpers to `unsafe_raw`, e.g:
+Using these is equivalent to passing the output of the original Rails helpers to `unsafe_raw`, e.g:
 
 ```ruby
 unsafe_raw helpers.javascript_include_tag

@@ -6,9 +6,9 @@ title: Layouts in Rails
 
 Rails has an implicit layouts feature that automatically wraps views in a layout template, usually `views/layouts/application.html.erb`. When using Phlex, you'll probably want to by-pass this feature completely. Here's why:
 
-Sometimes you need to pass some argument to the layout, such as a page title that needs to be rendered in a `<title>` tag in the HTML `<head>`. Rails lets you do this from another part of the view using the `content_for` feature, but this pattern precludes defining an explicit interface for your layout through its initializer.
+Sometimes you need to pass an argument to the layout, such as a page title that needs to be rendered in a `<title>` tag in the HTML `<head>`. Rails lets you do this from another part of the view using the `content_for` feature, but this pattern precludes defining an explicit interface for your layout through its initializer.
 
-If layouts are Phlex views, they can be rendered just like any other view and can require that `title` argument from their initializer. The trick is the page view renders its content into the layout view.
+If layouts are Phlex views, they can be rendered like any other view and can require that `title` argument from their initializer. The trick is the page view renders its content into the layout view.
 
 ```phlex
 example do |e|

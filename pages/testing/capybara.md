@@ -4,7 +4,6 @@ title: Testing Phlex Views with Capybara
 
 # Testing with Capybara [beta]
 
-
 The [`phlex-testing-capybara`](https://rubygems.org/gems/phlex-testing-capybara) gem provides a test helper that lets you use [Capybara](http://teamcapybara.github.io/capybara/) matchers.
 
 ## Installation

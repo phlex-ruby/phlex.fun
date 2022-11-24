@@ -15,6 +15,7 @@ module Components
 		def tab(name, &block)
 			render(Tab.new(name: name, checked: first?), &block)
 			@index += 1
+			nil
 		end
 
 		def unique_identifier

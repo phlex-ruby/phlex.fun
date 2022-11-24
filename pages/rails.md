@@ -20,7 +20,7 @@ Add the following to your Gemfile and run `bundle install`.
 gem "phlex-rails"
 ```
 
-Note, you do not need to install `phlex` separately becuase `phlex` is a dependency of `phlex-rails`.
+Note, you do not need to install `phlex` separately because `phlex` is a dependency of `phlex-rails`.
 
 Once the install is finished, you’ll want to run the setup script: `bin/rails phlex:install`.
 

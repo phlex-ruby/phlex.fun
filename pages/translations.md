@@ -1,5 +1,5 @@
 ---
-title: Translatoins
+title: Translations
 ---
 
 # Translations

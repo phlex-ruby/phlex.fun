@@ -4,7 +4,7 @@ title: HTML Tags
 
 # HTML Tags
 
-`Phlex::HTML` comes with methods that corespond to the most common HTML tags. You’ve seen the `h1` tag in the previous section.
+`Phlex::HTML` comes with methods that correspond to the most common HTML tags. You’ve seen the `h1` tag in the previous section.
 
 
 ## Content
