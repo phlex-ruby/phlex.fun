@@ -34,7 +34,7 @@ Phlex view templates render in an isolated execution context where only the inst
 
 ## Better performance 🔥
 
-Rendering a Phlex view is ~4.35× faster than an ActionView partial and ~2× faster than ViewComponent component.
+Rendering a Phlex view is significantly faster than rendering an ActionView partial or ViewComponent component.
 
 
 # What’s a view?
