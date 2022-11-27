@@ -160,7 +160,7 @@ module Pages
 				render Example.new do |e|
 					e.tab "example.rb", <<~RUBY
 						class Example < Phlex::HTML
-							def before_rendering_template
+							def before_template
 								h1 { "Hello" }
 							end
 
@@ -168,7 +168,7 @@ module Pages
 								h2 { "World" }
 							end
 
-							def after_rendering_template
+							def after_template
 								h3 { "Bye" }
 							end
 						end
