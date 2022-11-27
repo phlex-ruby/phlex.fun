@@ -14,7 +14,7 @@ module Components
 
 		def code = super(class: "bg-stone-50 inline-block font-medium rounded border px-1 -mt-1")
 
-		def code_block(code, language:)
+		def code_block(code, language)
 			render CodeBlock.new(code.gsub(/(?:^|\G) {4}/m, "	"), syntax: language)
 		end
 	end

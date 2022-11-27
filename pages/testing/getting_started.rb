@@ -13,6 +13,7 @@ module Pages
 
 					render Example.new do |e|
 						e.tab "test/test_hello.rb", <<~RUBY
+							require "minitest"
 							require "phlex/testing/view_helper"
 
 							class TestHello < Minitest::Test

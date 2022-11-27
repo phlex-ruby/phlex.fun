@@ -32,8 +32,6 @@ module Components
 		def testing
 			render Nav::Group.new("Testing") do |g|
 				g.item("Getting Started", to: Pages::Testing::GettingStarted)
-				g.item("Nokogiri", to: Pages::Testing::Nokogiri)
-				g.item("Capybara", to: Pages::Testing::Capybara)
 				g.item("Rails", to: Pages::Testing::Rails)
 			end
 		end

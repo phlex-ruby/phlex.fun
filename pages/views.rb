@@ -160,8 +160,6 @@ module Pages
 				render Example.new do |e|
 					e.tab "example.rb", <<~RUBY
 						class Example < Phlex::HTML
-							prepend Phlex::HTML::Callbacks
-
 							def before_rendering_template
 								h1 { "Hello" }
 							end
