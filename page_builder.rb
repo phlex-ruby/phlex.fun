@@ -2,11 +2,15 @@
 
 class PageBuilder
 	def self.build_all
-		FileUtils.mkdir_p("#{__dir__}/dist")
-		FileUtils.cp_r("#{__dir__}/assets", "#{__dir__}/dist")
+		FileUtils.mkdir_p("#{root_path}/dist")
+		FileUtils.cp_r("#{root_path}/assets", "#{root_path}/dist")
 
-		pages = Dir["#{__dir__}/pages/**/*.md"]
+		pages = Dir["#{root_path}/pages/**/*.md"]
 		pages.each { |page| new(page).call }
+	end
+
+	def self.root_path
+		__dir__
 	end
 
 	def initialize(page)
@@ -15,7 +19,7 @@ class PageBuilder
 
 	def call
 		FileUtils.mkdir_p(directory)
-		File.write(file, Components::Page.new(File.read(@page)).call(view_context: { current_page: path }))
+		File.write(file, Components::Page.new(@page).call(view_context: { current_page: path }))
 	end
 
 	private
@@ -25,11 +29,11 @@ class PageBuilder
 	end
 
 	def directory
-		"#{__dir__}/dist#{path}"
+		"#{PageBuilder.root_path}/dist#{path}"
 	end
 
 	def path
-		real_path = @page.delete_prefix("#{__dir__}/pages/").delete_suffix(".md").tr("_", "-")
+		real_path = @page.delete_prefix("#{PageBuilder.root_path}/pages/").delete_suffix(".md").tr("_", "-")
 		if real_path == "index"
 			"/"
 		else
