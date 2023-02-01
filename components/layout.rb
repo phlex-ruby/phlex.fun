@@ -2,8 +2,6 @@
 
 module Components
 	class Layout < Phlex::HTML
-		register_element :style
-
 		def initialize(title:)
 			@title = title
 		end
@@ -30,7 +28,7 @@ module Components
 
 					title { @title }
 					link href: "/application.css", rel: "stylesheet"
-					style { unsafe_raw Rouge::Theme.find("github").render(scope: ".highlight") }
+					style { Rouge::Theme.find("github").render(scope: ".highlight") }
 				end
 
 				body class: "text-stone-700" do
