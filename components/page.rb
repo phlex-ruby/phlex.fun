@@ -17,7 +17,7 @@ module Components
 			end
 		end
 
-		def file_path = @path.delete_prefix("#{PageBuilder.root_path}")
+		def file_path = @path.delete_prefix(PageBuilder.root_path)
 
 		def content = @document.sub(FRONT_MATTER_PATTERN, "")
 	end
