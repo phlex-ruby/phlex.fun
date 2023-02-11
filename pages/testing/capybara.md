@@ -30,7 +30,7 @@ example do |e|
 
       def test_example
         render Example.new("Joel")
-        assert_select "h1", text: "Hello Joel"
+        assert_selector "h1", text: "Hello Joel"
       end
     end
   RUBY
