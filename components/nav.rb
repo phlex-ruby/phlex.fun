@@ -16,6 +16,7 @@ module Components
 					g.item("Introduction", to: "/html/introduction/")
 					g.item("Tags", to: "/html/tags/")
 					g.item("Helpers", to: "/html/helpers/")
+					g.item("Components", to: "/html/components/")
 				end
 
 				render Nav::Group.new("Testing") do |g|
