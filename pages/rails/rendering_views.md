@@ -4,12 +4,14 @@ title: Rendering Phlex views in Rails
 
 # Rendering Phlex views in Rails
 
-You can render a `Phlex::HTML` from your Rails controller actions as well as other views, and even from ActionView / ViewComponent templates.
+You can render a Phlex view from your Rails controller actions or other views — Phlex, ActionView or ViewComponent.
 
-Instead of implicitly rendering an ERB template with automatic access to all your controller instance variables, you need to explicitly render Phlex views from your controller action methods.
+Instead of implicitly rendering an ERB template with automatic access to all your controller instance variables, you’ll need to explicitly render Phlex views from your controller action methods.
 
 ```ruby
 class ArticlesController < ApplicationController
+	layout -> { ApplicationLayout }
+	
   def index
     render Views::Articles::Index.new(
       articles: Article.all.load_async

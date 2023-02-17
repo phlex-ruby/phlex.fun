@@ -4,24 +4,21 @@ title: Phlex Rails Generators
 
 # Rails Generators
 
-## Layout
-Generates a Phlex view for your layout including helpers from `Phlex::Rails::Layout`.
-
+## Component
 ```bash
-bin/rails g phlex:layout Layout
+bin/rails g phlex:component Card
 ```
 
-## Controller
-```bash
-bin/rails g phlex:controller Articles --actions index show
-```
-
-## Page
-```bash
-bin/rails g phlex:page Articles::Index
-```
+This will generate a `CardComponent` in `card_component.rb` under `app/views/components`.
 
 ## View
 ```bash
-bin/rails g phlex:view Article
+bin/rails g phlex:view Articles::Index
 ```
+This will generate a `Articles::IndexView` in `index_view.rb` under `app/views/articles`.
+
+## Controller
+```bash
+bin/rails g phlex:controller Articles index show
+```
+This will generate an `ArticlesController` in `app/controllers`. It will have the actions `index` and `show`, which will render the views `Articles::IndexView` and `Articles::ShowView` generated in `index_view.rb` and `show_view.rb` under `app/views/articles`.

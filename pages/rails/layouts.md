@@ -4,48 +4,38 @@ title: Layouts in Rails
 
 # Layouts in Rails
 
-Rails has an implicit layouts feature that automatically wraps views in a layout template, usually `views/layouts/application.html.erb`. When using Phlex, you'll probably want to by-pass this feature completely. Here's why:
+If you ran the install geneartor, you should have an `ApplicationLayout` file under `app/views/layouts/application_layout.rb`.
 
-Sometimes you need to pass an argument to the layout, such as a page title that needs to be rendered in a `<title>` tag in the HTML `<head>`. Rails lets you do this from another part of the view using the `content_for` feature, but this pattern precludes defining an explicit interface for your layout through its initializer.
+You can configure a controller to use this layout with the `layout` method. Phlex layouts are even compatible with non-Phlex views.
 
-If layouts are Phlex views, they can be rendered like any other view and can require that `title` argument from their initializer. The trick is the page view renders its content into the layout view.
-
-```phlex
-example do |e|
-  e.tab "layout.rb", <<~RUBY
-    module Views
-      class Layout < Phlex::HTML
-        def initialize(title:)
-          @title = title
-        end
-
-        def template(&)
-          html do
-            head do
-              title { @title }
-            end
-
-            body(&)
-          end
-        end
-      end
-    end
-  RUBY
-
-  e.tab "index.rb", <<~RUBY
-    module Views
-      class Index < Phlex::HTML
-        def template
-          render Layout.new(title: "Hello") do
-            h1 { "👋" }
-          end
-        end
-      end
-    end
-  RUBY
-
-  e.execute "Views::Index.new.call"
+```ruby
+class FooController < ApplicationController
+	layout -> { ApplicationLayout }
+	
+	def index
+		render Foo::IndexView
+	end
 end
 ```
 
-If you're using a Phlex view as a layout, you'll want to disable layouts from your Rails controller. You can do this by adding `layout false` to your controller. In a new app, you'll probably want to add this to the `ApplicationController`.
+## Yielding content
+
+Rails doesn't provide a mechanism for passsing arguments to a layout component, but your layout can `yield` content provided by `content_for`.
+
+```ruby
+class ApplicationLayout
+	def template
+		doctype
+		
+		html do
+			head do
+				title { yield(:title) }
+			end
+			
+			body do
+				yield
+			end
+		end
+	end
+end
+```
