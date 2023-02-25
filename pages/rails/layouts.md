@@ -4,7 +4,7 @@ title: Layouts in Rails
 
 # Layouts in Rails
 
-If you ran the install geneartor, you should have an `ApplicationLayout` file under `app/views/layouts/application_layout.rb`.
+If you ran the install generator, you should have an `ApplicationLayout` file under `app/views/layouts/application_layout.rb`.
 
 You can configure a controller to use this layout with the `layout` method. Phlex layouts are even compatible with non-Phlex views.
 
