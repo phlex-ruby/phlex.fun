@@ -23,7 +23,9 @@ end
 Rails doesn't provide a mechanism for passsing arguments to a layout component, but your layout can `yield` content provided by `content_for`.
 
 ```ruby
-class ApplicationLayout
+class ApplicationLayout < Phlex::HTML
+	include Phlex::Rails::Layout
+	
 	def template
 		doctype
 		
