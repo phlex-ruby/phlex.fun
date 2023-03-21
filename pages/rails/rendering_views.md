@@ -13,13 +13,13 @@ class ArticlesController < ApplicationController
 	layout -> { ApplicationLayout }
 	
   def index
-    render Views::Articles::Index.new(
+    render Articles::IndexView.new(
       articles: Article.all.load_async
     )
   end
 
   def show
-    render Views::Articles::Show.new(
+    render Articles::ShowView.new(
       article: Article.find(params[:id])
     )
   end
