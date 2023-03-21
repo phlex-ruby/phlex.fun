@@ -6,7 +6,7 @@ title: HTML view helpers
 
 ## Stand-alone text
 
-You can output text content without wrapping it in an element by using the `text` method. It accepts a single argument which can be a `String`, `Symbol`, `Integer` or `Float`.
+You can output text content without wrapping it in an element by using the `plain` method. It accepts a single argument which can be a `String`, `Symbol`, `Integer` or `Float`.
 
 ```phlex
 example do |e|
@@ -15,7 +15,7 @@ example do |e|
 			def template
 				h1 do
 					strong { "Hello " }
-					text "World!"
+					plain "World!"
 				end
 			end
 		end
