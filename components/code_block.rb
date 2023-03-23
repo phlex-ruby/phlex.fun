@@ -5,26 +5,26 @@ module Components
 		FORMATTER = Rouge::Formatters::HTML.new
 
 		def initialize(code, syntax:)
-			@code = code
-			@syntax = syntax.to_sym
-
-			if @syntax == :ruby || @syntax == :html
-				@code = @code.gsub(/(?:^|\G) {2}/m, "	")
-			end
+			@code = code.chomp
+			@syntax = syntax.length > 0 ? syntax : nil
 		end
 
 		def template
-			pre(class: "highlight p-5 whitespace-pre-wrap bg-stone-50") {
-				unsafe_raw FORMATTER.format(
-					lexer.lex(@code)
-				)
-			}
+			pre class: "highlight", data: do
+				if @syntax
+					unsafe_raw FORMATTER.format(
+						lexer.lex(@code)
+					)
+				else
+					@code
+				end
+			end
 		end
 
 		private
 
-		def lexer
-			Rouge::Lexer.find(@syntax)
-		end
+		def data = { language: @syntax, lines: }
+		def lines = @code.scan(/\n/).count + 1
+		def lexer = Rouge::Lexer.find(@syntax)
 	end
 end

@@ -12,7 +12,10 @@ module Components
 
 		def template
 			render Layout.new(title: @data["title"]) do
-				render Markdown.new(content)
+				article(class: "flow") do
+					render Markdown.new(content)
+				end
+
 				render EditPage.new(file_path) if file_path
 			end
 		end

@@ -1,8 +1,138 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/assets/fonts/jetbrains-mono/Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
 
-pre { tab-size: 2; }
+:root {
+	--ratio: 1.125;
+
+	--color-background: white;
+	--color-text: #222;
+	--color-border: #000;
+	--color-blue: mediumblue;
+	--color-red: crimson;
+
+	--size-xs: calc(var(--size-s) / var(--ratio));
+	--size-s: calc(var(--size-m) / var(--ratio));
+	--size-m: 1em;
+	--size-l: calc(var(--size-m) * var(--ratio));
+	--size-xl: calc(var(--size-l) * var(--ratio));
+	--size-2xl: calc(var(--size-xl) * var(--ratio));
+	--size-3xl: calc(var(--size-2xl) * var(--ratio));
+	--size-4xl: calc(var(--size-3xl) * var(--ratio));
+	--size-5xl: calc(var(--size-4xl) * var(--ratio));
+	--size-6xl: calc(var(--size-5xl) * var(--ratio));
+	--size-7xl: calc(var(--size-6xl) * var(--ratio));
+	--size-8xl: calc(var(--size-7xl) * var(--ratio));
+
+	--flow-space: 1em;
+
+	font-family: jaf-facitweb, sans-serif;
+	font-size: 1.3em;
+	line-height: 1.6;
+	color: var(--color-text);
+	background: var(--color-background);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+  	--color-background: #111;
+    --color-text: white;
+    --color-border: white;
+    --color-blue: blue;
+    --color-red: red;
+  }
+} */
+
+h1 { font-size: var(--size-4xl); }
+h2 {
+	--flow-space-top: 2em;
+	font-size: var(--size-xl);
+}
+
+h3 {
+	font-size: var(--size-l);
+	--flow-space-bottom: .5em;
+	--flow-space-top: 2em;
+}
+
+h4 { font-size: var(--size-m); }
+
+a {
+	color: blue;
+	text-underline-offset: .15em;
+}
+
+pre, code {
+	tab-size: 2;
+	font-family: "JetBrains Mono";
+	font-variant-ligatures: none;
+}
+
+code {
+	border: 1px solid;
+	padding: 0 .25em;
+	margin: -1px 0;
+	font-size: 0.95em;
+	display: inline-block;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+.highlight {
+	--flow-space-bottom: var(--size-8xl);
+	--flow-space-top: var(--size-3xl);
+	padding: var(--size-l) var(--size-2xl);
+	border: 1px solid var(--color-border);
+	border-bottom: 3px solid var(--color-border);
+	position: relative;
+	border-radius: 5px;
+	white-space: pre-wrap;
+}
+
+a {
+	color: var(--color-blue);
+}
+
+.highlight[data-lines="1"] {
+	padding-top: var(--size-s);
+	padding-bottom: var(--size-s);
+}
+
+.highlight[data-language="ruby"]:after { color: var(--color-red); }
+.highlight[data-language="html"]:after { color: var(--color-blue); }
+.highlight[data-language="erb"]:after { color: green; }
+.highlight[data-language="bash"]:after { color: black; }
+
+.highlight[data-language]:after {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	content: attr(data-language);
+	border-left: 1px solid var(--color-border);
+	border-bottom: 1px solid var(--color-border);
+	font-size: var(--size-xs);
+	padding: 0.1em 0.5em;
+	text-transform: uppercase;
+	border-bottom-left-radius: 3px;
+}
+
+.highlight:has(+ .highlight) {
+	--flow-space-bottom: 0;
+	border-bottom: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.highlight + .highlight {
+	--flow-space-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
 
 .tabs input[type="radio"]:checked + label {
   background: #f8f8f8;
@@ -21,12 +151,122 @@ pre { tab-size: 2; }
   display: block;
 }
 
-p {
-  @apply my-5
+.top {
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-top: 2px solid var(--color-border);
 }
 
-.prose ol, .prose ul {
-  list-style: revert;
-  margin: 0 0 0 1rem;
-  padding: 0 0 0 1rem;
+body {
+	margin: 0;
+}
+
+.container {
+	display: flex;
+	margin: auto;
+	max-width: 68rem;
+	padding: 5rem;
+}
+
+.sidebar {
+	flex: 1;
+}
+
+.main-nav a {
+	--flow-space: .25em;
+	display: block;
+}
+
+main {
+	flex: 2;
+}
+
+.highlight .k { color: var(--color-red); }
+.highlight .nc, .highlight .no, .highlight .n, .highlight .nt, .highlight .o { color: var(--color-blue); }
+.highlight .c1 { color: slategrey; }
+.highlight .ss, .highlight .na, .highlight .vi, .highlight .nb { color: green; }
+.highlight .si, .highlight .kp { color: purple }
+
+
+
+// https://piccalil.li/blog/a-modern-css-reset
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.flow > * + * {
+	margin-block-start: var(--flow-space-top, var(--flow-space, 1em));
+	margin-block-end: var(--flow-space-bottom, var(--flow-space, 1em));
 }

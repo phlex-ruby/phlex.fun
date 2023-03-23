@@ -1,10 +1,8 @@
 ---
-title: Getting started with Rails
+title: Using Phlex with Ruby on Rails
 ---
 
-# Getting started with Phlex on Rails
-
-While Phlex can be used in any Ruby project, it’s especially great with [Rails](https://rubyonrails.org). But before we get into the details, it’s important to understand that Phlex is very different from [ActionView](https://guides.rubyonrails.org/action_view_overview.html) and [ViewComponent](https://viewcomponent.org).
+# Introduction to Phlex / Rails
 
 ## Setup
 

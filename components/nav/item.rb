@@ -8,14 +8,8 @@ module Components
 		end
 
 		def template
-			li do
-				a(**link_classes, href: @to.to_s) { @text }
-			end
+			a(href: @to.to_s) { @text }
 		end
-
-		def link_classes = classes("pb-1 block font-medium text-stone-500",
-			active?: "text-red-600 font-bold"
-		)
 
 		def active? = @to == helpers[:current_page]
 	end

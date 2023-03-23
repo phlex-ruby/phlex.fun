@@ -6,8 +6,8 @@ module Components
 			end
 
 			def template(&)
-				h2(class: "text-lg font-semibold pt-5") { @title }
-				ul(&)
+				h3 { @title }
+				yield_content(&)
 			end
 
 			def item(...)

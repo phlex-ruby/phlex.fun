@@ -3,46 +3,79 @@ title: Phlex — fast, object-oriented view framework for Ruby
 ---
 
 # Introduction
-Phlex is a framework for building fast, reusable, testable views in pure Ruby.
 
-```phlex
-example do |e|
-  e.tab "nav.rb", <<~RUBY
-    class Nav < Phlex::HTML
-      def template
-        nav(class: "main-nav") {
-          ul {
-            li { a(href: "/") { "Home" } }
-            li { a(href: "/about") { "About" } }
-            li { a(href: "/contact") { "Contact" } }
-          }
-        }
-      end
-    end
-  RUBY
+Phlex is a framework for building fast, reusable, testable object-oriented views in Ruby. It’s thread-safe and supports [MRI/CRuby](https://www.ruby-lang.org/en/) v2.7+, [TruffleRuby](https://www.graalvm.org/ruby/) v22.2+ and [JRuby](https://www.jruby.org) v9.2+.
 
-  e.execute "Nav.new.call"
+HTML is described using simple Ruby constructs: *methods*, *keyword arguments* and *blocks*.
+
+```ruby
+nav(class: "main-nav") {
+	ul {
+		li { a(href: "/") { "Home" } }
+		li { a(href: "/about") { "About" } }
+		li { a(href: "/contact") { "Contact" } }
+	}
+}
+```
+
+Writing views in Ruby means we don’t need to switch between multiple languages for templates with dynamic content. We can iterate through a list and output HTML for each item, for example, without any context switching.
+
+```ruby
+@articles.each do |article|
+	h2 { article.title }
 end
 ```
 
-## Better developer experience 💃
-Phlex views are “plain old Ruby objects” — templates are methods and HTML tags are method calls. If you know how to define a class with a method that calls another method, you know how to use Phlex.
+The ERB equivalent uses both Ruby and HTML in adition to a third language (ERB) to handle switching between the first two.
 
-## Better safety 🥽
+```erb
+<% @articles.each do |article| %>
+	<h2><%= article.title %></h2>
+<% end %>
+```
 
-Phlex view templates render in an isolated execution context where only the instance variables and methods for the specific view are exposed.
-
-## Better performance 🔥
-
-Rendering a Phlex view is significantly faster than rendering an ActionView partial or ViewComponent component.
+Using Ruby also means we can apply the same object-oriented [refactoring patterns](https://refactoring.com/catalog/) to our views that we use for the rest of our application.
 
 
-# What’s a view?
+## It’s not just templating
 
-Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
+Phlex templates always belong to *objects* which provide an isolated execution context where only the instance variables and methods for that specific object are exposed to the template. This design eliminates an [entire category of bugs](https://andycroll.com/ruby/only-use-locals-in-view-partials/).
 
-Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the *template*.
+Here’s a view class that renders an `<h1>` tag with a greeting:
 
-The *template* is a special method that’s called when rendering a view. The `template` method determines the output of the view by calling methods that append to the output.
+```ruby
+class HelloComponent < Phlex::HTML
+	def initialize(name:)
+		@name = name
+	end
 
-Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
+	def template
+		h1 { "👋 Hello #{@name}!" }
+	end
+end
+```
+
+These objects (let’s call them components) can represent anything from small pieces of user-interface to full pages and layouts.
+
+After initialising a component object, you can render it to HTML with the `call` method.
+
+```ruby
+HelloComponent.new(name: "Joel").call
+```
+```html
+<h1>👋 Hello Joel!</h1>
+```
+
+You can also render components in other components using the `render` method. Let’s define a component that renders the `HelloComponent` with a couple of different names:
+
+```ruby
+class ExampleComponent < Phlex::HTML
+	def template
+		["Jack", "Jill"].each do |name|
+			render HelloComponent.new(name:)
+		end
+	end
+end
+```
+
+You’ll notice we’ve been inheriting from `Phlex::HTML`. You can also inherit from `Phlex::SVG` to build dynamic SVG components.
