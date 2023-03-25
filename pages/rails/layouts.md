@@ -20,7 +20,7 @@ end
 
 ## Yielding content
 
-Rails doesn't provide a mechanism for passsing arguments to a layout component, but your layout can `yield` content provided by `content_for`.
+Rails doesn't provide a mechanism for passing arguments to a layout component, but your layout can `yield` content provided by `content_for`.
 
 ```ruby
 class ApplicationLayout < Phlex::HTML
