@@ -50,7 +50,7 @@ This would work just fine for a list of views as each method can be called multi
 
 One caveat of defining the view this way is `title` and `body` could be called in any order. This offers flexibility, but what if you need to make sure your markup is output in a consistent order?
 
-First, include `Phlex::DeferredRender` in your view. This changes the behavior of `template` so it does not receive a block and is yielded early. Then use public methods to save blocks, passing them to back to the `template` at render time.
+First, include `Phlex::DeferredRender` in your view. This changes the behavior of `template` so it does not receive a block and is yielded early. Then use public methods to save blocks, passing them back to the `template` at render time.
 
 ```phlex
 example do |e|
