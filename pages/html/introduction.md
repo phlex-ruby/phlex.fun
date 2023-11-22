@@ -154,3 +154,26 @@ example do |e|
 	e.execute "Example.new.call"
 end
 ```
+
+## Conditional Rendering
+
+In Phlex, you can conditionally render components using the `render?` method. This method should return a boolean value. If it returns `true`, the component will be rendered. If it returns `false`, the component will not be rendered.
+
+Here's an example:
+
+```phlex
+class WelcomeMessage < Phlex::HTML
+	attr_reader :user
+
+	def initialize(user)
+		@user = user
+	end
+
+	def render?
+		user.logged_in?
+	end
+
+	def template
+		h1 { "Welcome, #{user.name}" }
+	end
+end
