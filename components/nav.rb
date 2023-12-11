@@ -41,7 +41,7 @@ module Components
 		private
 
 		def nav
-			super(class: "fixed lg:relative w-3/4 border-r-2 border-gray-100 lg:border-0 lg:w-1/4 text-lg lg:text-base h-full z-40 px-10 py-5 -left-full peer-checked:left-0 lg:left-0 bg-white")
+			super(class: "fixed lg:relative w-3/4 border-r-2 border-gray-100 lg:border-0 lg:w-1/4 text-lg lg:text-base h-full z-40 px-10 pt-5 pb-28 sm:pb-5 -left-full peer-checked:left-0 lg:left-0 bg-white overflow-y-scroll")
 		end
 	end
 end
