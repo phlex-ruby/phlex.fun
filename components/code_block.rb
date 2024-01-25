@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 module Components
-	class CodeBlock < Phlex::HTML
+	class CodeBlock < Base
 		FORMATTER = Rouge::Formatters::HTML.new
 
-		def initialize(code, syntax:)
-			@code = code.chomp
-			@syntax = syntax.length > 0 ? syntax : nil
+		def initialize(code, syntax: nil)
+			super(
+				code: code.chomp,
+				syntax: syntax.length > 0 ? syntax : nil
+			)
 		end
+
+		attribute :code, _Constraint(String, length: 1..)
+		attribute :syntax, _Nilable(_Union(String, Symbol))
 
 		def template
 			pre class: "highlight", data: do

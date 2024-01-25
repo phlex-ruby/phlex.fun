@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 module Components
-	class Layout < Phlex::HTML
-		def initialize(title:)
-			@title = title
-		end
+	class Layout < Base
+		attribute :title, String
 
 		def template(&block)
 			doctype
@@ -16,7 +14,6 @@ module Components
 
 					title { @title }
 					link href: "/assets/application.css", rel: "stylesheet"
-					link href: "https://use.typekit.net/hhb7uzw.css", rel: "stylesheet"
 
 					# favicon
 					# generated via https://realfavicongenerator.net/ on 2022-11-28
@@ -32,13 +29,7 @@ module Components
 				end
 
 				body class: "text-stone-700" do
-					div(class: "top")
-					div(class: "container") do
-						div(class: "sidebar") do
-							render Nav
-						end
-						main(&block)
-					end
+					main(&block)
 				end
 			end
 		end

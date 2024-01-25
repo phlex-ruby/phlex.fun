@@ -9,9 +9,5 @@ module Components
 				render CodeBlock.new(code, syntax: language)
 			end
 		end
-
-		def example(&)
-			render(Example.new, &)
-		end
 	end
 end

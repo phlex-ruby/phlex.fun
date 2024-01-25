@@ -1,9 +1,13 @@
 module Components
-	class Page < Phlex::HTML
+	class Page < Base
+
 		FRONT_MATTER_PATTERN = /^---\n(?<META>(\n|.)+)?\n---/
 
+		attribute :path, String
+
 		def initialize(path)
-			@path = path
+			super(path:)
+
 			@document = File.read(@path)
 			@data = YAML.load(
 				@document.match(FRONT_MATTER_PATTERN)["META"]
@@ -20,8 +24,12 @@ module Components
 			end
 		end
 
-		def file_path = @path.delete_prefix(PageBuilder.root_path)
+		def file_path
+			@path.delete_prefix(PageBuilder.root_path)
+		end
 
-		def content = @document.sub(FRONT_MATTER_PATTERN, "")
+		def content
+			@document.sub(FRONT_MATTER_PATTERN, "")
+		end
 	end
 end

@@ -11,7 +11,6 @@ loader.push_dir("#{__dir__}")
 loader.enable_reloading
 loader.setup
 
-require "minitest"
 
 PageBuilder.build_all
 FileUtils.cp_r("#{__dir__}/assets", "#{__dir__}/dist")

@@ -1,198 +1,3 @@
-@font-face {
-	font-family: 'JetBrains Mono';
-	src: url('/assets/fonts/jetbrains-mono/Regular.woff2') format('woff2');
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
-
-:root {
-	--ratio: 1.125;
-
-	--color-background: white;
-	--color-text: #222;
-	--color-border: #000;
-	--color-blue: mediumblue;
-	--color-red: crimson;
-
-	--size-xs: calc(var(--size-s) / var(--ratio));
-	--size-s: calc(var(--size-m) / var(--ratio));
-	--size-m: 1em;
-	--size-l: calc(var(--size-m) * var(--ratio));
-	--size-xl: calc(var(--size-l) * var(--ratio));
-	--size-2xl: calc(var(--size-xl) * var(--ratio));
-	--size-3xl: calc(var(--size-2xl) * var(--ratio));
-	--size-4xl: calc(var(--size-3xl) * var(--ratio));
-	--size-5xl: calc(var(--size-4xl) * var(--ratio));
-	--size-6xl: calc(var(--size-5xl) * var(--ratio));
-	--size-7xl: calc(var(--size-6xl) * var(--ratio));
-	--size-8xl: calc(var(--size-7xl) * var(--ratio));
-
-	--flow-space: 1em;
-
-	font-family: jaf-facitweb, sans-serif;
-	font-size: 1.3em;
-	line-height: 1.6;
-	color: var(--color-text);
-	background: var(--color-background);
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-  	--color-background: #111;
-    --color-text: white;
-    --color-border: white;
-    --color-blue: blue;
-    --color-red: red;
-  }
-} */
-
-h1 { font-size: var(--size-4xl); }
-h2 {
-	--flow-space-top: 2em;
-	font-size: var(--size-xl);
-}
-
-h3 {
-	font-size: var(--size-l);
-	--flow-space-bottom: .5em;
-	--flow-space-top: 2em;
-}
-
-h4 { font-size: var(--size-m); }
-
-a {
-	color: blue;
-	text-underline-offset: .15em;
-}
-
-pre, code {
-	tab-size: 2;
-	font-family: "JetBrains Mono";
-	font-variant-ligatures: none;
-}
-
-code {
-	border: 1px solid;
-	padding: 0 .25em;
-	margin: -1px 0;
-	font-size: 0.95em;
-	display: inline-block;
-	text-decoration: none;
-	border-radius: 3px;
-}
-
-.highlight {
-	--flow-space-bottom: var(--size-8xl);
-	--flow-space-top: var(--size-3xl);
-	padding: var(--size-l) var(--size-2xl);
-	border: 1px solid var(--color-border);
-	border-bottom: 3px solid var(--color-border);
-	position: relative;
-	border-radius: 5px;
-	white-space: pre-wrap;
-}
-
-a {
-	color: var(--color-blue);
-}
-
-.highlight[data-lines="1"] {
-	padding-top: var(--size-s);
-	padding-bottom: var(--size-s);
-}
-
-.highlight[data-language="ruby"]:after { color: var(--color-red); }
-.highlight[data-language="html"]:after { color: var(--color-blue); }
-.highlight[data-language="erb"]:after { color: green; }
-.highlight[data-language="bash"]:after { color: black; }
-
-.highlight[data-language]:after {
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	content: attr(data-language);
-	border-left: 1px solid var(--color-border);
-	border-bottom: 1px solid var(--color-border);
-	font-size: var(--size-xs);
-	padding: 0.1em 0.5em;
-	text-transform: uppercase;
-	border-bottom-left-radius: 3px;
-}
-
-.highlight:has(+ .highlight) {
-	--flow-space-bottom: 0;
-	border-bottom: 0;
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
-}
-
-.highlight + .highlight {
-	--flow-space-top: 0;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}
-
-.tabs input[type="radio"]:checked + label {
-  background: #f8f8f8;
-  z-index: 1;
-  margin-bottom: -1px;
-  padding-bottom: 1px;
-}
-
-.tabs input[type="radio"]:focus + label {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.tabs input[type="radio"]:checked + label + .tab {
-  display: block;
-}
-
-.top {
-	position: sticky;
-	top: 0;
-	left: 0;
-	width: 100%;
-	border-top: 2px solid var(--color-border);
-}
-
-body {
-	margin: 0;
-}
-
-.container {
-	display: flex;
-	margin: auto;
-	max-width: 68rem;
-	padding: 5rem;
-}
-
-.sidebar {
-	flex: 1;
-}
-
-.main-nav a {
-	--flow-space: .25em;
-	display: block;
-}
-
-main {
-	flex: 2;
-}
-
-.highlight .k { color: var(--color-red); }
-.highlight .nc, .highlight .no, .highlight .n, .highlight .nt, .highlight .o { color: var(--color-blue); }
-.highlight .c1 { color: slategrey; }
-.highlight .ss, .highlight .na, .highlight .vi, .highlight .nb { color: green; }
-.highlight .si, .highlight .kp { color: purple }
-
-
-
-// https://piccalil.li/blog/a-modern-css-reset
-
 /* Box sizing rules */
 *,
 *::before,
@@ -215,8 +20,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -250,23 +55,213 @@ select {
   font: inherit;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-   scroll-behavior: auto;
-  }
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/jetbrains-mono/Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+:root {
+  --ratio: 1.125;
+
+  --color-background: white;
+  --color-text: #222;
+  --color-border: #000;
+  --color-blue: mediumblue;
+  --color-red: crimson;
+
+  --size-xs: calc(var(--size-s) / var(--ratio));
+  --size-s: calc(var(--size-m) / var(--ratio));
+  --size-m: 1em;
+  --size-l: calc(var(--size-m) * var(--ratio));
+  --size-xl: calc(var(--size-l) * var(--ratio));
+  --size-2xl: calc(var(--size-xl) * var(--ratio));
+  --size-3xl: calc(var(--size-2xl) * var(--ratio));
+  --size-4xl: calc(var(--size-3xl) * var(--ratio));
+  --size-5xl: calc(var(--size-4xl) * var(--ratio));
+  --size-6xl: calc(var(--size-5xl) * var(--ratio));
+  --size-7xl: calc(var(--size-6xl) * var(--ratio));
+
+  --flow-space: 1em;
+
+  /* font-family: jaf-facitweb, sans-serif; */
+  font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans",
+    source-sans-pro, sans-serif;
+  font-size: 1.4em;
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+.flow h1 {
+  font-size: var(--size-7xl);
+  margin-top: 5em;
+}
+
+h2 {
+  --flow-space-top: 2em;
+  font-size: var(--size-3xl);
+}
+
+h3 {
+  font-size: var(--size-xl);
+  --flow-space-bottom: 0.5em;
+  --flow-space-top: 2em;
+}
+
+h4 {
+  font-size: var(--size-m);
+}
+
+a {
+  color: blue;
+  text-underline-offset: 0.15em;
+}
+
+pre,
+code {
+  tab-size: 2;
+  font-family: "JetBrains Mono";
+  font-variant-ligatures: none;
+}
+
+code {
+  border: 1px solid;
+  padding: 0 0.25em;
+  line-height: 1.6;
+  position: relative;
+  font-size: 0.9em;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.highlight {
+  --flow-space-bottom: var(--size-8xl);
+  --flow-space-top: var(--size-3xl);
+  padding: var(--size-l) var(--size-2xl);
+  border: 1px solid var(--color-border);
+  border-bottom: 3px solid var(--color-border);
+  position: relative;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  font-size: 0.85em;
+}
+
+a {
+  color: var(--color-blue);
+}
+
+.highlight[data-lines="1"] {
+  padding-top: var(--size-s);
+  padding-bottom: var(--size-s);
+}
+
+.highlight[data-language="ruby"]:after {
+  color: var(--color-red);
+}
+.highlight[data-language="html"]:after {
+  color: var(--color-blue);
+}
+.highlight[data-language="erb"]:after {
+  color: green;
+}
+.highlight[data-language="bash"]:after {
+  color: black;
+}
+
+.highlight[data-language]:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: attr(data-language);
+  border-left: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--size-xs);
+  padding: 0.1em 0.5em;
+  text-transform: uppercase;
+  border-bottom-left-radius: 3px;
+}
+
+.highlight:has(+ .highlight) {
+  --flow-space-bottom: 0;
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.highlight + .highlight {
+  --flow-space-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.tabs input[type="radio"]:checked + label {
+  background: #f8f8f8;
+  z-index: 1;
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+}
+
+.tabs input[type="radio"]:focus + label {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000);
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-top: 2px solid var(--color-border);
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  margin: auto;
+  max-width: 50rem;
+  padding: 5rem;
+}
+
+.highlight .k {
+  color: var(--color-red);
+}
+.highlight .nc,
+.highlight .no,
+.highlight .n,
+.highlight .nt,
+.highlight .o {
+  color: var(--color-blue);
+}
+.highlight .c1 {
+  color: slategrey;
+}
+.highlight .ss,
+.highlight .na,
+.highlight .vi,
+.highlight .nb {
+  color: green;
+}
+.highlight .si,
+.highlight .kp {
+  color: purple;
 }
 
 .flow > * + * {
-	margin-block-start: var(--flow-space-top, var(--flow-space, 1em));
-	margin-block-end: var(--flow-space-bottom, var(--flow-space, 1em));
+  margin-block-start: var(--flow-space-top, var(--flow-space, 1em));
+  margin-block-end: var(--flow-space-bottom, var(--flow-space, 1em));
 }
