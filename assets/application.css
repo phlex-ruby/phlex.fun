@@ -55,14 +55,6 @@ select {
   font: inherit;
 }
 
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/jetbrains-mono/Regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --ratio: 1.125;
 
@@ -123,7 +115,8 @@ a {
 pre,
 code {
   tab-size: 2;
-  font-family: "JetBrains Mono";
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
   font-variant-ligatures: none;
 }
 
