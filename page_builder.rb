@@ -3,7 +3,6 @@
 class PageBuilder
 	def self.build_all
 		FileUtils.mkdir_p("#{root_path}/dist")
-		FileUtils.cp_r("#{root_path}/assets", "#{root_path}/dist")
 
 		pages = Dir["#{root_path}/pages/**/*.md"]
 		pages.each { |page| new(page).call }

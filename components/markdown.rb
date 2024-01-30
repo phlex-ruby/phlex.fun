@@ -1,29 +1,37 @@
 # frozen_string_literal: true
+require "phlex/testing/view_helper"
 
 module Components
 	class Markdown < Phlex::Markdown
-		def h1 = super(class: "text-3xl font-semibold my-5")
-		def h2 = super(class: "text-2xl font-semibold mt-10 mb-5")
-
-		def a(**attributes)
-			super(
-				class: "font-bold text-red-600 underline underline-offset-4",
-				**attributes
-			)
+		def h1(**, &)
+			content = capture(&)
+			super(id: content.downcase.gsub(/\s+/, "-"), &)
 		end
 
-		def code = super(class: "bg-stone-50 inline-block font-medium rounded border px-1 -mt-1")
-
 		def code_block(code, language)
-			if language == "phlex"
-				instance_eval(code)
+			case language
+			when "phlex"
+				eval_code(code)
+				render CodeBlock.new(code, syntax: "ruby")
+			when "phlexecute"
+				output = eval_code(code)
+				pretty = HtmlBeautifier.beautify(output)
+				render CodeBlock.new(pretty, syntax: "html")
 			else
 				render CodeBlock.new(code, syntax: language)
 			end
 		end
 
-		def example(&)
-			render(Example.new, &)
+		private
+
+		def eval_code(code)
+			eval_context.module_eval(code)
+		end
+
+		def eval_context
+			@eval_context ||= Module.new do
+				extend Phlex::Testing::ViewHelper
+			end
 		end
 	end
 end

@@ -1,10 +1,17 @@
 module Components
-	class EditPage < Phlex::HTML
+	class EditPage < Base
+
 		def initialize(file_path, branch: "main", repo: "joeldrapper/phlex.fun")
-			@file_path = file_path
-			@branch = branch
-			@repo = repo
+			super(
+				file_path:,
+				branch:,
+				repo:
+			)
 		end
+
+		attribute :file_path, String
+		attribute :branch, String
+		attribute :repo, String
 
 		def template
 			p(class: "mt-12") do
