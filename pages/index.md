@@ -23,7 +23,64 @@ end
 render Nav
 ```
 
-## What’s a view?
+## Why render HTML in Ruby?
+
+Building components in Ruby makes it possible to build powerful abstractions. The `Nav` menu above could be refactored into the following Ruby class.
+
+```phlex
+class Nav < Phlex::HTML
+  def template(&content)
+  	nav(class: "main-nav") {
+			ul(&content)
+  	}
+  end
+
+  def item(url, &content)
+  	li { a(href: url, &content) }
+  end
+end
+```
+```phlexecute
+render Nav.new do |nav|
+	nav.item("/") { "Home" }
+	nav.item("/about") { "About" }
+	nav.item("/contact") { "Contact" }
+end
+```
+
+Which can be called from Ruby or Erb without a bunch of `<% %>` tags.
+
+```ruby
+render Nav.new do |nav|
+	nav.item("/") { "Home" }
+	nav.item("/about") { "About" }
+	nav.item("/contact") { "Contact" }
+end
+```
+
+Since the component is just a Ruby class, it can be extended with inheritence and modules. Let's create a subclass that works with Tailwind CSS.
+
+```phlex
+class TailwindNav < Nav
+	def template(&content) = nav(class: "flex flex-row gap-4", &content)
+
+	def item(url, &content)
+	  a(href: url, class: "text-underline", &content)
+	end
+end
+```
+```phlexecute
+render TailwindNav.new do |nav|
+	nav.item("/") { "Home" }
+	nav.item("/about") { "About" }
+	nav.item("/contact") { "Contact" }
+end
+```
+
+
+Your view data, code, and markup live together in the same place making it easier to reason through an application's UI. Since views are just Ruby, you get more flexibility than templating languages like Erb, Slim, Haml, and Liquid.
+
+### What’s a view?
 Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
 
 Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the template.
@@ -32,7 +89,7 @@ The template is a special method that’s called when rendering a view. The `tem
 
 Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
 
-# Installation
+### Installation
 
 Install Phlex to your project by running:
 
@@ -436,7 +493,8 @@ render ClassesExample
 
 If you think you need to use `unsafe_raw`, maybe [open a discussion thread](https://github.com/phlex-ruby/phlex/discussions/new) for other ideas.
 
-# Components
+# Slots
+
 You can build reusable & composable Phlex views.
 
 For example, you may need to define multiple sections (slots) in a view. This can be accomplished by defining public instance methods on the view that accept blocks:
