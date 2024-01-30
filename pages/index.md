@@ -4,7 +4,7 @@ title: Phlex — fast, object-oriented view framework for Ruby
 
 # Introduction
 
-Phlex is a framework for building fast, reusable, testable views in pure Ruby.
+Phlex is a Ruby gem for building fast object-oriented HTML and SVG components. Views are described using simple Ruby constructs: *methods*, *keyword arguments* and *blocks*. For example, this is how you might describe an HTML `<nav>` with a list of links:
 
 ```phlex
 class Nav < Phlex::HTML
@@ -19,21 +19,12 @@ class Nav < Phlex::HTML
   end
 end
 ```
+
+The above Ruby source would produce the following HTML markup:
+
 ```phlexecute
 render Nav
 ```
-
-### Better developer experience 💃
-
-Phlex views are “plain old Ruby objects” — templates are methods and HTML tags are method calls. If you know how to define a class with a method that calls another method, you know how to use Phlex.
-
-### Better safety 🥽
-
-Phlex view templates render in an isolated execution context where only the instance variables and methods for the specific view are exposed.
-
-### Better performance 🔥
-
-Rendering a Phlex view is significantly faster than rendering an ActionView partial or ViewComponent component.
 
 ## What’s a view?
 Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
