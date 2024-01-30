@@ -90,7 +90,7 @@ select {
 
 .flow h1 {
   font-size: var(--size-7xl);
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 h2 {
@@ -131,6 +131,7 @@ code {
   text-decoration: none;
   border-radius: 3px;
   border: 1px solid var(--color-border);
+  word-break: break-all;
 }
 
 .highlight {
@@ -142,6 +143,7 @@ code {
   position: relative;
   border-radius: 5px;
   white-space: pre-wrap;
+  overflow: scroll;
   font-size: 0.85em;
 }
 
@@ -228,7 +230,7 @@ body {
 
 main {
   margin: auto;
-  max-width: 50rem;
+  max-width: 40rem;
   padding: 1.5rem;
 }
 
