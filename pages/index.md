@@ -194,11 +194,12 @@ end
 render Greeting
 ```
 
-Underscores `_` are automatically converted to dashes `-` for `Symbol` keys. If you need to use an underscore in an attribute name, you can pass it as a `String`.
+Underscores `_` are automatically converted to dashes `-` for `Symbol` keys. If you need to use an underscore in an attribute name, you can use a `String` key instead.
 
 ```phlex
 class Greeting < Phlex::HTML
 	def template
+		h1(foo_bar: "hello") { "👋 Hello World!" }
 		h1("foo_bar" => "hello") { "👋 Hello World!" }
 	end
 end
@@ -208,7 +209,7 @@ render Greeting
 ```
 
 ### Hash attributes
-You can pass a `Hash` as an attribute value and the Hash will be flattened with a dash between each level.
+You can pass a `Hash` as an attribute value and it will be flattened with a dash `-` between each level.
 
 ```phlex
 class Greeting < Phlex::HTML
