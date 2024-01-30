@@ -137,25 +137,24 @@ end
 ### Hooks
 [//]: # (We should also add an example of around_template)
 
-You can hook into the rendering process by overriding `before_template` and `after_template` which are called immediately before / after the template is rendered.
+You can hook into the rendering process by overriding `before_template` and `after_template` which are called immediately before and after the template is rendered.
 
-It’s a good idea to call `super` to allow for inherited callbacks.
+You should always call `super` from these methods to allow for inherited callbacks.
 
 ```phlex
 class Example < Phlex::HTML
-
 	def before_template
-		h1 { "Hello" }
+		h1 { "Before" }
 		super
 	end
 
 	def template
-		h2 { "World" }
+		h2 { "Hello World!" }
 	end
 
 	def after_template
-		h3 { "Bye" }
 		super
+		h3 { "After" }
 	end
 end
 ```
