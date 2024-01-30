@@ -34,17 +34,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.1"
-          bundler-cache: false
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "npm"
-
-      - name: Install Ruby dependencies
-        run: bundle install
+          ruby-version: "3.3"
+          bundler-cache: true
 
       - name: Install JavaScript dependencies
         run: npm install

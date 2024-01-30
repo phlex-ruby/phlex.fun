@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,10 +15,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-          bundler-cache: false
-
-      - name: Install dependencies
-        run: bundle install
+          bundler-cache: true
 
       - name: Build docs
         run: bundle exec ./build.rb
