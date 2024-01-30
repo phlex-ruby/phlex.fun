@@ -37,9 +37,6 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
 
-      - name: Install JavaScript dependencies
-        run: npm install
-
       - name: Build site
         run: |
           bundle exec build.rb
