@@ -8,7 +8,7 @@ Phlex is a [Ruby gem](https://rubygems.org/gems/phlex) for building fast object-
 
 ```phlex
 class Nav < Phlex::HTML
-  def template
+  def view_template
     nav(class: "main-nav") {
 		 	ul {
 				li { a(href: "/") { "Home" } }
@@ -28,7 +28,7 @@ Views are Ruby objects that represent a piece of output from your app. We plan t
 
 Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the template.
 
-The template is a special method that’s called when rendering a view. The `template` method determines the output of the view by calling methods that append to the output.
+The `view_template` is a special method that’s called when rendering a view. The `view_template` method determines the output of the view by calling methods that append to the output.
 
 Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
 
@@ -41,11 +41,11 @@ gem "phlex"
 
 # HTML Introduction
 ## HTML Views
-You can create an HTML view by subclassing `Phlex::HTML` and defining a `template` instance method.
+You can create an HTML view by subclassing `Phlex::HTML` and defining a `view_template` instance method.
 
 ```phlex
 class Hello < Phlex::HTML
-	def template
+	def view_template
 		h1 { "👋 Hello World!" }
 	end
 end
@@ -54,7 +54,7 @@ end
 render Hello
 ```
 
-The `template` method determines what your view will output when its rendered. The above example calls the `h1` method which outputs an `<h1>` tag.
+The `view_template` method determines what your view will output when its rendered. The above example calls the `h1` method which outputs an `<h1>` tag.
 
 ### Accepting arguments
 
@@ -68,7 +68,7 @@ class Hello < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "👋 Hello #{@name}!" }
 	end
 end
@@ -83,7 +83,7 @@ Views can render other views in their templates using the `render` method. Let's
 
 ```phlex
 class Example < Phlex::HTML
-	def template
+	def view_template
 		render Hello.new(name: "Joel")
 		render Hello.new(name: "Alexandre")
 	end
@@ -99,7 +99,7 @@ Views can also yield content blocks, which can be passed in when rendering. Let'
 
 ```phlex
 class Card < Phlex::HTML
-	def template
+	def view_template
 		article(class: "drop-shadow") {
 			yield
 		}
@@ -108,7 +108,7 @@ end
 ```
 ```phlex
 class Example < Phlex::HTML
-	def template
+	def view_template
 		render(Card.new) {
 			h1 { "👋 Hello!" }
 		}
@@ -128,7 +128,7 @@ Since the block of content was the only thing we need in the `<article>` element
 
 ```ruby
 class Card < Phlex::HTML
-	def template(&)
+	def view_template(&)
 		article(class: "drop-shadow", &)
 	end
 end
@@ -148,7 +148,7 @@ class Example < Phlex::HTML
 		super
 	end
 
-	def template
+	def view_template
 		h2 { "Hello World!" }
 	end
 
@@ -171,7 +171,7 @@ You pass content as a block to a tag method. If the return value of the block is
 
 ```phlex
 class Greeting < Phlex::HTML
-	def template
+	def view_template
 		h1 { "👋 Hello World!" }
 	end
 end
@@ -185,7 +185,7 @@ You can add attributes to HTML elements by passing keyword arguments to the meth
 
 ```phlex
 class Greeting < Phlex::HTML
-	def template
+	def view_template
 		h1(class: "text-xl font-bold") { "👋 Hello World!" }
 	end
 end
@@ -198,7 +198,7 @@ Underscores `_` are automatically converted to dashes `-` for `Symbol` keys. If 
 
 ```phlex
 class Greeting < Phlex::HTML
-	def template
+	def view_template
 		h1(foo_bar: "hello") { "👋 Hello World!" }
 		h1("foo_bar" => "hello") { "👋 Hello World!" }
 	end
@@ -213,7 +213,7 @@ You can pass a `Hash` as an attribute value and it will be flattened with a dash
 
 ```phlex
 class Greeting < Phlex::HTML
-	def template
+	def view_template
 		div(data: { controller: "hello" }) {
 			# ...
 		}
@@ -229,7 +229,7 @@ When an attribute value is `true`, the attribute name will be output without a v
 
 ```phlex
 class ChannelControls < Phlex::HTML
-	def template
+	def view_template
 		input(
 			value: "1",
 			name: "channel",
@@ -251,11 +251,11 @@ render ChannelControls
 ```
 
 ### The template tag
-Because the `template` method is used to define the view template itself, you'll need to use the method `template_tag` if you want to to render an HTML `<template>` tag.
+Because the `view_template` method is used to define the view template itself, you'll need to use the method `template_tag` if you want to to render an HTML `<template>` tag.
 
 ```phlex
 class TemplateExample < Phlex::HTML
-	def template
+	def view_template
 		template_tag {
 			img src: "hidden.jpg", alt: "A hidden image."
 		}
@@ -273,7 +273,7 @@ You can register custom elements with the `register_element` macro. The custom e
 class CustomTagExample < Phlex::HTML
 	register_element :trix_editor
 
-	def template
+	def view_template
 		trix_editor input: "content", autofocus: true
 	end
 end
@@ -289,7 +289,7 @@ You can output text content without wrapping it in an element by using the `plai
 
 ```phlex
 class Heading < Phlex::HTML
-	def template
+	def view_template
 		h1 do
 			strong { "Hello " }
 			plain "World!"
@@ -307,7 +307,7 @@ If you need to add whitespace, you can use the `whitespace` method. This is usef
 
 ```phlex
 class Links < Phlex::HTML
-	def template
+	def view_template
 		a(href: "/") { "Home" }
 		whitespace
 		a(href: "/about") { "About" }
@@ -359,7 +359,7 @@ class Link < Phlex::HTML
 		@active = active
 	end
 
-	def template
+	def view_template
 		a(href: @to, class: tokens("nav-item",
 				active?: "active")) { @text }
 	end
@@ -371,7 +371,7 @@ end
 ```
 ```phlex
 class TokensExample < Phlex::HTML
-	def template
+	def view_template
 		nav {
 			ul {
 				li { render Link.new("Home", to: "/", active: true) }
@@ -396,7 +396,7 @@ class Link < Phlex::HTML
 		@active = active
 	end
 
-	def template
+	def view_template
 		a(href: @to, **classes("nav-item",
 			active?: "active")) { @text }
 	end
@@ -408,7 +408,7 @@ end
 ```
 ```phlex
 class ClassesExample < Phlex::HTML
-	def template
+	def view_template
 		nav {
 			ul {
 				li { render Link.new("Home", to: "/", active: true) }
@@ -434,7 +434,7 @@ For example, you may need to define multiple sections (slots) in a view. This ca
 
 ```phlex
 class Card < Phlex::HTML
-	def template(&)
+	def view_template(&)
 		article(class: "card", &)
 	end
 
@@ -449,7 +449,7 @@ end
 ```
 ```phlex
 class CardExample < Phlex::HTML
-	def template
+	def view_template
 		render Card.new do |card|
 			card.title do
 				h1 { "Title" }
@@ -470,7 +470,7 @@ This would work just fine for a list of views as each method can be called multi
 
 One caveat of defining the view this way is `title` and `body` could be called in any order. This offers flexibility, but what if you need to make sure your markup is output in a consistent order?
 
-First, include `Phlex::DeferredRender` in your view. This changes the behavior of `template` so it does not receive a block and is yielded early. Then use public methods to save blocks, passing them to back to the `template` at render time.
+First, include `Phlex::DeferredRender` in your view. This changes the behavior of `view_template` so it does not receive a block and is yielded early. Then use public methods to save blocks, passing them to back to the `view_template` at render time.
 
 ```phlex
 class List < Phlex::HTML
@@ -480,7 +480,7 @@ class List < Phlex::HTML
 		@items = []
 	end
 
-	def template
+	def view_template
 		if @header
 			h1(class: "header", &@header)
 		end
@@ -503,7 +503,7 @@ end
 ```
 ```phlex
 class ListExample < Phlex::HTML
-	def template
+	def view_template
 		render List.new do |list|
 			list.header do
 				"Header"
@@ -548,7 +548,7 @@ class Hello < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "Hello #{@name}" }
 	end
 end
@@ -586,7 +586,7 @@ class Hello < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "Hello #{@name}" }
 	end
 end
@@ -613,7 +613,7 @@ class Hello < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "Hello #{@name}" }
 	end
 end
@@ -653,7 +653,7 @@ class Hello < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "Hello #{@name}" }
 	end
 end
@@ -761,7 +761,7 @@ Rails doesn't provide a mechanism for passing arguments to a layout component, b
 class ApplicationLayout < Phlex::HTML
 	include Phlex::Rails::Layout
 
-	def template
+	def view_template
 		doctype
 
 		html do

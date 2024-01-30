@@ -14,7 +14,7 @@ module Components
 		attribute :code, _Constraint(String, length: 1..)
 		attribute :syntax, _Nilable(_Union(String, Symbol))
 
-		def template
+		def view_template
 			pre class: "highlight", data: do
 				if @syntax
 					unsafe_raw FORMATTER.format(

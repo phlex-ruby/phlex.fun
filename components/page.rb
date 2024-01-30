@@ -14,7 +14,7 @@ module Components
 			)
 		end
 
-		def template
+		def view_template
 			render Layout.new(title: @data["title"]) do
 				article(class: "flow") do
 					render Markdown.new(content)
