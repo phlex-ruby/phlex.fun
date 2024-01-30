@@ -2,7 +2,7 @@
 title: Phlex — fast, object-oriented view framework for Ruby
 ---
 
-# Introduction
+# Phlex 💪
 
 Phlex is a [Ruby gem](https://rubygems.org/gems/phlex) for building fast object-oriented HTML and SVG components. Views are described using Ruby constructs: *methods*, *keyword arguments* and *blocks*, which directly correspond to the output. For example, this is how you might describe an HTML `<nav>` with a list of links:
 
@@ -32,14 +32,23 @@ The template is a special method that’s called when rendering a view. The `tem
 
 Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
 
-# Setup
-Add `phlex` to your Gemfile and run `bundle install`.
+# Installation
+
+Install Phlex to your project by running:
+
+```sh
+$ bundle add phlex
+```
+
+This will add the following to your Gemfile:
 
 ```ruby
 gem "phlex"
 ```
 
-# HTML Introduction
+and automatically run `bundle install`
+
+# HTML
 ## HTML Views
 You can create an HTML view by subclassing `Phlex::HTML` and defining a `template` instance method.
 
