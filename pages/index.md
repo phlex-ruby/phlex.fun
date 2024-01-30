@@ -25,7 +25,7 @@ render Nav
 
 ## Why render HTML in Ruby?
 
-Building components in Ruby makes it possible to build powerful abstractions. The `Nav` menu above could be refactored into the following Ruby class.
+Building components in Ruby makes it possible to build powerful abstractions. The `Nav` menu above could be refactored into a Ruby class to allow developers to add items to the menu without needing to understand the underlying HTML.
 
 ```phlex
 class Nav < Phlex::HTML
@@ -48,7 +48,7 @@ render Nav.new do |nav|
 end
 ```
 
-Which can be called from Ruby or Erb without a bunch of `<% %>` tags.
+The component can be called from Ruby or Erb without a bunch of `<% %>` tags.
 
 ```ruby
 render Nav.new do |nav|
