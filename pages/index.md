@@ -4,24 +4,21 @@ title: Phlex — fast, object-oriented view framework for Ruby
 
 # Introduction
 
-Phlex is a Ruby gem for building fast object-oriented HTML and SVG components. Views are described using simple Ruby constructs: *methods*, *keyword arguments* and *blocks*. For example, this is how you might describe an HTML `<nav>` with a list of links:
+Phlex is a [Ruby gem](https://rubygems.org/gems/phlex) for building fast object-oriented HTML and SVG components. Views are described using Ruby constructs: *methods*, *keyword arguments* and *blocks*, which directly correspond to the output. For example, this is how you might describe an HTML `<nav>` with a list of links:
 
 ```phlex
 class Nav < Phlex::HTML
   def template
-    nav(class: "main-nav") do
-		 	ul do
+    nav(class: "main-nav") {
+		 	ul {
 				li { a(href: "/") { "Home" } }
 				li { a(href: "/about") { "About" } }
 				li { a(href: "/contact") { "Contact" } }
-			end
-		end
+			}
+		}
   end
 end
 ```
-
-The above Ruby source would produce the following HTML markup:
-
 ```phlexecute
 render Nav
 ```
@@ -103,18 +100,18 @@ Views can also yield content blocks, which can be passed in when rendering. Let'
 ```phlex
 class Card < Phlex::HTML
 	def template
-		article(class: "drop-shadow") do
+		article(class: "drop-shadow") {
 			yield
-		end
+		}
 	end
 end
 ```
 ```phlex
 class Example < Phlex::HTML
 	def template
-		render Card.new do
+		render(Card.new) {
 			h1 { "👋 Hello!" }
-		end
+		}
 	end
 end
 ```
@@ -217,9 +214,9 @@ You can pass a `Hash` as an attribute value and the Hash will be flattened with 
 ```phlex
 class Greeting < Phlex::HTML
 	def template
-		div(data: { controller: "hello" }) do
+		div(data: { controller: "hello" }) {
 			# ...
-		end
+		}
 	end
 end
 ```
@@ -259,9 +256,9 @@ Because the `template` method is used to define the view template itself, you'll
 ```phlex
 class TemplateExample < Phlex::HTML
 	def template
-		template_tag do
+		template_tag {
 			img src: "hidden.jpg", alt: "A hidden image."
-		end
+		}
 	end
 end
 ```
@@ -352,7 +349,7 @@ tokens(
 ) # → "foo"
 ```
 
-Here we have a `Lin`k view that produces an `<a>` tag with the CSS class `nav-item`. If the link is _active_, we also apply the CSS class `active`.
+Here we have a `Link` view that produces an `<a>` tag with the CSS class `nav-item`. If the link is _active_, we also apply the CSS class `active`.
 
 ```phlex
 class Link < Phlex::HTML
@@ -375,12 +372,12 @@ end
 ```phlex
 class TokensExample < Phlex::HTML
 	def template
-		nav do
-			ul do
+		nav {
+			ul {
 				li { render Link.new("Home", to: "/", active: true) }
 				li { render Link.new("About", to: "/about", active: false) }
-			end
-		end
+			}
+		}
 	end
 end
 ```
@@ -412,12 +409,12 @@ end
 ```phlex
 class ClassesExample < Phlex::HTML
 	def template
-		nav do
-			ul do
+		nav {
+			ul {
 				li { render Link.new("Home", to: "/", active: true) }
 				li { render Link.new("About", to: "/about", active: false) }
-			end
-		end
+			}
+		}
 	end
 end
 ```
