@@ -34,7 +34,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Install dependenciesq
+        run: bundle install
 
       - name: Build site
         run: bundle exec ./build.rb
