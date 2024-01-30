@@ -80,16 +80,9 @@ end
 
 Your view data, code, and markup live together in the same place making it easier to reason through an application's UI. Since views are just Ruby, you get more flexibility than templating languages like Erb, Slim, Haml, and Liquid.
 
-### What’s a view?
-Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
+# Getting Started
 
-Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the template.
-
-The template is a special method that’s called when rendering a view. The `template` method determines the output of the view by calling methods that append to the output.
-
-Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
-
-### Installation
+## Installation
 
 Install Phlex to your project by running:
 
@@ -104,6 +97,15 @@ gem "phlex"
 ```
 
 and automatically run `bundle install`
+
+## What’s a view?
+Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
+
+Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the template.
+
+The template is a special method that’s called when rendering a view. The `template` method determines the output of the view by calling methods that append to the output.
+
+Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
 
 # HTML
 ## HTML Views
