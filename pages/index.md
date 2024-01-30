@@ -4,95 +4,321 @@ title: Phlex — fast, object-oriented view framework for Ruby
 
 # Introduction
 
-Phlex is a Ruby gem for building fast object-oriented HTML and SVG components. It’s thread-safe and supports [MRI/CRuby](https://www.ruby-lang.org/en/) v2.7+, [TruffleRuby](https://www.graalvm.org/ruby/) v22.2+ and [JRuby](https://www.jruby.org) v9.2+.
+Phlex is a framework for building fast, reusable, testable views in pure Ruby.
 
-Views are described using simple Ruby constructs: *methods*, *keyword arguments* and *blocks*. For example, this is how you might describe an HTML `<nav>` with a list of links:
-
-```ruby
-nav(class: "main-nav") do
-	ul do
-		li { a(href: "/") { "Home" } }
-		li { a(href: "/about") { "About" } }
-		li { a(href: "/contact") { "Contact" } }
-	end
+```phlex
+class Nav < Phlex::HTML
+  def template
+    nav(class: "main-nav") do
+		 	ul do
+				li { a(href: "/") { "Home" } }
+				li { a(href: "/about") { "About" } }
+				li { a(href: "/contact") { "Contact" } }
+			end
+		end
+  end
 end
 ```
-
-The above Ruby source would produce the following HTML markup:
-
-```html
-<nav class="main-nav">
-	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/about">About</a></li>
-		<li><a href="/contact">Contact</a></li>
-	</ul>
-</nav>
+```phlexecute
+render Nav
 ```
 
-Using a Ruby DSL means we don’t need to switch between different languages when writing templates with dynamic content. For example, we can iterate through a list and output HTML for each item without any context switching.
+### Better developer experience 💃
+
+Phlex views are “plain old Ruby objects” — templates are methods and HTML tags are method calls. If you know how to define a class with a method that calls another method, you know how to use Phlex.
+
+### Better safety 🥽
+
+Phlex view templates render in an isolated execution context where only the instance variables and methods for the specific view are exposed.
+
+### Better performance 🔥
+
+Rendering a Phlex view is significantly faster than rendering an ActionView partial or ViewComponent component.
+
+## What’s a view?
+Views are Ruby objects that represent a piece of output from your app. We plan to support various different types of output — such as JSON, XML and SVG — but for now, we’re focusing on HTML.
+
+Views can have an `initialize` method that dictates which arguments the view accepts and is responsible for setting everything up — usually assigning instance variables for use in the template.
+
+The template is a special method that’s called when rendering a view. The `template` method determines the output of the view by calling methods that append to the output.
+
+Instance methods perform important calculations or encapsulate a small part of the template. Public instance methods can expose an interface that’s yielded to the parent when rendering.
+
+# Setup
+Add `phlex` to your Gemfile and run `bundle install`.
 
 ```ruby
-@articles.each do |article|
-	h2 { article.title }
-end
+gem "phlex"
 ```
 
-To do this in ERB, you would need to use three different languages — **ERB**, **HTML** and **Ruby** — in the same file.
+# HTML Introduction
+## HTML Views
+You can create an HTML view by subclassing `Phlex::HTML` and defining a `template` instance method.
 
-```erb
-<% @articles.each do |article| %>
-	<h2><%= article.title %></h2>
-<% end %>
-```
-
-
-## Components
-
-Phlex encourages you to break up your views into small, testable, reusable objects called components. Each component class has a `template` method, which determiens its output. Components can also render other components.
-
-Let’s create a class called `HelloComponent` with a template that renders an `<h1>` tag with the content “👋 Hello World!”.
-
-```ruby
-class HelloComponent < Phlex::HTML
+```phlex
+class Hello < Phlex::HTML
 	def template
 		h1 { "👋 Hello World!" }
 	end
 end
 ```
-```html
-<h1>👋 Hello World!</h1>
+```phlexecute
+render Hello
 ```
 
-Notice how we can just return a string from the content block? When no other nodes are present, the return value of the block is used as the content of the tag.
+The `template` method determines what your view will output when its rendered. The above example calls the `h1` method which outputs an `<h1>` tag.
 
-If you want to output plain text without wrapping it in an element, you can use the `plain` method.
+### Accepting arguments
 
-```ruby
-def template
-	h1 do
-		plain "👋 Hello "
-		strong { "World!" }
+You can define an _initializer_ for your views just like any other Ruby class. Let’s make our `Hello` view take a `name` as a keyword argument, save it in an instance variable and render that variable in the template.
+
+We’ll render this view with the arguments `name: "Joel"` and see what it produces.
+
+```phlex
+class Hello < Phlex::HTML
+	def initialize(name:)
+		@name = name
+	end
+
+	def template
+		h1 { "👋 Hello #{@name}!" }
 	end
 end
 ```
-```html
-<h1>👋 Hello <strong>World</strong></h1>
+```phlexecute
+render Hello.new(name: "Joel")
 ```
 
-All text output is HTML-escaped, so it’s safe for user-generated content.
+### Rendering views
 
-## Nodes
+Views can render other views in their templates using the `render` method. Let's try rendering a couple of instances of this `Hello` view from a new `Example` view and look at the output of the `Example` view.
+
+```phlex
+class Example < Phlex::HTML
+	def template
+		render Hello.new(name: "Joel")
+		render Hello.new(name: "Alexandre")
+	end
+end
+```
+```phlexecute
+render Example
+```
+
+
+### Content
+Views can also yield content blocks, which can be passed in when rendering. Let's make a `Card` component that yields content in an `<article>` element with a `drop-shadow` class on it.
+
+```phlex
+class Card < Phlex::HTML
+	def template
+		article(class: "drop-shadow") do
+			yield
+		end
+	end
+end
+```
+```phlex
+class Example < Phlex::HTML
+	def template
+		render Card.new do
+			h1 { "👋 Hello!" }
+		end
+	end
+end
+```
+```phlexecute
+render Example
+```
+
+The `Example` view renders a `Card` and passes it a block with an `<h1>` tag.
+
+Looking at the output of the `Example` view, we can see the `<h1>` element was rendered inside the `<article>` element from the `Card` view.
+
+### Delegating content
+Since the block of content was the only thing we need in the `<article>` element, we could have just passed the content block directly to the element instead.
+
+```ruby
+class Card < Phlex::HTML
+	def template(&)
+		article(class: "drop-shadow", &)
+	end
+end
+```
+
+### Hooks
+[//]: # (We should also add an example of around_template)
+
+You can hook into the rendering process by overriding `before_template` and `after_template` which are called immediately before / after the template is rendered.
+
+It’s a good idea to call `super` to allow for inherited callbacks.
+
+```phlex
+class Example < Phlex::HTML
+
+	def before_template
+		h1 { "Hello" }
+		super
+	end
+
+	def template
+		h2 { "World" }
+	end
+
+	def after_template
+		h3 { "Bye" }
+		super
+	end
+end
+```
+```phlexecute
+render Example
+```
+
+# Tags
+## HTML Tags
+`Phlex::HTML` comes with methods that correspond to the most common HTML tags. You’ve seen the `h1` tag in the previous section.
+
+### Content
+You pass content as a block to a tag method. If the return value of the block is a `String`, `Symbol`, `Integer` or `Float` and no output methods were used, the return value will be output as _text_.
+
+```phlex
+class Greeting < Phlex::HTML
+	def template
+		h1 { "👋 Hello World!" }
+	end
+end
+```
+```phlexecute
+render Greeting
+```
+
+### Attributes
+You can add attributes to HTML elements by passing keyword arguments to the methods.
+
+```phlex
+class Greeting < Phlex::HTML
+	def template
+		h1(class: "text-xl font-bold") { "👋 Hello World!" }
+	end
+end
+```
+```phlexecute
+render Greeting
+```
+
+Underscores `_` are automatically converted to dashes `-` for `Symbol` keys. If you need to use an underscore in an attribute name, you can pass it as a `String`.
+
+```phlex
+class Greeting < Phlex::HTML
+	def template
+		h1("foo_bar" => "hello") { "👋 Hello World!" }
+	end
+end
+```
+```phlexecute
+render Greeting
+```
+
+### Hash attributes
+You can pass a `Hash` as an attribute value and the Hash will be flattened with a dash between each level.
+
+```phlex
+class Greeting < Phlex::HTML
+	def template
+		div(data: { controller: "hello" }) do
+			# ...
+		end
+	end
+end
+```
+```phlexecute
+render Greeting
+```
+
+### Boolean attributes
+When an attribute value is `true`, the attribute name will be output without a value; when _falsy_, the attribute isn’t output at all. You can use the strings `"true"` and `"false"` as values for non-boolean attributes.
+
+```phlex
+class ChannelControls < Phlex::HTML
+	def template
+		input(
+			value: "1",
+			name: "channel",
+			type: "radio",
+			checked: true
+		)
+
+		input(
+			value: "2",
+			name: "channel",
+			type: "radio",
+			checked: false
+		)
+	end
+end
+```
+```phlexecute
+render ChannelControls
+```
+
+### The template tag
+Because the `template` method is used to define the view template itself, you'll need to use the method `template_tag` if you want to to render an HTML `<template>` tag.
+
+```phlex
+class TemplateExample < Phlex::HTML
+	def template
+		template_tag do
+			img src: "hidden.jpg", alt: "A hidden image."
+		end
+	end
+end
+```
+```phlexecute
+render TemplateExample
+```
+
+### Registering custom tags
+You can register custom elements with the `register_element` macro. The custom element will only be available in the view where it is registered and subclasses of that view.
+
+```phlex
+class CustomTagExample < Phlex::HTML
+	register_element :trix_editor
+
+	def template
+		trix_editor input: "content", autofocus: true
+	end
+end
+```
+```phlexecute
+render CustomTagExample
+```
+
+# Helpers
+## HTML Helpers
+### Stand-alone text
+You can output text content without wrapping it in an element by using the `plain` method. It accepts a single argument which can be a `String`, `Symbol`, `Integer` or `Float`.
+
+```phlex
+class Heading < Phlex::HTML
+	def template
+		h1 do
+			strong { "Hello " }
+			plain "World!"
+		end
+	end
+end
+```
+```phlexecute
+render Heading
+```
 
 ### Whitespace
 
-For the purpose of this documentation, we’ve been formatting the HTML output with indentation to make it easier to read. Howev
-er, Phlex doesn’t add any whitespace to the output by default. If you want to add whitespace, you can use the `whitespace` method.
+If you need to add whitespace, you can use the `whitespace` method. This is useful for adding space between _inline_ elements to allow them to wrap.
 
-This is useful for adding between _inline_ elements to allow them to wrap. For example, if these links were inline, they would overflow the container rather than wrap if we didn’t use whitespace.
-
-```ruby
-class FooterLinksComponent < Phlex::HTML
+```phlex
+class Links < Phlex::HTML
 	def template
 		a(href: "/") { "Home" }
 		whitespace
@@ -102,127 +328,235 @@ class FooterLinksComponent < Phlex::HTML
 	end
 end
 ```
+```phlexecute
+render Links
+```
 
-When called without a block, `whitespace` outputs a single space character. If you pass a block, the content is wrapped with space character on either side.
+If you pass a block to `whitespace`, the content is wrapped in whitespace on either side.
 
 ```ruby
 whitespace { a(href: "/") { "Home" } }
 ```
 
-### Doctype
-
-You can output an HTML 5 doctype with the `doctype` method.
-
-```ruby
-doctype
-```
-```html
-<!DOCTYPE html>
-```
-
 ### Comments
-
-The `comment` method wraps the content in comment tags.
+The `comment` method takes a block and wraps the content in an HTML comment.
 
 ```ruby
 comment { "Hello" }
 ```
-```html
-<!-- Hello -->
-```
 
-### Raw HTML
-
-If you want to output raw HTML without escaping it, you can use the `unsafe_raw` method.
-
-You should only use this method if you’re sure the content is safe because Phlex provides no protection against XSS (cross-site-scripting) attacks when using `unsafe_raw`.
+### Conditional tokens
+The `tokens` method helps you define conditional HTML attribute tokens such as CSS classes. You can use it to combine multiple tokens together.
 
 ```ruby
-unsafe_raw "<strong>Hello</strong>"
-```
-```html
-<strong>Hello</strong>
+tokens("a", "b", "c") # → "a b c"
 ```
 
-### Capturing output
-
-If you want to capture the output of a block as a String, you can use the `capture` method.
-
-In this example, the `captured_html` variable will be set to the string `"<h1>Hello</h1>"`. You probably won’t need to use this method, but it can be helpful for building advanced components.
+You can use keyword arguments to specify the conditions for specific tokens. A condition can be a `Proc` or `Symbol` that maps to an instance method. The `:active?` Symbol for example maps to the `active?` instance method.
 
 ```ruby
-captured_html = capture do
-	h1 { "Hello" }
-end
+tokens(
+	-> { true } => "foo",
+	-> { false } => "bar"
+) # → "foo"
 ```
 
-### Custom elements
+Here we have a `Lin`k view that produces an `<a>` tag with the CSS class `nav-item`. If the link is _active_, we also apply the CSS class `active`.
 
-To create custom elements, use the `register_element` macro. For example, you can register the `<trix-editor>` element like this:
-
-```ruby
-class Example < Phlex::HTML
-	register_element :trix_editor
+```phlex
+class Link < Phlex::HTML
+	def initialize(text, to:, active:)
+		@text = text
+		@to = to
+		@active = active
+	end
 
 	def template
-		trix_editor
+		a(href: @to, class: tokens("nav-item",
+				active?: "active")) { @text }
+	end
+
+	private
+
+	def active? = @active
+end
+```
+```phlex
+class TokensExample < Phlex::HTML
+	def template
+		nav do
+			ul do
+				li { render Link.new("Home", to: "/", active: true) }
+				li { render Link.new("About", to: "/about", active: false) }
+			end
+		end
 	end
 end
 ```
-
-Underscores in the method name are converted to dashes, so `trix_editor` becomes `<trix-editor>`. Calling this component would output the following:
-
-```html
-<trix-editor></trix-editor>
+```phlexecute
+render TokensExample
 ```
 
-Custom elements are not registered globally, so you can’t use an element that was registered in class `A` in class `B`, but they can be shared through inheritance.
+### Conditional classes
+The `classes` method helps to create a token list of CSS classes. This method returns a `Hash` with the key `:class` and the value as the result of `tokens`, allowing you to destructure it into a keyword argument using the `**` prefix operator.
 
-Here, `Example` can use `trix_editor` because it inherits from `Base` where the element was registered:
+```phlex
+class Link < Phlex::HTML
+	def initialize(text, to:, active:)
+		@text = text
+		@to = to
+		@active = active
+	end
 
-```ruby
-class Base < Phlex::HTML
-	register_element :trix_editor
+	def template
+		a(href: @to, **classes("nav-item",
+			active?: "active")) { @text }
+	end
+
+	private
+
+	def active? = @active
 end
 ```
-```ruby
-class Example < Base
+```phlex
+class ClassesExample < Phlex::HTML
 	def template
-		trix_editor
+		nav do
+			ul do
+				li { render Link.new("Home", to: "/", active: true) }
+				li { render Link.new("About", to: "/about", active: false) }
+			end
+		end
 	end
 end
 ```
-
-Alternatively, custom elements can be shared by including a module that extends `Phlex::Elements`:
-
-```ruby
-module MyElements
-	extend Phlex::Elements
-
-	register_element :trix_editor
-end
+```phlexecute
+render ClassesExample
 ```
-```ruby
-class Example < Phlex::HTML
-	include MyElements
 
-	def template
-		trix_editor
+### Unsafe output
+`unsafe_raw` takes a `String` and outputs it without any safety or HTML escaping. You should _never_ use this method with any string that could come from an untrusted person. In fact, you should pretty much never use this method. If you do, don’t come crying when someone hacks your website.
+
+If you think you need to use `unsafe_raw`, maybe [open a discussion thread](https://github.com/phlex-ruby/phlex/discussions/new) for other ideas.
+
+# Components
+You can build reusable & composable Phlex views.
+
+For example, you may need to define multiple sections (slots) in a view. This can be accomplished by defining public instance methods on the view that accept blocks:
+
+```phlex
+class Card < Phlex::HTML
+	def template(&)
+		article(class: "card", &)
+	end
+
+	def title(&)
+		div(class: "title", &)
+	end
+
+	def body(&)
+		div(class: "body", &)
 	end
 end
 ```
+```phlex
+class CardExample < Phlex::HTML
+	def template
+		render Card.new do |card|
+			card.title do
+				h1 { "Title" }
+			end
 
-The `Phlex::Elements` module provides the `register_element` macro to define element methods. However, these methods will only work on a class that also inherits from `Phlex::HTML` or `Phlex::SVG`.
+			card.body do
+				p { "Body" }
+			end
+		end
+	end
+end
+```
+```phlexecute
+render CardExample
+```
 
-## Rendering components
+This would work just fine for a list of views as each method can be called multiple times.
 
-After initialising a component object, you can render it to HTML with the `call` method. If you’re using `phlex-rails` with Rails, you won’t need to use use `#call` directly since you can render components with the `render` method from controllers or other views.
+One caveat of defining the view this way is `title` and `body` could be called in any order. This offers flexibility, but what if you need to make sure your markup is output in a consistent order?
 
-First, let’s make a HelloComponent that takes a name and renders an `<h1>` with a greeting.
+First, include `Phlex::DeferredRender` in your view. This changes the behavior of `template` so it does not receive a block and is yielded early. Then use public methods to save blocks, passing them to back to the `template` at render time.
+
+```phlex
+class List < Phlex::HTML
+	include Phlex::DeferredRender
+
+	def initialize
+		@items = []
+	end
+
+	def template
+		if @header
+			h1(class: "header", &@header)
+		end
+
+		ul do
+			@items.each do |item|
+				li { render(item) }
+			end
+		end
+	end
+
+	def header(&block)
+		@header = block
+	end
+
+	def with_item(&content)
+		@items << content
+	end
+end
+```
+```phlex
+class ListExample < Phlex::HTML
+	def template
+		render List.new do |list|
+			list.header do
+				"Header"
+			end
+
+			list.with_item do
+				"One"
+			end
+
+			list.with_item do
+				"two"
+			end
+		end
+	end
+end
+```
+```phlexecute
+render ListExample
+```
+
+# Testing Introduction
+## Testing Phlex Views
+The `Phlex::Testing::ViewHelper` module defines render allowing you to render Phlex views directly in your tests and make assertions against the output.
+
+You’ll need to require `phlex/testing/view_helper` and include `Phlex::Testing::ViewHelper` your test.
 
 ```ruby
-class HelloComponent < Phlex::HTML
-	def initialize(name:)
+require "phlex/testing/view_helper"
+
+class TestHello < Minitest::Test
+	include Phlex::Testing::ViewHelper
+
+	def test_hello_output_includes_name
+		output = render Hello.new("Joel")
+		assert_equal "<h1>Hello Joel</h1>", output
+	end
+end
+```
+```ruby
+class Hello < Phlex::HTML
+	def initialize(name)
 		@name = name
 	end
 
@@ -232,134 +566,250 @@ class HelloComponent < Phlex::HTML
 end
 ```
 
-Now we can render it by calling it.
+# Nokogiri
+## Testing HTML Views with Nokogiri [beta]
+The [`phlex-testing-nokogiri`](https://rubygems.org/gems/phlex-testing-nokogiri) gem provides helpers for working with rendered views as [Nokogiri](https://nokogiri.org/) documents and fragments.
+
+### Installation
+Add the following to the test group in your Gemfile and run `bundle install`.
 
 ```ruby
-HelloComponent.new(name: "Joel").call
-```
-```html
-<h1>👋 Hello Joel!</h1>
+gem "phlex-testing-nokogiri"
 ```
 
-You can also render components from other components using the `render` method.
+### Testing Documents
+If your view represents a whole HTML document, you can require `phlex/testing/nokogiri` and include the `Phlex::Testing::Nokogiri::DocumentHelper` module to render your view as `Nokogiri::Document` using the `render` method.
 
 ```ruby
-class ExampleComponent < Phlex::HTML
-	NAMES = ["Jack", "Jill"]
+require "phlex/testing/nokogiri"
+
+class TestExample < Minitest::Test
+	include Phlex::Testing::Nokogiri::DocumentHelper
+
+	def test_example
+		output = render Example.new
+		assert_equal "Hello Joel", output.css("h1").text
+	end
+end
+```
+```ruby
+class Hello < Phlex::HTML
+	def initialize(name)
+		@name = name
+	end
 
 	def template
-		NAMES.each do |name|
-			render HelloComponent.new(name:)
+		h1 { "Hello #{@name}" }
+	end
+end
+```
+
+### Testing Fragments
+If your view represents a fragment (partial), you can require `phlex/testing/nokogiri` and include the `Phlex::Testing::Nokogiri::FragmentHelper` module to render your view as `Nokogiri::Fragment` with the `render` method.
+
+```ruby
+require "phlex/testing/nokogiri"
+
+class TestExample < Minitest::Test
+	include Phlex::Testing::Nokogiri::FragmentHelper
+
+	def test_example
+		output = render Example.new("Joel")
+		assert_equal "Hello Joel", output.css("h1").text
+	end
+end
+```
+```ruby
+class Hello < Phlex::HTML
+	def initialize(name)
+		@name = name
+	end
+
+	def template
+		h1 { "Hello #{@name}" }
+	end
+end
+```
+
+# Capybara
+## Testing with Capybara [beta]
+The [`phlex-testing-capybara`](https://rubygems.org/gems/phlex-testing-capybara) gem provides a test helper that lets you use [Capybara](http://teamcapybara.github.io/capybara/) matchers.
+
+### Installation
+Add the following to the test group in your Gemfile and run `bundle install`.
+
+```ruby
+gem "phlex-testing-capybara"
+```
+
+### Usage
+You’ll need to require `phlex/testing/capybara` and include `Phlex::Testing::Capybara::ViewHelper`.
+
+The `render` method will return a `Capybara::Node::Simple` and set the `page` attribute to the result.
+
+```ruby
+require "phlex/testing/capybara"
+
+class TestExample < Minitest::Test
+	include Phlex::Testing::Capybara::ViewHelper
+
+	def test_example
+		render Example.new("Joel")
+		assert_selector "h1", text: "Hello Joel"
+	end
+end
+```
+```ruby
+class Hello < Phlex::HTML
+	def initialize(name)
+		@name = name
+	end
+
+	def template
+		h1 { "Hello #{@name}" }
+	end
+end
+```
+
+# Testing Rails
+## Testing Phlex views in Rails
+When you include `Phlex::Testing::Rails::ViewHelper`, views rendered in the test will have a view context, so they can use Rails helpers.
+
+# Rails Introduction
+## Getting started with Phlex on Rails
+While Phlex can be used in any Ruby project, it’s especially great with [Rails](https://rubyonrails.org/). But before we get into the details, it’s important to understand that Phlex is very different from [ActionView](https://guides.rubyonrails.org/action_view_overview.html) and [ViewComponent](https://viewcomponent.org/).
+
+### Setup
+To use Phlex with Rails, you’ll need to install the [`phlex-rails`](https://rubygems.org/gems/phlex-rails) gem. Add the following to your Gemfile and run bundle install.
+
+```ruby
+gem "phlex-rails"
+```
+
+Note, you do not need to install `phlex` separately because `phlex` is a dependency of `phlex-rails`.
+
+Once the gem is installed, run the install generator.
+
+```bash
+bin/rails generate phlex:install
+```
+
+This script will:
+
+1. update `config/application.rb` to include `app/views`, `app/views/components`, and `app/views/layouts` in your auto-load paths;
+2. generate `views/application_view.rb`
+3. generate `views/layouts/application_layout.rb`
+4. generate `views/components/application_component.rb`
+
+`ApplicationComponent` is your base component which all your other components inherit from. By default, `ApplicationView` inherits from `ApplicationComponent`.
+
+# Generators
+## Rails Generators
+### Component
+```bash
+bin/rails g phlex:component Card
+```
+
+This will generate a `CardComponent` in `card_component.rb` under `app/views/components`.
+
+### View
+```bash
+bin/rails g phlex:view Articles::Index
+```
+
+This will generate an `Articles::IndexView` in `index_view.rb` under `app/views/articles`.
+
+### Controller
+```bash
+bin/rails g phlex:controller Articles index show
+```
+
+This will generate an `ArticlesController` in `app/controllers`. It will have the actions `index` and `show`, which will render the views `Articles::IndexView` and `Articles::ShowView` generated in `index_view.rb` and `show_view.rb` under `app/views/articles`.
+
+# Rendering Views
+## Render Phlex views in Rails
+You can render a Phlex view from your Rails controller actions or other views — Phlex, ActionView or ViewComponent.
+
+Instead of implicitly rendering an ERB template with automatic access to all your controller instance variables, you’ll need to explicitly render Phlex views from your controller action methods.
+
+```ruby
+class ArticlesController < ApplicationController
+	layout -> { ApplicationLayout }
+
+	def index
+		render Articles::IndexView.new(
+			articles: Article.all.load_async
+		)
+	end
+
+	def show
+		render Articles::ShowView.new(
+			article: Article.find(params[:id])
+		)
+	end
+end
+```
+
+# Layouts
+## Layouts in Rails
+If you ran the install generator, you should have an `ApplicationLayout` file under `app/views/layouts/application_layout.rb`.
+
+You can configure a controller to use this layout with the `layout` method. Phlex layouts are even compatible with non-Phlex views.
+
+```ruby
+class FooController < ApplicationController
+	layout -> { ApplicationLayout }
+
+	def index
+		render Foo::IndexView
+	end
+end
+```
+
+### Yielding content
+Rails doesn't provide a mechanism for passing arguments to a layout component, but your layout can `yield` content provided by `content_for`.
+
+```ruby
+class ApplicationLayout < Phlex::HTML
+	include Phlex::Rails::Layout
+
+	def template
+		doctype
+
+		html do
+			head do
+				title { yield(:title) }
+			end
+
+			body do
+				yield
+			end
 		end
 	end
 end
 ```
 
-## HTML attributes
+# Helpers
+## Using Rails Helpers
+Phlex aims to ship with an adapter for every Rails view helper. (Please open an issue if we're missing one.)
 
+Each adapter can be included from its own module under `Phlex::Rails::Helpers`, e.g. `Phlex::Rails::Helpers::ContentFor`. The module name will match the title-cased method name.
 
-[`Phlex::HTML`](https://www.rubydoc.info/gems/phlex/Phlex/HTML) defines instance methods that correspond to [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element). You can find a complete list of [standard elements](https://www.rubydoc.info/gems/phlex/Phlex/HTML/StandardElements) and [void elements](https://www.rubydoc.info/gems/phlex/Phlex/HTML/VoidElements) in the [API documentation](https://www.rubydoc.info/gems/phlex). If it’s missing an element that you need, please [open an issue on GitHub](https://github.com/phlex-ruby/phlex/issues/new).
+You can include these adapters as needed, or include the ones you use most commonly in `ApplicationComponent` or `ApplicationView`.
 
-Standard elements such as `<div>` and `<span>` accept nested content as a block, while void elements such as `<img>` and `<input>` do not. When passing a content block, you can either call other tag methods or return a value to output as text.
+If you need to call the original unadapted helper, you can do that through the `helpers` proxy. For example, `helpers.link_to "Home", "/"` will return the HTML link as a String, while the adapter would output it.
 
-In this example, we call the `span` method in the `div` block and then return the value `"Hello"` in the `span` block.
+# Migrating to Phlex
+## Migrating an existing Rails app to Phlex
+Whether you currently use ActionView or ViewComponent with ERB, HAML or Slim, you can start using Phlex in your Rails app today without a big rewrite.
 
-```ruby
-div do
-	span { "Hello" }
-end
-```
+### You can render Phlex views into existing templates
+Phlex views implement the _renderable_ interface for Rails, which means they can be rendered from a controller or another view template — even ViewComponent templates. This means you can gradually migrate specific views and components to Phlex without having to change everything at once.
 
-We can’t combine these techniques like this:
+If you're migrating from ViewComponent, you might find you can convert components to Phlex views without even changing any call-sites.
 
-```ruby
-div do
-	"Hello "
-	strong { "World" }
-	"!"
-end
-```
+### You can render ActionView partials and ViewComponent components in Phlex views
+The `render` method in Phlex doesn't only work with Phlex views. You can use it to render ActionView partials and ViewComponent components.
 
-Instead, we can use the `plain` method to output plain text.
-
-
-```ruby
-div do
-	plain "Hello "
-	strong { "World" }
-	plain "!"
-end
-```
-
-## Attributes
-
-All tag methods accept HTML attributes as keyword arguments:
-
-```ruby
-div(class: "foo")
-```
-```html
-<div class="foo"></div>
-```
-
-When using `Symbol` keys, underscores are replaced with dashes, so the key `:data_controller` becomes the attribute `data-controller`:
-
-```ruby
-div(data_controller: "foo")
-```
-```html
-<div data-controller="foo"></div>
-```
-
-When using `String` keys, underscores are not replaced. The key `"data_controller"` is the attribute `data_controller`. I can’t think of a good reason to use underscores in HTML attribute names, but you have the option.
-
-```ruby
-div("data_controller" => "foo")
-```
-```html
-<div data_controller="foo"></div>
-```
-
-`Hash` values are flattened with dashes.
-
-```ruby
-div(data: { controller: "foo" })
-```
-```html
-<div data-controller="foo"></div>
-```
-
-`true` values are omitted.
-
-```ruby
-input(disabled: true)
-```
-```html
-<input disabled>
-```
-
-*Falsy* values (`false` or `nil`) skip the attribute entirely:
-
-```ruby
-input(disabled: false)
-```
-```html
-<input>
-```
-
-Some HTML attributes may *look* like boolean attributes, but they’re actually enums. The ARIA attribute [`aria-invalid`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid), for example, must be `"true"`, `"false"`, `"spelling"` or `"grammar"`.
-
-For this attribute, you should use the strings `"true"` or `"false"` rather than the boolean literals `true` or `false`.
-
-```ruby
-input(aria_invalid: "true")
-```
-```html
-<input aria-invalid="true">
-```
-
-# Advanced Phlex
-
-## Hooks and callbacks
-
-Phlex provides a number of hooks and callbacks that allow you to customise the behaviour of components.
+### Use an ERB → Phlex converter
+The ERB → Phlex converter, [Phlexing](https://www.phlexing.fun/), can do the heavy-lifting but it won't help you architect your components / design system.
