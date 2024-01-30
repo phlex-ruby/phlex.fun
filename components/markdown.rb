@@ -3,6 +3,11 @@ require "phlex/testing/view_helper"
 
 module Components
 	class Markdown < Phlex::Markdown
+		def h1(**, &)
+			content = capture(&)
+			super(id: content.downcase.gsub(/\s+/, "-"), &)
+		end
+
 		def code_block(code, language)
 			case language
 			when "phlex"
