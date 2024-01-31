@@ -4,7 +4,7 @@ module Components
 	class Layout < Base
 		attribute :title, String
 
-		def template(&block)
+		def view_template(&block)
 			doctype
 
 			html do

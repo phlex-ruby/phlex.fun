@@ -13,7 +13,7 @@ module Components
 		attribute :branch, String
 		attribute :repo, String
 
-		def template
+		def view_template
 			p(class: "mt-12") do
 				a(href: github_edit_file_url, target: :_blank, class: "text-stone-500 font-medium") do
 					span { "📝 Edit this page on GitHub" }

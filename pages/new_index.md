@@ -55,7 +55,7 @@ Let’s create a class called `HelloComponent` with a template that renders an `
 
 ```ruby
 class HelloComponent < Phlex::HTML
-	def template
+	def view_template
 		h1 { "👋 Hello World!" }
 	end
 end
@@ -69,7 +69,7 @@ Notice how we can just return a string from the content block? When no other nod
 If you want to output plain text without wrapping it in an element, you can use the `plain` method.
 
 ```ruby
-def template
+def view_template
 	h1 do
 		plain "👋 Hello "
 		strong { "World!" }
@@ -93,7 +93,7 @@ This is useful for adding between _inline_ elements to allow them to wrap. For e
 
 ```ruby
 class FooterLinksComponent < Phlex::HTML
-	def template
+	def view_template
 		a(href: "/") { "Home" }
 		whitespace
 		a(href: "/about") { "About" }
@@ -164,7 +164,7 @@ To create custom elements, use the `register_element` macro. For example, you ca
 class Example < Phlex::HTML
 	register_element :trix_editor
 
-	def template
+	def view_template
 		trix_editor
 	end
 end
@@ -187,7 +187,7 @@ end
 ```
 ```ruby
 class Example < Base
-	def template
+	def view_template
 		trix_editor
 	end
 end
@@ -206,7 +206,7 @@ end
 class Example < Phlex::HTML
 	include MyElements
 
-	def template
+	def view_template
 		trix_editor
 	end
 end
@@ -226,7 +226,7 @@ class HelloComponent < Phlex::HTML
 		@name = name
 	end
 
-	def template
+	def view_template
 		h1 { "Hello #{@name}" }
 	end
 end
@@ -247,7 +247,7 @@ You can also render components from other components using the `render` method.
 class ExampleComponent < Phlex::HTML
 	NAMES = ["Jack", "Jill"]
 
-	def template
+	def view_template
 		NAMES.each do |name|
 			render HelloComponent.new(name:)
 		end
