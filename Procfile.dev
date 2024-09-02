@@ -1,2 +1,0 @@
-server: ruby -run -e httpd dist
-docs: bundle exec build.rb --watch
