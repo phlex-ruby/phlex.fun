@@ -1,23 +1,61 @@
 import { defineConfig } from "vitepress";
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
 	title: "Phlex",
 	description: "Ruby views",
 	themeConfig: {
-		// https://vitepress.dev/reference/default-theme-config
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Guide", link: "/guide/rails" },
+			{ text: "Community", link: "/community" },
+			{ text: "Guide", link: "/guide" },
 		],
-
 		sidebar: [
 			{
-				text: "Guide",
-				items: [{ text: "Rails", link: "/guide/rails" }],
+				text: "Intro",
+				link: "guide",
+			},
+			{
+				text: "Rails",
+				items: [
+					{ text: "Installation", link: "guide/rails/installation" },
+					{ text: "Views", link: "guide/rails/views" },
+					{ text: "Components" },
+					{ text: "Layouts" },
+					{ text: "Helpers" },
+					{ text: "Generators" },
+					{ text: "Migrating to Phlex" },
+				],
+			},
+			{
+				text: "HTML",
+				items: [
+					{ text: "Introduction" },
+					{ text: "Elements" },
+					{ text: "Attributes" },
+					{ text: "Comments" },
+					{ text: "Helpers" },
+					{ text: "Whitespace" },
+				],
+			},
+			{
+				text: "SVG",
+				items: [
+					{ text: "Introduction" },
+					{ text: "Elements" },
+					{ text: "Attributes" },
+				],
+			},
+			{
+				text: "CSV",
+				items: [{ text: "Introduction" }, { text: "CSV Injection" }],
 			},
 		],
-
-		socialLinks: [{ icon: "github", link: "https://github.com/phlex-ruby" }],
+		socialLinks: [
+			{ icon: "github", link: "https://github.com/phlex-ruby" },
+			{ icon: "discord", link: "https://discord.gg/p7C9SWS8Sa" },
+		],
+		footer: {
+			message: "Released under the MIT License.",
+		},
 	},
 });
