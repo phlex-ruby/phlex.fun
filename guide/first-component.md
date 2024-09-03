@@ -1,8 +1,8 @@
 # Building your first component in Phlex
 
-Let's start by building a simple Card component. A Card is a presentational component, it doesn't
-really have any behavior. So it's going to be mostly for abstracting away the CSS classes and specific
-markup. We'll use simple classes in our example, but you could imagine if you were using a utility
+Let’s start by building a simple Card component. A Card is a presentational component, it doesn’t
+really have any behavior. So it’s going to be mostly for abstracting away the CSS classes and specific
+markup. We’ll use simple classes in our example, but you could imagine if you were using a utility
 based CSS framework like Tailwind that you would be abstracting away a lot more.
 
 ```ruby
@@ -13,9 +13,10 @@ class Card < Phlex::HTML
 end
 ```
 
-Not the most exciting component, but it's a start. We can use it like this:
+Not the most exciting component, but it’s a start. We can use it like this:
 
 ::: code-group
+
 ```ruby [view.rb]
 class View < Phlex::HTML
   def view_template
@@ -25,14 +26,16 @@ class View < Phlex::HTML
   end
 end
 ```
+
 ```html [output]
 <div class="card">
   <p>Card content</p>
 </div>
 ```
+
 :::
 
-This is nice, but some of our cards will need a header section that has a title. Let's keep adding
+This is nice, but some of our cards will need a header section that has a title. Let’s keep adding
 to our `Card` component so that it can have an optional header:
 
 ```ruby
@@ -40,21 +43,22 @@ class Card < Phlex::HTML
   def view_template(&)
     div(class: "card", &)
   end
-  # [!code ++:8]
-  def header(&)
+
+  def header(&) # [!code ++:3]
     div(class: "card-header", &)
   end
 
-  def title(&)
+  def title(&) # [!code ++:3]
     h2(class: "card-title", &)
   end
 end
 ```
 
-We've added `header` and `title` methods to our `Card` component. Now when we render a card, we can
+We’ve added `header` and `title` methods to our `Card` component. Now when we render a card, we can
 use the block argument, which will be the instance of our `Card`, and call our new methods:
 
 ::: code-group
+
 ```ruby [view.rb]
 class View < Phlex::HTML
   def view_template
@@ -68,6 +72,7 @@ class View < Phlex::HTML
   end
 end
 ```
+
 ```html [output]
 <div class="card">
   <div class="card-header">
@@ -76,10 +81,11 @@ end
   <p>Card content</p>
 </div>
 ```
+
 :::
 
 Ok, this is starting to look a bit better. But we also need a way to add an action button to our card.
-This will need a bit more flexibility than just changing the content of the button. Let's see what
+This will need a bit more flexibility than just changing the content of the button. Let’s see what
 that looks like:
 
 ```ruby
@@ -105,6 +111,7 @@ end
 This will let us pass in attributes to the action button.
 
 ::: code-group
+
 ```ruby [view.rb]
 class View < Phlex::HTML
   def view_template
@@ -118,6 +125,7 @@ class View < Phlex::HTML
   end
 end
 ```
+
 ```html [output]
 <div class="card">
   <div class="card-header">
@@ -127,13 +135,14 @@ end
   <a class="card-action" href="/">Action</a>
 </div>
 ```
+
 :::
 
-This seems like it's working, but we actually have a bit of a problem. We can't specify a class for
+This seems like it’s working, but we actually have a bit of a problem. We can’t specify a class for
 our action button without overriding the class provided in the `action` method. Any custom class or
 classes we provide will clobber the default `card-action` class. Phlex provides a helper method to help
 us deal with this situation called `mix`. It mixes attributes together, and is aware of token lists.
-Let's update our `action` method to use `mix`:
+Let’s update our `action` method to use `mix`:
 
 ```ruby
 def action(**attributes, &)
@@ -145,6 +154,7 @@ Now if we specify a custom class when we call our `action` method, it will be ad
 instead of overriding it.
 
 ::: code-group
+
 ```ruby [view.rb]
 class View < Phlex::HTML
   def view_template
@@ -158,6 +168,7 @@ class View < Phlex::HTML
   end
 end
 ```
+
 ```html [output]
 <div class="card">
   <div class="card-header">
@@ -167,4 +178,5 @@ end
   <p>Card content</p>
 </div>
 ```
+
 :::
