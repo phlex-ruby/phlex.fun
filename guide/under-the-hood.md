@@ -339,3 +339,51 @@ end
 ```
 
 This is a little mind-bending. We’re now always passing a block to `view_template`, that yields self to the block that was passed to `call` if a block was passed.
+
+The final `Component` class should look like this — just 33 lines of Ruby:
+
+```ruby
+class Component
+  def call(buffer = [])
+    @buffer = buffer
+    view_template { yield(self) if block_given? }
+    @buffer.join
+  end
+
+  def div(content = nil, **attributes)
+    @buffer << "<div"
+
+    attributes.each do |key, value|
+      @buffer << " #{key}=\"#{value}\""
+    end
+
+    @buffer << ">"
+
+    if content
+      @buffer << content
+    elsif block_given?
+      yield
+    end
+
+    @buffer << "</div>"
+  end
+
+  def plain(content)
+    @buffer << content
+  end
+
+  def render(component, &)
+    component.call(@buffer, &)
+  end
+end
+```
+
+Our `HelloWorld` component with the `card.title` interface should now render the title correctly:
+
+```html
+<div class="outer">
+  <div class="card">
+    <div class="card-title">Hello, World!</div>
+  </div>
+</div>
+```
