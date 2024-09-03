@@ -27,15 +27,18 @@ export default defineConfig({
 					{ text: "Your first component", link: "/guide/first-component" },
 					{ text: "Under the hood", link: "/guide/under-the-hood" },
 					{ text: "Attributes deep-dive", link: "/guide/attributes" },
+					{ text: "Advanced components", link: "/guide/advanced-components" },
+					{ text: "Tags", link: "/guide/tags" },
+					{ text: "Layouts", link: "/guide/layouts" },
 				],
 			},
 			{
 				text: "Reference",
 				collapsed: false,
 				items: [
-					{ text: "SGML" },
-					{ text: "HTML" },
-					{ text: "SVG" },
+					{ text: "SGML", link: "/reference/sgml" },
+					{ text: "HTML", link: "/reference/html" },
+					{ text: "SVG", link: "/reference/svg" },
 					{ text: "Kits", link: "/reference/kits" },
 					{
 						text: "Rails",

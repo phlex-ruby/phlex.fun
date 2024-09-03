@@ -2,18 +2,23 @@
 
 You’ve just rebuilt 90% of Phlex so you know a thing or two about rendering attributes.
 
-## `String` and `Symbol` keys
+## Keys
 
-## `String` and `Symbol` values
+- Difference between string and symbol keys
 
-## `Array` and `Set` attributes
+## Values
 
-## Nested `Hash` attributes
+- Strings
+- Arrays
+- Sets
+- Booleans
+- Custom objects
 
-## The `style` attribute
+## Nested attributes
 
-## The `class` attribute
+- Describe how hashes work
 
-## Custom objects as attribute values
+## Special attributes
 
-## Boolean attributes
+- `style`
+- `class`
