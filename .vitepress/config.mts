@@ -11,45 +11,13 @@ export default defineConfig({
 		],
 		sidebar: [
 			{
-				text: "Getting Started",
+				text: "Guide",
 				items: [
 					{ text: "Intro", link: "/guide/" },
-					{ text: "Setup", link: "/guide/setup" }
-				]
-			},
-			{
-				text: "Rails",
-				items: [
-					{ text: "Views", link: "/guide/rails/views" },
-					{ text: "Generators" },
-					{ text: "Migrating to Phlex" },
+					{ text: "Setup", link: "/guide/setup" },
+					{ text: "Your first component", link: "/guide/first-component" },
+					{ text: "Under the hood", link: "/guide/under-the-hood" },
 				],
-			},
-			{
-				text: "HTML",
-				collapsed: false,
-				items: [
-					{ text: "Introduction" },
-					{ text: "Elements" },
-					{ text: "Attributes" },
-					{ text: "Comments" },
-					{ text: "Helpers" },
-					{ text: "Whitespace" },
-				],
-			},
-			{
-				text: "SVG",
-				collapsed: false,
-				items: [
-					{ text: "Introduction" },
-					{ text: "Elements" },
-					{ text: "Attributes" },
-				],
-			},
-			{
-				text: "CSV",
-				collapsed: false,
-				items: [{ text: "Introduction" }, { text: "CSV Injection" }],
 			},
 		],
 
@@ -61,4 +29,4 @@ export default defineConfig({
 			message: "Released under the MIT License.",
 		},
 	},
-})
+});
