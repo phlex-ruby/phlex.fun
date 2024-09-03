@@ -1,6 +1,6 @@
 # Under the hood
 
-You’ve successfully installed Phlex and rendered your first component. Now let’s take a moment to understand what’s happening behind the scenes. To do this, we’re going to build a mineature version of Phlex from scratch.
+You’ve successfully installed Phlex and rendered your first component. Now let’s take a moment to understand what’s happening behind the scenes. To do this, we’re going to build a miniature version of Phlex from scratch.
 
 It won’t have advanced features, performance optimizations or HTML safety, but I think it’ll give you a good sense of things.
 
