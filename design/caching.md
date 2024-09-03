@@ -4,7 +4,7 @@ The most expensive (performance-wise) process in Phlex is building attributes, w
 
 Phlex supports all kinds of attributes including deeply-nested hashes, arrays, sets, strings, symbols, boolean values and even custom objects. It even has special handling for `class` and `style` attributes.
 
-Attributes need to be calculated thousands of times per render. One advantage we have is attributes are always calculated the same way. The same Hash will always produce the same String of HTML.
+Attributes need to be calculated thousands of times per render. One advantage we have is attributes are always calculated the same way. The same hash will always produce the same string of HTML.
 
 This problem lends itself well to caching. If we store the result of the first calculation, we can then resuse it the next time we get the same set of attributes.
 

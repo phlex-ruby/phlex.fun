@@ -6,10 +6,15 @@ export default defineConfig({
 	themeConfig: {
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Community", link: "/community" },
+			{ text: "Community", link: "project/community" },
 			{ text: "Guide", link: "/guide" },
 		],
 		sidebar: [
+			{
+				text: "Project",
+				collapsed: false,
+				items: [{ text: "Community", link: "/project/community" }],
+			},
 			{
 				text: "Guide",
 				collapsed: false,
@@ -18,6 +23,7 @@ export default defineConfig({
 					{ text: "Setup", link: "/guide/setup" },
 					{ text: "Your first component", link: "/guide/first-component" },
 					{ text: "Under the hood", link: "/guide/under-the-hood" },
+					{ text: "Attributes deep-dive", link: "/guide/attributes" },
 				],
 			},
 			{
@@ -32,8 +38,9 @@ export default defineConfig({
 						text: "Rails",
 						collapsed: false,
 						items: [
-							{ text: "Streaming", link: "/reference/rails/streaming" },
 							{ text: "Helpers", link: "/reference/rails/helpers" },
+							{ text: "Generators", link: "/reference/rails/generators" },
+							{ text: "Streaming", link: "/reference/rails/streaming" },
 						],
 					},
 				],
