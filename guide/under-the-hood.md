@@ -326,7 +326,7 @@ class HelloWorld < Component
 end
 ```
 
-To get this to work, we’ll need to find the point where we yield and make it `yielf(self)`. We could do this in the `div` method, but there’s a better way.
+To get this to work, we’ll need to find the point where we yield and make it `yield(self)`. We could do this in the `div` method, but there’s a better way.
 
 When the block comes into `call`, we can wrap it in a new block that yields `self`. This way, it will always yield the component instance even if we forget to.
 
