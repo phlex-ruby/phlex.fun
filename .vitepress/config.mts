@@ -11,17 +11,16 @@ export default defineConfig({
 		],
 		sidebar: [
 			{
-				text: "Intro",
-				link: "/guide/index/",
-			},
-			{
-				text: "Setup",
-				link: "/guide/setup/",
+				text: "Getting Started",
+				items: [
+					{ text: "Intro", link: "/guide/" },
+					{ text: "Setup", link: "/guide/setup" }
+				]
 			},
 			{
 				text: "Rails",
 				items: [
-					{ text: "Views", link: "guide/rails/views" },
+					{ text: "Views", link: "/guide/rails/views" },
 					{ text: "Generators" },
 					{ text: "Migrating to Phlex" },
 				],
@@ -62,4 +61,4 @@ export default defineConfig({
 			message: "Released under the MIT License.",
 		},
 	},
-});
+})
