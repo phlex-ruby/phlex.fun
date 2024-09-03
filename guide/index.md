@@ -4,7 +4,7 @@ Phlex is a Ruby gem for building fast object-oriented views. Phlex actually supp
 
 Phlex views are composed of components. Components can be concrete, like a **Header** or **Footer**, or more abstract like a **Button**. They can be nested in other components or wrap a layout around your content.
 
-Templates are described using basic Ruby constructs: _methods_, _arguments_ and _blocks_, which directly correspond HTML semantics.
+Templates are described using basic Ruby constructs: _methods_, _arguments_ and _blocks_, which directly correspond to HTML _tags_, _attributes_ and _content_.
 
 Building components in Ruby makes it possible to build powerful abstractions. For example, let’s build a `Nav` component that allows developers to add items to the menu without needing to understand the underlying HTML.
 
