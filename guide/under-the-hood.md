@@ -87,3 +87,43 @@ You should see the following output with one div nested inside another:
 ```
 
 Ruby handled the hierarchy for us. We got part way into the first div when we _yielded_ to the block which started a new div. Since there was no block given to this inner div, it closed immediately yielding control back to the original outer div, which then closed.
+
+## Handling text content
+
+Let’s add the ability to render text content inside our divs. We’ll update the method to accept an optional `content` argument. If `content` is provided, we’ll push it onto the buffer. Otherwise, we’ll yield to the block as before if a block is given.
+
+```ruby
+def div(content = nil)
+  @buffer << "<div>"
+
+  if content
+    @buffer << content
+  elsif block_given?
+    yield
+  end
+
+  @buffer << "</div>"
+end
+```
+
+::: warning
+This implementation doesn’t handle HTML safety. In a real-world scenario, you’d want to escape any HTML content to prevent cross-site-scripting attacks, where a user could inject malicious code into your page by providing it as their name, for example.
+:::
+
+Let’s go back to our `HelloWorld` component and add some text content to the inner div.
+
+```ruby
+class HelloWorld < Component
+  def view_template
+    div {
+      div("Hello, World!")
+    }
+  end
+end
+```
+
+Now when we render our `HelloWorld` component, we should see the following output:
+
+```html
+<div><div>Hello, World!</div></div>
+```
