@@ -21,7 +21,7 @@ Now we want to be able to render HTML tags. Let’s start with `<div>` and we ca
 ```ruby
 def div
   @buffer << "<div>"
-  yield(self) if block_given?
+  yield if block_given?
   @buffer << "</div>"
 end
 ```
