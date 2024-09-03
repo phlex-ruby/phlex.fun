@@ -12,12 +12,39 @@ export default defineConfig({
 		sidebar: [
 			{
 				text: "Guide",
+				collapsed: false,
 				items: [
 					{ text: "Intro", link: "/guide/" },
 					{ text: "Setup", link: "/guide/setup" },
 					{ text: "Your first component", link: "/guide/first-component" },
 					{ text: "Under the hood", link: "/guide/under-the-hood" },
 				],
+			},
+			{
+				text: "Reference",
+				collapsed: false,
+				items: [
+					{
+						text: "Phlex",
+						collapsed: false,
+						items: [
+							{ text: "SGML" },
+							{ text: "HTML" },
+							{ text: "SVG" },
+							{ text: "Kit" },
+						],
+					},
+					{
+						text: "Rails",
+						collapsed: false,
+						items: [{ text: "Streaming" }, { text: "Helpers" }],
+					},
+				],
+			},
+			{
+				text: "Technical Design",
+				collapsed: false,
+				items: [{ text: "Caching" }],
 			},
 		],
 
