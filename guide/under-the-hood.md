@@ -156,7 +156,7 @@ end
 
 Let’s go back to our `HelloWorld` component and add a class attribute to each of the divs.
 
-```ruby
+```ruby{3-4}
 class HelloWorld < Component
   def view_template
     div(class: "outer") {
