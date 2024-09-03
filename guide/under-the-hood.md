@@ -127,3 +127,215 @@ Now when we render our `HelloWorld` component, we should see the following outpu
 ```html
 <div><div>Hello, World!</div></div>
 ```
+
+## Handling attributes
+
+Let’s add the ability to render attributes on our divs. We’ll update the method to accept an optional `attributes` hash. We can do this by accepting a double splat argument, `**attributes`, which will collect all the keyword arguments into a new `Hash`.
+
+Now we want to start by pushing just the opening `<div` onto the buffer. Then we’ll iterate over the `attributes` hash and push each key-value pair onto the buffer. Finally, we’ll push the closing `>` onto the buffer and continue as before.
+
+```ruby{2-8}
+def div(content = nil, **attributes)
+  @buffer << "<div"
+
+  attributes.each do |key, value|
+    @buffer << " #{key}=\"#{value}\""
+  end
+
+  @buffer << ">"
+
+  if content
+    @buffer << content
+  elsif block_given?
+    yield
+  end
+
+  @buffer << "</div>"
+end
+```
+
+Let’s go back to our `HelloWorld` component and add a class attribute to each of the divs.
+
+```ruby
+class HelloWorld < Component
+  def view_template
+    div(class: "outer") {
+      div("Hello, World!", class: "inner")
+    }
+  end
+end
+```
+
+Now when we render our `HelloWorld` component, we should see the following output:
+
+```html
+<div class="outer"><div class="inner">Hello, World!</div></div>
+```
+
+## Nesting components
+
+For the final step, let’s add the ability to nest components inside one another.
+
+To do this we’ll need the ability to pass a buffer to a component when we come to rendering it. Let’s remove the original `initialize` method and update the `call` method to accept a buffer argument instead.
+
+We’ll also accept a block (`&`) and pass it to the `view_template` method.
+
+```ruby
+def call(buffer = [], &)
+  @buffer = buffer
+  view_template(&)
+  @buffer.join
+end
+```
+
+The buffer still defaults to an empty array, but now we can pass in a buffer from the outside. The block allows us to yield content in our template.
+
+Let’s define a `render` method that takes a component and renders, passing the buffer and the block.
+
+```ruby
+def render(component, &)
+  component.call(@buffer, &)
+end
+```
+
+The whole `Component` class should now look like this:
+
+```ruby
+class Component
+  def call(buffer = [], &)
+    @buffer = buffer
+    view_template(&)
+    @buffer.join
+  end
+
+  def div(content = nil, **attributes)
+    @buffer << "<div"
+
+    attributes.each do |key, value|
+      @buffer << " #{key}=\"#{value}\""
+    end
+
+    @buffer << ">"
+
+    if content
+      @buffer << content
+    elsif block_given?
+      yield
+    end
+
+    @buffer << "</div>"
+  end
+
+  def render(component, &)
+    component.call(@buffer, &)
+  end
+end
+```
+
+Now let’s create a new component called `Card`:
+
+```ruby
+class Card < Component
+  def view_template(&)
+    div(class: "card", &)
+  end
+end
+```
+
+Back in our `HelloWorld` component, let’s update it to render our `Card` component:
+
+```ruby
+class HelloWorld < Component
+  def view_template
+    div(class: "outer") {
+      render Card.new do
+        div("Hello, World!", class: "inner")
+      end
+    }
+  end
+end
+```
+
+The output should now be something like this (without newlines and indentation):
+
+```html
+<div class="outer">
+  <div class="card">
+    <div class="inner">Hello, World!</div>
+  </div>
+</div>
+```
+
+## Plain text
+
+In about 30 lines of code, we’ve build a simple component abstraction for rendering HTML. We can render nested divs with content and attributes and we can nest components inside one another.
+
+However, what we can’t do is render text without wrapping it in a div. Let’s fix that with a new method called `plain` that simply pushes content onto the buffer.
+
+```ruby
+def plain(content)
+  @buffer << content
+end
+```
+
+Now we can update our `HelloWorld` component to render the text directly inside the `Card` component:
+
+```ruby
+class HelloWorld < Component
+  def view_template
+    div(class: "outer") {
+      render Card.new do
+        plain "Hello, World!"
+      end
+    }
+  end
+end
+```
+
+## Supporting advanced DSLs
+
+What if we want to our Card component to expose an interface for interacting with it. For example, we might want to set the title.
+
+Let’s start by updating the Card component as if this worked and then we’ll get it working.
+
+```ruby
+class Card < Component
+  def view_template(&)
+    div(class: "card", &)
+  end
+
+  def title(content)
+    div(content, class: "card-title")
+  end
+end
+```
+
+This `title` method perfectly encapsulates the card title. But how can we call it at just the right moment so that it pushes to the buffer in the right place?
+
+The trick here is to yield the component to the block that’s passed to `view_template` from the `render` method. This will allow us to pick up the card component when passing in the block.
+
+```ruby
+class HelloWorld < Component
+  def view_template
+    div(class: "outer") {
+      render Card.new do |card|
+        card.title "Hello, World!"
+      end
+    }
+  end
+end
+```
+
+To get this to work, we’ll need to find the point where we yield and make it `yielf(self)`. We could do this in the `div` method, but there’s a better way.
+
+When the block comes into `call`, we can wrap it in a new block that yields `self`. This way, it will always yield the component instance even if we forget to.
+
+```ruby
+def call(buffer = [])
+  @buffer = buffer
+  view_template { yield(self) if block_given? }
+  @buffer.join
+end
+```
+
+This is a little mind-bending. We’re now always passing a block to `view_template`, that yields self to the block that was passed to `call` if a block was passed.
