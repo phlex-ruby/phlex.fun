@@ -13,7 +13,10 @@ export default defineConfig({
 			{
 				text: "Project",
 				collapsed: false,
-				items: [{ text: "Community", link: "/project/community" }],
+				items: [
+					{ text: "Community", link: "/project/community" },
+					{ text: "GitHub", link: "https://github.com/phlex-ruby" },
+				],
 			},
 			{
 				text: "Guide",
@@ -33,7 +36,7 @@ export default defineConfig({
 					{ text: "SGML" },
 					{ text: "HTML" },
 					{ text: "SVG" },
-					{ text: "Kit" },
+					{ text: "Kits", link: "/reference/kits" },
 					{
 						text: "Rails",
 						collapsed: false,
@@ -57,6 +60,10 @@ export default defineConfig({
 					{ text: "Selective Rendering" },
 					{ text: "Deferred Render" },
 				],
+			},
+			{
+				text: "AI Prompt",
+				link: "/ai",
 			},
 		],
 
