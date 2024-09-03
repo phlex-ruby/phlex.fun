@@ -8,7 +8,7 @@ hero:
   tagline: A little string concatenation library.
   actions:
     - theme: brand
-      text: Get started
+      text: Guide
       link: /guide
 
 features:

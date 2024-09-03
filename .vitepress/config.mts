@@ -24,27 +24,32 @@ export default defineConfig({
 				text: "Reference",
 				collapsed: false,
 				items: [
-					{
-						text: "Phlex",
-						collapsed: false,
-						items: [
-							{ text: "SGML" },
-							{ text: "HTML" },
-							{ text: "SVG" },
-							{ text: "Kit" },
-						],
-					},
+					{ text: "SGML" },
+					{ text: "HTML" },
+					{ text: "SVG" },
+					{ text: "Kit" },
 					{
 						text: "Rails",
 						collapsed: false,
-						items: [{ text: "Streaming" }, { text: "Helpers" }],
+						items: [
+							{ text: "Streaming", link: "/reference/rails/streaming" },
+							{ text: "Helpers", link: "/reference/rails/helpers" },
+						],
 					},
 				],
 			},
 			{
 				text: "Technical Design",
 				collapsed: false,
-				items: [{ text: "Caching" }],
+				items: [
+					{ text: "Intro", link: "/design/intro" },
+					{ text: "Caching", link: "/design/caching" },
+					{ text: "Performance", link: "/design/performance" },
+					{ text: "Component Kits" },
+					{ text: "Rails Integration" },
+					{ text: "Selective Rendering" },
+					{ text: "Deferred Render" },
+				],
 			},
 		],
 
