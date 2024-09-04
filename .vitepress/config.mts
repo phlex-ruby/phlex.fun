@@ -35,19 +35,21 @@ export default defineConfig({
 					},
 					{ text: "Tags", link: "/handbook/tags" },
 					{ text: "Layouts", link: "/handbook/layouts" },
+					{ text: "Helpers", link: "/handbook/helpers" },
+					{ text: "Testing", link: "/handbook/testing" },
 				],
 			},
 
 			{
 				text: "Guides",
-				collapsed: false,
+				collapsed: true,
 				items: [{ text: "Upgrading to v2", link: "/guides/v2-upgrade" }],
 			},
 
 			{
 				text: "Reference",
 				link: "/reference/",
-				collapsed: false,
+				collapsed: true,
 				items: [
 					{ text: "SGML", link: "/reference/sgml" },
 					{ text: "HTML", link: "/reference/html" },
@@ -62,6 +64,18 @@ export default defineConfig({
 							{ text: "Streaming", link: "/reference/rails/streaming" },
 						],
 					},
+				],
+			},
+
+			{
+				text: "Compared to…",
+				collapsed: true,
+				items: [
+					{ text: "ViewComponent", link: "/compare/view-component" },
+					{ text: "ActionView & ERB", link: "/compare/action-view" },
+					{ text: "React", link: "/compare/react" },
+					{ text: "Slim", link: "/compare/slim" },
+					{ text: "Haml", link: "/compare/haml" },
 				],
 			},
 
@@ -88,8 +102,11 @@ export default defineConfig({
 			{ icon: "github", link: "https://github.com/phlex-ruby" },
 			{ icon: "discord", link: "https://discord.gg/p7C9SWS8Sa" },
 		],
+
 		footer: {
 			message: "Released under the MIT License.",
+			copyright:
+				'Made by <a href="https://github.com/joeldrapper">Joel Drapper</a>, <a href="https://github.com/willcosgrove">Will Cosgrove</a> and dozens of other <a href="https://github.com/phlex-ruby/phlex/graphs/contributors">contributors</a>.',
 		},
 	},
 });

@@ -1,3 +1,9 @@
+---
+
+prev: false
+
+---
+
 # Intro
 
 Phlex is a Ruby gem for building fast object-oriented views. Phlex actually supports **HTML**, **SVG** and **CSV** views, but we'll focus on HTML views to begin with.
