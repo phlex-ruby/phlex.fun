@@ -7,7 +7,7 @@ export default defineConfig({
 		nav: [
 			{ text: "Home", link: "/" },
 			{ text: "Community", link: "project/community" },
-			{ text: "Guide", link: "/guide" },
+			{ text: "Handbook", link: "/handbook" },
 		],
 		sidebar: [
 			{
@@ -18,22 +18,35 @@ export default defineConfig({
 					{ text: "GitHub", link: "https://github.com/phlex-ruby" },
 				],
 			},
+
 			{
-				text: "Guide",
+				text: "Handbook",
+				link: "/handbook/",
 				collapsed: false,
 				items: [
-					{ text: "Intro", link: "/guide/" },
-					{ text: "Setup", link: "/guide/setup" },
-					{ text: "Your first component", link: "/guide/first-component" },
-					{ text: "Under the hood", link: "/guide/under-the-hood" },
-					{ text: "Attributes deep-dive", link: "/guide/attributes" },
-					{ text: "Advanced components", link: "/guide/advanced-components" },
-					{ text: "Tags", link: "/guide/tags" },
-					{ text: "Layouts", link: "/guide/layouts" },
+					{ text: "Intro", link: "/handbook/" },
+					{ text: "Setup", link: "/handbook/setup" },
+					{ text: "Your first component", link: "/handbook/first-component" },
+					{ text: "Under the hood", link: "/handbook/under-the-hood" },
+					{ text: "Attributes deep-dive", link: "/handbook/attributes" },
+					{
+						text: "Advanced components",
+						link: "/handbook/advanced-components",
+					},
+					{ text: "Tags", link: "/handbook/tags" },
+					{ text: "Layouts", link: "/handbook/layouts" },
 				],
 			},
+
+			{
+				text: "Guides",
+				collapsed: false,
+				items: [{ text: "Upgrading to v2", link: "/guides/v2-upgrade" }],
+			},
+
 			{
 				text: "Reference",
+				link: "/reference/",
 				collapsed: false,
 				items: [
 					{ text: "SGML", link: "/reference/sgml" },
@@ -51,16 +64,17 @@ export default defineConfig({
 					},
 				],
 			},
+
 			{
 				text: "Technical Design",
-				collapsed: false,
+				collapsed: true,
 				items: [
 					{ text: "Intro", link: "/design/intro" },
 					{ text: "Caching", link: "/design/caching" },
 					{ text: "Performance", link: "/design/performance" },
-					{ text: "Component Kits" },
-					{ text: "Rails Integration" },
-					{ text: "Selective Rendering" },
+					{ text: "Component kits" },
+					{ text: "Rails integration" },
+					{ text: "Selective rendering" },
 					{ text: "Deferred Render" },
 				],
 			},

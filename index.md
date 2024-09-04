@@ -8,8 +8,11 @@ hero:
   tagline: A little string concatenation library.
   actions:
     - theme: brand
-      text: Guide
-      link: /guide
+      text: Handbook
+      link: /handbook/
+    - theme: alt
+      text: Reference
+      link: /reference/
 
 features:
   - title: Pure, beautiful Ruby
