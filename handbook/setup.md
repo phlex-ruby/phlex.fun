@@ -16,7 +16,7 @@ Start by running:
 bundle add phlex-rails
 ```
 
-This will install the latest version of `phlex` and `phlex-rails` and add `phlex-rails` to your `Gemfile`. Once that’s finished, you’ll want to run the install geneartor to kick things off:
+This will install the latest version of `phlex` and `phlex-rails` and add `phlex-rails` to your `Gemfile`. Once that’s finished, you’ll want to run the install generator to kick things off:
 
 ```
 bundle exec rails generate phlex:install
