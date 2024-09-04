@@ -18,7 +18,7 @@ We can do something like this:
 CACHE[attributes_hash] ||= calculate_attributes(attributes_hash)
 ```
 
-This works pretty well, but there’s actually a much quicker way. Ruby’s `Hash` objects have a `#hash` method that returns an `Integer` that is unique to the contents of the hash. The same contents will always produce the same integer.
+This works pretty well, but there’s actually a faster way. Ruby’s `Hash` objects have a `#hash` method that returns an `Integer` that is a digest of the contents of the hash. The same contents will always produce the same integer.
 
 We can use this integer as the key in our cache which makes lookups much faster.
 
@@ -26,7 +26,7 @@ We can use this integer as the key in our cache which makes lookups much faster.
 CACHE[attributes_hash.hash] ||= calculate_attributes(attributes_hash)
 ```
 
-There’s a catch though. The `#hash` method is not really guaranteed to be unique. While it’s very, very unlikely, it is possible for two different hashes to produce the same integer. This is called a collision.
+There’s a catch though. The `#hash` method is not guaranteed to be unique. While it’s very, very unlikely, it is possible for two different hashes to produce the same integer. This is called a hash collision.
 
 What we can do to avoid this is to store both the original attributes hash and the calculated HTML string in the cache keyed by this hash integer. Then, if we get a hit, we can compare the original attributes hash to the one we’re looking for to make sure they’re exactly the same.
 
@@ -41,7 +41,7 @@ else
 end
 ```
 
-It’s a bit messy but it works and it’s faster than using the Hash object as the key, while still being safe.
+It’s a bit convoluted but it works and it’s faster than using the Hash object as the key, while still being correct.
 
 ## Key eviction
 
@@ -57,11 +57,9 @@ There are a few different approaches to key eviction:
 - **Last In First Out (LIFO)** — with this approach, the first keys to be evicted are the ones that were added to the cache last.
 - **First In First Out (FIFO)** — with this approach, the first keys to be evicted are the ones that were added to the cache first.
 
-Naievely, the LRU approach seems like the best one. It’s the most fair and it’s the one that’s most likely to keep the most useful keys in the cache. However, it’s also the slowest.
+Naievely, the LRU approach seems like the best one. It’s the most fair and it’s the one that’s most likely to keep the most useful keys in the cache. However the bookkeeping overhead to know which keys have been accessed most recently, also makes it slower to access.
 
-If you think about it, with an LRU cache, you need to keep track of the order in which keys were accessed. That means every read becomes an expensive write. In order to avoid contention, you would also need to use a `Mutex` to make sure only one thread is accessing the cache at a time.
-
-It is possible to minimise th overhead of an LRU cache using a B-Tree, but this is quite a complex data structure and it’s not built into Ruby. Additionally, to avoid readers blocking writers, you would probably need some kind of write-ahead log.
+If you think about it, with an LRU cache, you need to keep track of the order in which keys were accessed. That means every read also requires a write, which is more expensive. In order to avoid contention, you would also need to use a `Mutex` to make sure only one thread is accessing the cache at a time.
 
 In contrast, LIFO and FIFO caches are much simpler, especially as Ruby’s `Hash` class maintains insertion order.
 
@@ -77,9 +75,7 @@ But how do we determine the size of the cache itself? Ideally, it would be just 
 
 This is a very tricky problem and one that we haven’t entirely solved, however we do have an approach that works pretty well.
 
-Each time you define a component, we look up the source location of the `view_template` method. We check how many bytes are in that file and expand the cache by that amount.
-
-This is probably a bit much — it’s very unlikely the entire file was make up of attributes. But remember we’re talking kilobytes here. It’s a pretty good approximation that has a fixed limit and expands predictably with your app.
+We use the total file size of all of your components as an upper bound for the cache size. This is probably a bit much — it’s very unlikely the entire file was made up of attributes. But remember we’re talking kilobytes here. It’s a pretty good approximation that has a fixed limit and expands predictably with your app.
 
 ## Avoiding race conditions
 
