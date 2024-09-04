@@ -17,7 +17,7 @@ hero:
 features:
   - title: Pure, beautiful Ruby
     icon: 💎
-    details: Phlex gives you HTML semantics in Ruby syntax so you can use your existing Ruby skills making object-oriented views. Plus, you get to use tools like Solargraph, RubyLSP, Rubocop and Simplecov.
+    details: Phlex gives you HTML semantics in Ruby syntax so you can use your existing skills designing object-oriented views. Plus, you get to use tools like RubyLSP, Rubocop and Simplecov.
   - title: Fast enough
     icon: 🚀
     details: Phlex renders HTML at over 1gbps on a MacBook Pro and unlike Rails partials, it doesn’t slow down the more components you extract.
