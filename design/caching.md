@@ -57,7 +57,7 @@ There are a few different approaches to key eviction:
 - **Last In First Out (LIFO)** — with this approach, the first keys to be evicted are the ones that were added to the cache last.
 - **First In First Out (FIFO)** — with this approach, the first keys to be evicted are the ones that were added to the cache first.
 
-Naievely, the LRU approach seems like the best one. It’s the most fair and it’s the one that’s most likely to keep the most useful keys in the cache. However the bookkeeping overhead to know which keys have been accessed most recently, also makes it slower to access.
+Naively, the LRU approach seems like the best one. It’s the most fair and it’s the one that’s most likely to keep the most useful keys in the cache. However the bookkeeping overhead to know which keys have been accessed most recently, also makes it slower to access.
 
 If you think about it, with an LRU cache, you need to keep track of the order in which keys were accessed. That means every read also requires a write, which is more expensive. In order to avoid contention, you would also need to use a `Mutex` to make sure only one thread is accessing the cache at a time.
 
