@@ -28,38 +28,84 @@ end
 
 ### `#after_template`
 
+A hook that is called after the template is rendered. Can be overridden to add custom behavior.
+
 ### `#around_template`
+
+A hook that wraps the template rendering. Can be overridden to add custom behavior before and after rendering. You should always call `super` in your implementation.
+
+```ruby
+def around_template
+  puts "Before rendering"
+  super
+  puts "After rendering"
+end
+```
 
 ### `#await`
 
+Waits for an asynchronous task to complete. If the task isn’t completed, it flushes. Supports `Concurrent::IVar` and `Async::Task`.
+
 ### `#before_template`
+
+A hook that is called before the template is rendered. Can be overridden to add custom behavior.
 
 ### `#call`
 
+Renders the view and returns the buffer. The default buffer is a mutable String.
+
 ### `#capture`
 
-### `#comment`
+Captures the block and returns the output as a string. In Rails, this is an `ActionView::SafeBuffer`.
 
 ### `#comment`
+
+Outputs an HTML comment. You can wrap other content and the content will still be rendered.
 
 ### `#context`
 
+Returns the current render context data.
+
 ### `#flush`
+
+Flushes the buffer if not capturing.
 
 ### `#format_object`
 
+Formats an object for output. Can be overridden to handle different object types.
+
 ### `#plain`
+
+Outputs text content. The text will be HTML-escaped.
 
 ### `#render?`
 
+Determines if the component should render. By default, it returns `true`. Override this method to conditionally render the component.
+
 ### `#render`
+
+Renders another component, block, string, or enumerable of the above.
 
 ### `#tag`
 
-### `#unsafe_raw`
+This is like `public_send`, but it only sends if the method is an HTML tag. It will not send to the `script` tag. If you need to do that, use `#unsafe_tag`.
 
-### `#unsafe_tag`
+### `#unsafe_raw(content = nil)`
+
+Outputs the given string without any HTML safety. Should be used with caution.
+
+### `#unsafe_tag(name, ...)`
+
+Similar to `#tag`, but allows rendering of potentially unsafe tags like `<script>`.
 
 ### `#vanish`
 
+Similar to `#capture`, but the output is discarded.
+
 ### `#whitespace`
+
+Outputs a whitespace character. Useful for getting inline elements to wrap. You can optionall pass a block to wrap the content with a whitespace character on before and after.
+
+### `#view_template`
+
+The main template method that should be overridden in subclasses to define the component’s structure.
