@@ -9,6 +9,7 @@ export default defineConfig({
 			{ text: "Community", link: "project/community" },
 			{ text: "Handbook", link: "/handbook" },
 		],
+
 		sidebar: [
 			{
 				text: "Project",
@@ -67,17 +68,17 @@ export default defineConfig({
 				],
 			},
 
-			{
-				text: "Compared to…",
-				collapsed: true,
-				items: [
-					{ text: "ViewComponent", link: "/compare/view-component" },
-					{ text: "ActionView & ERB", link: "/compare/action-view" },
-					{ text: "React", link: "/compare/react" },
-					{ text: "Slim", link: "/compare/slim" },
-					{ text: "Haml", link: "/compare/haml" },
-				],
-			},
+			// {
+			// 	text: "Compared to…",
+			// 	collapsed: true,
+			// 	items: [
+			// 		{ text: "ViewComponent", link: "/compare/view-component" },
+			// 		{ text: "ActionView & ERB", link: "/compare/action-view" },
+			// 		{ text: "React", link: "/compare/react" },
+			// 		{ text: "Slim", link: "/compare/slim" },
+			// 		{ text: "Haml", link: "/compare/haml" },
+			// 	],
+			// },
 
 			{
 				text: "Technical Design",
