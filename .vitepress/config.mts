@@ -4,6 +4,10 @@ export default defineConfig({
 	title: "Phlex",
 	description: "Ruby views",
 	themeConfig: {
+		editLink: {
+			pattern: "https://github.com/phlex-ruby/phlex.fun/edit/main/:path",
+		},
+
 		nav: [
 			{ text: "Home", link: "/" },
 			{ text: "Community", link: "project/community" },
