@@ -3,23 +3,27 @@
 ## Component
 
 ```
-bin/rails g phlex:component Card
+bundle exec rails g phlex:component Card
 ```
 
-This will generate a CardComponent in card_component.rb under app/views/components.
+This will generate a new `Card` component in `app/components/card.rb`.
 
 ## View
 
 ```
-bin/rails g phlex:view Articles::Index
+bundle exec rails g phlex:view Articles::Index
 ```
 
-This will generate an `Articles::IndexView` in `index_view.rb` under `app/views/articles`.
+This will generate a new `Articles::Index` view in `app/views/articles/index.rb`.
 
-## Controller
+## Install
 
 ```
-bin/rails g phlex:controller Articles index show
+bundle exec rails g phlex:install
 ```
 
-This will generate an `ArticlesController` in `app/controllers`. It will have the actions `index` and `show`, which will render the views `Articles::IndexView` and `Articles::ShowView` generated in `index_view.rb` and `show_view.rb` under `app/views/articles`.
+This will generate:
+
+1. a new initializer in `config/initializers/phlex.rb`
+2. a base component class in `app/components/base.rb`
+3. a base view class in `app/views/base.rb`
