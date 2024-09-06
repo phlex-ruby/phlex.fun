@@ -48,7 +48,21 @@ h1(data: { controller: "hello" }) { "Hello!" }
 
 ## Attribute values
 
-You’ve seen how string values work. Symbols behave the same way. You’ve also seen how to nest attributes with hashes. But Phlex allows a few other types of attribute value.
+### Symbols
+
+Like keys, if you use symbols for values, Phlex will convert them to strings, replacing underscores `_` with dashes `-`.
+
+::: code-group
+
+```ruby [component]
+div(contenteditable: :plaintext_only)
+```
+
+```html [output]
+<div contenteditable="plaintext-only"></div>
+```
+
+:::
 
 ### Arrays and sets
 
@@ -84,7 +98,9 @@ textarea(disabled: false)
 :::
 
 ::: tip
-Some HTML attributes such as `contenteditable` require you to pass `"true"` or `"false"` as a string. These are not technically “boolean” attributes, they're “enumerated” attributes. The distinction is subtle but important.
+Some HTML attributes such as `contenteditable` require you to pass `"true"` or `"false"` as strings. These are not really _boolean_ attributes even though they look similar; they’re technically _“enumerated”_ attributes.
+
+According to [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable), `contenteditable` accepts `"true"`, `"false"` or `"plaintext-only"`. The presence of this third option explains why `contenteditable` is not a boolean attribute. It also means new modes could be added in the future without breaking existing code.
 
 :::
 
@@ -130,7 +146,23 @@ a(
 <a class="button active">👋 Hello World!</a>
 ```
 
+:::
+
 In this example, the `button` class is always added, while the `active` and `disabled` classes are conditional. You can read `=>` as “if”.
+
+Phlex also ignores `nil` values, so another way you could write this is:
+
+```ruby
+a(
+  class: [
+    ("button"),
+    ("active" if is_active),
+    ("disabled" if is_disabled)
+  ]
+) { "Click me" }
+```
+
+The parentheses around `"button"` here are not strictly necessary because it’s not paired with a conditional, but they make the code more consistent. Also, this last technique works for any attribute, not just `class`.
 
 ### `style`
 

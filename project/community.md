@@ -19,7 +19,7 @@
 
 ## Articles 📝
 
-- [Phlex not ERB](https://judoscale.com/blog/phlex-not-erb)
+- [Say No To Partials And Helpers For A Maintainable Rails Front-End](https://judoscale.com/blog/phlex-not-erb)
 - [A Tale of two Phlexes](https://blog.willcosgrove.com/a-tale-of-two-phlexes)
 
 ## Third-party component libraries 📚
