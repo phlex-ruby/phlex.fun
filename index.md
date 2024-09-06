@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Phlex"
+  name: "Phlex <span style='font-size: 0.5em'>(pre relase)</span>"
   text: "Stunning server-side rendered views in Ruby"
   tagline: A little string concatenation library.
   actions:
