@@ -7,7 +7,7 @@ Attributes are normally symbol keys, which get dasherized. If you need a special
 
 ::: code-group
 ```ruby
-div(data_controller: "hello", "_special": "value") do
+div(data_controller: "hello", "_special" => "value") do
   "Hello!"
 end
 ```
