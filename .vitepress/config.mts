@@ -111,7 +111,7 @@ export default defineConfig({
 		footer: {
 			message: "Released under the MIT License.",
 			copyright:
-				'Made by <a href="https://github.com/joeldrapper">Joel Drapper</a>, <a href="https://github.com/willcosgrove">Will Cosgrove</a> and dozens of other <a href="https://github.com/phlex-ruby/phlex/graphs/contributors">contributors</a>.',
+				'Made by <a href="https://github.com/joeldrapper">Joel Drapper</a>, <a href="https://github.com/willcosgrove">Will Cosgrove</a> and dozens of other <a href="https://github.com/phlex-ruby/phlex/graphs/contributors">contributors</a>.',
 		},
 	},
 });
