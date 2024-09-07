@@ -73,6 +73,38 @@ end
 
 :::
 
+### `unsafe_raw` → `raw`
+
+We've renamed `unsafe_raw` to `raw`, and we've made it so that it will only output content if it's marked as safe. You can use the new `safe` helper to mark content as safe. Additionally, if you're using Rails, `ActiveSupport::SafeBuffer` is also treated as safe, so any methods that return an `ActiveSupport::SafeBuffer` (like `String#html_safe`) can also be output by `raw`.
+
+With the addition of `safe`, we've also made it so that element blocks that return safe content will be output with `raw` instead of `plain`. This means if the only content inside an element was an `unsafe_raw` call, you can now just call `safe`.
+
+#### Before
+```ruby
+def markdown(content)
+  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
+  unsafe_raw(rendered_markdown)
+end
+```
+```ruby
+script do
+  unsafe_raw "alert('Hello!')"
+end
+```
+
+#### After
+```ruby
+def markdown(content)
+  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
+  raw(safe(rendered_markdown))
+end
+```
+```ruby
+script do
+  safe "alert('Hello!')"
+end
+```
+
 ## New features
 
 ### Kits
