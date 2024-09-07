@@ -1,18 +1,33 @@
 # `Phlex::Testing::Capybara`
 
-`Phlex::Testing::Capybara` is a test helper that makes it easy to render components and test them in isolation. It’s made available by requiring `phlex/testing` or `phlex/rails/testing`.
+`Phlex::Testing::Capybara` is a test helper that makes it possible to test components in isolation. It’s made available by requiring `phlex/testing` or `phlex/rails/testing`.
+
+> [!IMPORTANT]
+> Before you include any Phlex testing helpers, you’ll need to require `phlex/testing`, or `phlex/rails/testing` if you’re using Rails. You can either require the helpers at the top of each test file or in a test helper or configuration file that’s loaded by your test suite.
+>
+> **Non-Rails**
+>
+> ```ruby
+> require "phlex/testing"
+> ```
+>
+> **Rails**
+>
+> ```ruby
+> require "phlex/rails/testing"
+> ```
 
 ### `#render`
 
-Use `#render` to render a component. The rendered component will be returned as a `Capybara::Node::Simple` and will also be assigned to the accessor `page`.
+Use `#render` to render a component. The rendered component will be returned as a `Capybara::Node::Simple`.
 
 ### `#page` and `#component`
 
-After rendering a component with `#render`, you can reference the result with `#page` or `#component`. Depending on which testing framework you’re using, you may not need to reference the result directly.
+After rendering a component with `#render`, you can reference the result with the `#page` or `#component` accessors. They both do the same thing so pick whichever reads better in your test.
 
 ## Minitest
 
-When you include `Phlex::Testing::Capybara`, it will automatically include `Capybara::Minitest::Assertions` for you.
+When you include `Phlex::Testing::Capybara` in a `Minitest::Test` it will automatically include [`Capybara::Minitest::Assertions`](https://www.rubydoc.info/gems/capybara/Capybara/Minitest/Assertions) for you.
 
 Here’s a minimal example:
 
@@ -38,6 +53,8 @@ You may want to move the `require` up to a generic test helper and require that 
 
 ## RSpec
 
+When you include `Phlex::Testing::Capybara` in an `RSpec::Core::ExampleGroup` it will automatically include [`Capybara::RSpecMatchers`](https://rubydoc.info/github/jnicklas/capybara/master/Capybara/RSpecMatchers) for you.
+
 ```ruby
 require "phlex/testing"
 
@@ -58,7 +75,7 @@ end
 
 If you’re using RSpec, you can define a custom spec type to include `Phlex::Testing::Capybara` automatically.
 
-In your `spec_helper.rb` (or `rails_helper`) or wherever you configure RSpec, add the following configuration:
+In your `spec_helper.rb`, `rails_helper` or wherever you configure RSpec, add the following configuration:
 
 ```ruby
 RSpec.configure do |config|
@@ -68,11 +85,6 @@ RSpec.configure do |config|
 end
 ```
 
-You’ll also need to require `phlex/testing` (or `phlex/rails/testing`) at the top of this file.
+## Other testing frameworks
 
-```ruby
-require "phlex/testing"
-```
-
-::: tip
-If you require `phlex/testing` or `phlex/rails/testing` in your configuration file, you don’t need to require it in your individual spec files.
+Not using Minitest or RSpec? You can probably still use `Phlex::Testing::Capybara` to render components and set the `#page` and `#component` accessors, but you might need to set up any matchers manually or work directly with the `Capybara::Node::Simple` object.
