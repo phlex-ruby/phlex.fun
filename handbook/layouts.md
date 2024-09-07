@@ -9,13 +9,11 @@ There are a few problems with this approach:
 1. it adds complexity to the rendering process — there’s a whole different concept to understand with special rules; and
 2. it makes it impossible to stream the response to the client until both the view and the layout are ready.
 
-Phlex’ approach is different. In Phlex, layouts are just components like any other.
-
-We’re going to look at a couple of different ways to implement layouts using Phlex components.
+In Phlex, layouts are just components.
 
 ## Layouts through composition
 
-The simplest way to implement layouts in Phlex is through composition. You render the view from the controller and the first thing the view does is render the layout.
+The simplest way to implement layouts in Phlex is through _composition_. You render the view from the controller and the first thing the view does is render the layout component.
 
 ::: code-group
 
