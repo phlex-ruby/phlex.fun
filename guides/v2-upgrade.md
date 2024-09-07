@@ -16,9 +16,62 @@ To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Eleme
 
 ### We removed `tokens` and `classes`
 
-If you need these back, you can always copy their original implementation from here, paste them into a helper module and include it in your `ApplicationComponent`.
+There are better ways to handle conditional tokens now, so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
 
-However, we recommend using the new standard capabilities of attributes.
+::: details Original `classes` and `tokens` implementation
+
+```ruby
+def classes(*tokens, **conditional_tokens)
+  tokens = self.tokens(*tokens, **conditional_tokens)
+
+  if tokens.empty?
+    {}
+  else
+    { class: tokens }
+  end
+end
+
+def tokens(*tokens, **conditional_tokens)
+  conditional_tokens.each do |condition, token|
+    truthy = case condition
+      when Symbol then send(condition)
+      when Proc then condition.call
+      else raise ArgumentError, "The class condition must be a Symbol or a Proc."
+    end
+
+    if truthy
+      case token
+        when Hash then __append_token__(tokens, token[:then])
+        else __append_token__(tokens, token)
+      end
+    else
+      case token
+        when Hash then __append_token__(tokens, token[:else])
+      end
+    end
+  end
+
+  tokens = tokens.select(&:itself).join(" ")
+  tokens.strip!
+  tokens.gsub!(/\s+/, " ")
+  tokens
+end
+
+private
+
+def append_token(tokens, token)
+  case token
+    when nil then nil
+    when String then tokens << token
+    when Symbol then tokens << token.name
+    when Array then tokens.concat(token)
+    else raise ArgumentError,
+      "Conditional classes must be Symbols, Strings, or Arrays of Symbols or Strings."
+  end
+end
+```
+
+:::
 
 ## New features
 
