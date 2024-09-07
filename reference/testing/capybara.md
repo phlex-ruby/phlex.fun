@@ -1,6 +1,6 @@
 # `Phlex::Testing::Capybara`
 
-`Phlex::Testing::Capybara` is a test helper that makes it possible to test components in isolation. It’s made available by requiring `phlex/testing` or `phlex/rails/testing`.
+`Phlex::Testing::Capybara` is a test helper that makes it possible to test components in isolation using [Capybara](https://teamcapybara.github.io/capybara/).
 
 > [!IMPORTANT]
 > Before you include any Phlex testing helpers, you’ll need to require `phlex/testing`, or `phlex/rails/testing` if you’re using Rails. You can either require the helpers at the top of each test file or in a test helper or configuration file that’s loaded by your test suite.
