@@ -219,9 +219,9 @@ end
 
 ## Working with legacy layouts
 
-Using Phlex for the whole view stack makes it faster and also means you can stream responses and use advanced features like selective rendering.
+Using Phlex for the whole view stack makes it faster and also means you can stream responses and use advanced features like selective rendering. But if you’re bringing Phlex into an existing Rails app, there’s no urgent need to convert your layouts over. In fact, the layouts are probably the lowest priority.
 
-But if you’re bringing Phlex into an existing Rails app, there’s no urgent need to convert your layouts over to Phlex. In fact, the layouts are probably the lowest priority. You’ll get way more benefits from extracting small, reusable components since you can immediately start rendering them in both your new Phlex views and your old Rails views.
+You’ll get way more benefits from extracting small, reusable components since you can immediately start rendering them in both your new Phlex views and your old Rails views. Plus, your new Phlex views will render just fine inside normal Rails layouts.
 
 With that said, there _is_ a way to write your layouts in Phlex while still rendering normal non-Phlex views from Rails, though you won’t be able to use streaming.
 
