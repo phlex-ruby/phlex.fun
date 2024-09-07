@@ -7,7 +7,7 @@ In this world of components, where do _layouts_ fit in? Rails’ built-in view l
 There are a few problems with this approach:
 
 1. it adds complexity to the rendering process — there’s a whole different concept to understand with special rules;
-2. it necessitates strange `content_for` and `yield` behaviours in order to get content from the view up into the layout; and
+2. it necessitates the `content_for` helper and strange `yield` behaviours in order to get content from the view up into the layout; and
 3. it makes it impossible to stream the response to the client until both the view and the layout are ready.
 
 In Phlex, layouts are just components.
