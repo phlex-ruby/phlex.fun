@@ -80,12 +80,14 @@ We've renamed `unsafe_raw` to `raw`, and we've made it so that it will only outp
 With the addition of `safe`, we've also made it so that element blocks that return safe content will be output with `raw` instead of `plain`. This means if the only content inside an element was an `unsafe_raw` call, you can now just call `safe`.
 
 #### Before
+
 ```ruby
 def markdown(content)
   rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
   unsafe_raw(rendered_markdown)
 end
 ```
+
 ```ruby
 script do
   unsafe_raw "alert('Hello!')"
@@ -93,17 +95,82 @@ end
 ```
 
 #### After
+
 ```ruby
 def markdown(content)
   rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
   raw(safe(rendered_markdown))
 end
 ```
+
 ```ruby
 script do
   safe "alert('Hello!')"
 end
 ```
+
+### New opinionated Rails generators
+
+We’ve made some significant changes to the Rails generators, which now assume a specific folder structure and naming convention for views and components.
+
+The `install` generator now create an _initializer_ file in `config/initializers/phlex.rb` where the modules: `Views` and `Components` are defined. It also autoloads the `app/views` and `app/components` directories with the `Views` and `Components` namespaces respectively.
+
+::: details `config/initializers/phlex.rb`
+
+```ruby
+# frozen_string_literal: true
+
+module Views
+end
+
+module Components
+  extend Phlex::Kit
+end
+
+Rails.autoloaders.main.push_dir(
+  "#{Rails.root}/app/views", namespace: Views
+)
+
+Rails.autoloaders.main.push_dir(
+  "#{Rails.root}/app/components", namespace: Components
+)
+```
+
+:::
+
+It also creates a `Base` class for both views and components.
+
+The `view` generator now creates views under `app/views`, namespaced under `Views`.
+
+::: details Example view
+
+```ruby
+# frozen_string_literal: true
+
+class Views::Articles::Index < Views::Base
+  def view_template
+    h1 { "Articles" }
+  end
+end
+```
+
+:::
+
+The `component` generator now creates components under `app/components`, namespaced under `Components`.
+
+::: details Example component
+
+```ruby
+# frozen_string_literal: true
+
+class Components::Button < Components::Base
+  def view_template
+    button { "Click me" }
+  end
+end
+```
+
+:::
 
 ## New features
 

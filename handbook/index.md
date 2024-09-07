@@ -1,7 +1,5 @@
 ---
-
 prev: false
-
 ---
 
 # Intro
@@ -22,7 +20,7 @@ class Nav < Phlex::HTML
 
   def item(text, href)
     li(class: "nav-item") {
-      a(text, href:, class: "nav-link")
+      a(href:, class: "nav-link") { text }
     }
   end
 end
@@ -34,9 +32,9 @@ Now we can use this `Nav` component to build out our menu in our `Header` compon
 class Header < Phlex::HTML
   def view_template
     render Nav.new do |nav|
-      nav.item("Home", "/")
-      nav.item("About", "/about")
-      nav.item("Contact", "/contact")
+      nav.item("/") { "Home "}
+      nav.item("/about") { "About" }
+      nav.item("/contact") { "Contact" }
     end
   end
 end
