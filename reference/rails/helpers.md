@@ -12,7 +12,7 @@ The way Phlex works is so fundamentally different from the way string-based temp
 
 Let’s think about `link_to` as an example. In ERB, you need to remember to use `link_to` like this:
 
-```erg
+```erb
 <%= link_to "Click me", "/path" %>
 ```
 
