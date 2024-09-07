@@ -45,12 +45,6 @@ class Components::CardTest < ActiveSupport::TestCase
 end
 ```
 
-::: tip
-
-You may want to move the `require` up to a generic test helper and require that instead.
-
-:::
-
 ## RSpec
 
 When you include `Phlex::Testing::Capybara` in an `RSpec::Core::ExampleGroup` it will automatically include [`Capybara::RSpecMatchers`](https://rubydoc.info/github/jnicklas/capybara/master/Capybara/RSpecMatchers) for you.
