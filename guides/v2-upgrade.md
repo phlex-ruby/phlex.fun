@@ -6,15 +6,15 @@ The latest version of v1 contains a number of deprecations, so we recommend upgr
 
 ## Breaking changes
 
-### `template` → `view_template`
+### Renamed `template` → `view_template`
 
 Instead of defining the `template` method for your component templates, you should instead define `view_template`.
 
-### `template_tag` → `template`
+### Renamed `template_tag` → `template`
 
 To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of the original `template_tag` method.
 
-### We removed `tokens` and `classes`
+### Removed `tokens` and `classes`
 
 There are better ways to handle conditional tokens now, so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
 

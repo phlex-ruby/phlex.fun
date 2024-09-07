@@ -10,8 +10,8 @@ export default defineConfig({
 
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Community", link: "project/community" },
 			{ text: "Handbook", link: "/handbook" },
+			{ text: "Reference", link: "/reference" },
 		],
 
 		sidebar: [
