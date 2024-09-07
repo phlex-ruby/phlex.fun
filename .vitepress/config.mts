@@ -61,12 +61,21 @@ export default defineConfig({
 					{ text: "SVG", link: "/reference/svg" },
 					{ text: "Kits", link: "/reference/kits" },
 					{
+						text: "Testing",
+						items: [
+							{ text: "Capybara", link: "/reference/testing/capybara" },
+							{ text: "Nokogiri", link: "/reference/testing/nokogiri" },
+							{ text: "Nokolexbor", link: "/reference/testing/nokolexbor" },
+						],
+					},
+					{
 						text: "Rails",
 						collapsed: false,
 						items: [
 							{ text: "Helpers", link: "/reference/rails/helpers" },
 							{ text: "Generators", link: "/reference/rails/generators" },
 							{ text: "Streaming", link: "/reference/rails/streaming" },
+							{ text: "Testing", link: "/reference/rails/testing" },
 						],
 					},
 				],

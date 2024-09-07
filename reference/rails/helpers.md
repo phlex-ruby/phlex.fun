@@ -4,7 +4,7 @@ Phlex’ Rails extension includes an adapter for each Rails view helper. (Please
 
 Each adapter can be included from its own module under `Phlex::Rails::Helpers`. For example, the `link_to` helper can be included from `Phlex::Rails::Helpers::LinkTo`.
 
-You’ll probably want to include the most common ones in an abstract super class, e.g. `ApplicationComponent` or `ApplicationView`.
+You’ll probably want to include the most common ones in an abstract super class, e.g. `Components::Base` or `Views::Base`.
 
 ## Why do we need adapters?
 
@@ -53,7 +53,7 @@ While the Rails extension defines adapters for all the standard Rails helpers, y
 You can use `register_output_helper` to define an adapter for a helper that returns HTML that should be output directly. All arguments will be passed through to the original helper.
 
 ```ruby
-class Layout < ApplicationComponent
+class Components::App < Components::Base
   register_output_helper :vite_javascript_tag
 end
 ```
@@ -68,7 +68,7 @@ If you pass a block to an adapted output helper, the block will be wrapped in a 
 To adapt a helper that returns a value, use `register_value_helper`. This will return the result of the helper as a string. As before, any block passed to this helper will be wrapped in a `capture` so that it returns an `ActiveSupport::SafeBuffer`.
 
 ```ruby
-class ApplicationComponent
+class Components::Base < Phlex::HTML
   register_value_helper :vite_asset_path
 end
 ```

@@ -27,7 +27,7 @@ end
 When you realise you need more options, you can upgrade that to a class.
 
 ```ruby
-class MyButton < ApplicationComponent
+class Components::MyButton < Components::Base
   def initialize(style:, color:)
     @style = style
     @color = color
