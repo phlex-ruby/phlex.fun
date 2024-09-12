@@ -2,9 +2,9 @@
 
 Phlex’ extension for Rails allows you to stream views from your Rails controllers.
 
-First, you’ll need to make sure you’re not using Rails layouts system. Rails’ layout system renders things out of order which prevents streaming.
+First, you’ll need to make sure you’re not using Rails' layout system. Rails’ layout system renders things out of order which prevents streaming.
 
-To disable layouts, you can add `layout false` to your controller. If this is a new applicaiton, or if you’ve migrartd entirely to Phlex, you may want to do this in your `ApplicationController`.
+To disable layouts, you can add `layout false` to your controller. If this is a new applicaiton, or if you’ve migrated entirely to Phlex, you may want to do this in your `ApplicationController`.
 
 Next, you’ll need to include Phlex’ streaming helpers. Just include the module `Phlex::Rails::Streaming`.
 
