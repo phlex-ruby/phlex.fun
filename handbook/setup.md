@@ -19,5 +19,5 @@ bundle add phlex-rails --version=2.0.0.beta1
 This will install the latest version of `phlex` and `phlex-rails` and add `phlex-rails` to your `Gemfile`. Once that’s finished, you’ll want to run the install generator to kick things off:
 
 ```
-bundle add phlex --version=2.0.0.beta1
+bundle exec rails generate phlex:install
 ```
