@@ -16,7 +16,7 @@ To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Eleme
 
 ### Removed `tokens` and `classes`
 
-There are better ways to handle conditional tokens now, so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
+There are [better ways to handle conditional tokens now](../handbook/attributes.md#attribute-values), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
 
 ::: details Original `classes` and `tokens` implementation
 
