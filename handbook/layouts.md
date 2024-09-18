@@ -1,6 +1,6 @@
 # Layouts
 
-In Phlex, _everything is a component_. A “view” is just a component that renders an entire HTML document — typically starting with `<doctype html>` and ending with `</html>`. Views are also entrypoints — they’re usually rendered directly from a controller.
+In Phlex, _everything is a component_. A “view” is just a component that renders an entire HTML document — typically starting with `<!doctype html>` and ending with `</html>`. Views are also entrypoints — they’re usually rendered directly from a controller.
 
 In this world of components, where do _layouts_ fit in? Rails’ built-in view library, `ActionView`, has a special concept of layouts where they are separate from the rest of your views (and partials) and treated differently. ActionView renders the view first and then wraps it in a layout right at the end.
 
