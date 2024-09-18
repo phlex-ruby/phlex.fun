@@ -6,7 +6,7 @@ It won’t have advanced features, performance optimizations or HTML safety, but
 
 ## Buffers and hirearchy
 
-We’ll start by creating a `Component` class with a `@buffer` instance variable. Phlex uses a mutible String for its buffer, but we’ll use an Array since it’s easier to debug.
+We’ll start by creating a `Component` class with a `@buffer` instance variable. Phlex uses a mutable String for its buffer, but we’ll use an Array since it’s easier to debug.
 
 ```ruby
 class Component
