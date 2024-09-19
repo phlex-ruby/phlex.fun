@@ -86,18 +86,6 @@ Determines if the component should render. By default, it returns `true`. Overri
 
 Renders another component, block, string, or enumerable of the above.
 
-### `#tag`
-
-This is like `public_send`, but it only sends if the method is an HTML tag. It will not send to the `script` tag. If you need to do that, use `#unsafe_tag`.
-
-### `#unsafe_raw(content = nil)`
-
-Outputs the given string without any HTML safety. Should be used with caution.
-
-### `#unsafe_tag(name, ...)`
-
-Similar to `#tag`, but allows rendering of potentially unsafe tags like `<script>`.
-
 ### `#vanish`
 
 Similar to `#capture`, but the output is discarded.
