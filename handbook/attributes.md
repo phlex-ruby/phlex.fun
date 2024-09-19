@@ -68,14 +68,14 @@ div(contenteditable: :plaintext_only)
 
 ::: code-group
 
-```ruby [component]
-h1(class: ["foo", "bar"]) { "Hello!" }
-h1(class: Set["foo", "bar"]) { "Hello!" }
-```
-
-```html [output]
-<h1 class="foo bar">Hello!</h1>
-<h1 class="foo bar">Hello!</h1>
+```ruby
+a(
+  class: [
+    ("button"),
+    ("active" if is_active),
+    ("disabled" if is_disabled)
+  ]
+) { "Click me" }
 ```
 
 :::
@@ -104,69 +104,9 @@ According to [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTM
 
 :::
 
-## Special attributes
+## The `style` attribute
 
-### `class`
-
-The `class` attribute is special. It behaves differently when you pass a Hash as a value, allowing you to conditionally add classes. Here, the class `active` is added because `is_active` is _truthy_, and the class `disabled` is not added because `is_disabled` is _falsy_:
-
-::: code-group
-
-```ruby [component]
-is_active = true
-is_disabled = false
-
-a(class: { active: is_active, disabled: is_disabled }) { "Click me" }
-```
-
-```html [output]
-<a class="active">👋 Hello World!</a>
-```
-
-:::
-
-You can also use this with an array:
-
-::: code-group
-
-```ruby{6} [component]
-is_active = true
-is_disabled = false
-
-a(
-  class: [
-    "button",
-    "active" => is_active,
-    "disabled" => is_disabled
-  ]
-) { "Click me" }
-```
-
-```html [output]
-<a class="button active">👋 Hello World!</a>
-```
-
-:::
-
-In this example, the `button` class is always added, while the `active` and `disabled` classes are conditional. You can read `=>` as “if”.
-
-Phlex also ignores `nil` values, so another way you could write this is:
-
-```ruby
-a(
-  class: [
-    ("button"),
-    ("active" if is_active),
-    ("disabled" if is_disabled)
-  ]
-) { "Click me" }
-```
-
-The parentheses around `"button"` here are not strictly necessary because it’s not paired with a conditional, but they make the code more consistent. Also, this last technique works for any attribute, not just `class`.
-
-### `style`
-
-Like `class`, the `style` attribute has special behaviour. If you pass a Hash to `style`, Phlex will convert it to a CSS string:
+The `style` attribute has special behaviour. If you pass a Hash to `style`, Phlex will convert it to a CSS string:
 
 ::: code-group
 
@@ -180,7 +120,7 @@ h1(style: { color: "red", font_size: "16px" }) { "Hello!" }
 
 :::
 
-### `href` on an `<a>` tag
+## `href` on an `<a>` tag
 
 It’s worth noting here that Phlex will not allow you to set the `href` attribute to anything that begins with `javascript:`. This is a security feature to prevent cross-site-scripting (XSS) attacks.
 
