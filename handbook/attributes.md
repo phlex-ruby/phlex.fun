@@ -24,8 +24,8 @@ h1("data_controller" => "hello") { "Hello!" }
 ```
 
 ```html [output]
-<h1 foo-bar="hello">👋 Hello World!</h1>
-<h1 foo_bar="hello">👋 Hello World!</h1>
+<h1 data-controller="hello">👋 Hello World!</h1>
+<h1 data_controller="hello">👋 Hello World!</h1>
 ```
 
 :::
