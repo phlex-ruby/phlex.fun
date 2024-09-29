@@ -6,6 +6,7 @@ markup. We’ll use simple classes in our example, but you could imagine if you 
 based CSS framework like Tailwind that you would be abstracting away a lot more.
 
 ```ruby
+# app/views/components/card.rb
 class Card < Phlex::HTML
   def view_template(&)
     div(class: "card", &)
