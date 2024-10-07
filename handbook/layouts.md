@@ -179,6 +179,8 @@ end
 
 ```ruby{2,5,11-13} [base view]
 class Views::Base < Phlex::HTML
+	include Components
+
   PageInfo = Data.define(:title)
 
   def around_template
