@@ -147,7 +147,7 @@ Let’s update our `action` method to use `mix`:
 
 ```ruby
 def action(**attributes, &)
-  a(**mix(class: "card-action", attributes), &)
+  a(**mix(attributes, class: "card-action"), &)
 end
 ```
 
