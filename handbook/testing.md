@@ -4,7 +4,7 @@
 
 ## Testing in Rails
 
-1. In `Gemfile`, add the `capybara` Gem:
+1. In `Gemfile`, add the `capybara` gem:
 
 ```
 group :test do
