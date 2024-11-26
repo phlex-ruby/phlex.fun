@@ -1,9 +1,8 @@
 # Building your first component in Phlex
 
-Let’s start by building a simple Card component. A Card is a presentational component, it doesn’t
-really have any behavior. So it’s going to be mostly for abstracting away the CSS classes and specific
-markup. We’ll use simple classes in our example, but you could imagine if you were using a utility
-based CSS framework like Tailwind that you would be abstracting away a lot more.
+Let’s start by building a simple Card component. A Card is a presentational component, it doesn’t really have any behavior. So it’s going to be mostly for abstracting away the CSS classes and specific structure of the markup.
+
+We’ll use simple classes in our example, but you could imagine if you were using a utilitybased CSS framework like Tailwind that you would be abstracting away a lot more.
 
 ```ruby
 # app/components/card.rb
@@ -14,7 +13,7 @@ class Components::Card < Phlex::HTML
 end
 ```
 
-Not the most exciting component, but it’s a start. We can use it like this:
+Not the most exciting component, but it’s a start. We can use it from another component like this:
 
 ::: code-group
 
@@ -36,8 +35,7 @@ end
 
 :::
 
-This is nice, but some of our cards will need a header section that has a title. Let’s keep adding
-to our `Card` component so that it can have an optional header:
+This is nice, but some of our cards will need a header section that has a title. Let’s keep adding to our `Card` component so that it can have an optional header:
 
 ```ruby
 class Card < Phlex::HTML
@@ -55,8 +53,7 @@ class Card < Phlex::HTML
 end
 ```
 
-We’ve added `header` and `title` methods to our `Card` component. Now when we render a card, we can
-use the block argument, which will be the instance of our `Card`, and call our new methods:
+We’ve added `header` and `title` methods to our `Card` component. Now when we render a card, we can use the yielded component, which will be the instance of our `Card`, and call our new methods:
 
 ::: code-group
 
@@ -85,9 +82,7 @@ end
 
 :::
 
-Ok, this is starting to look a bit better. But we also need a way to add an action button to our card.
-This will need a bit more flexibility than just changing the content of the button. Let’s see what
-that looks like:
+Ok, this is starting to look a bit better. But we also need a way to add an action button to our card. This will need a bit more flexibility than just changing the content of the button. Let’s see what that looks like:
 
 ```ruby
 class Card < Phlex::HTML
@@ -139,11 +134,7 @@ end
 
 :::
 
-This seems like it’s working, but we actually have a bit of a problem. We can’t specify a class for
-our action button without overriding the class provided in the `action` method. Any custom class or
-classes we provide will clobber the default `card-action` class. Phlex provides a helper method to help
-us deal with this situation called `mix`. It mixes attributes together, and is aware of token lists.
-Let’s update our `action` method to use `mix`:
+This seems like it’s working, but we actually have a bit of a problem. We can’t specify a class for our action button without overriding the class provided in the `action` method. Any custom class or classes we provide will clobber the default `card-action` class. Phlex provides a helper method to help us deal with this situation called `mix`. It mixes attributes together, and is aware of token lists. Let’s update our `action` method to use `mix`:
 
 ```ruby
 def action(**attributes, &)
@@ -151,8 +142,7 @@ def action(**attributes, &)
 end
 ```
 
-Now if we specify a custom class when we call our `action` method, it will be added to the class list
-instead of overriding it.
+Now if we specify a custom class when we call our `action` method, it will be added to the class list instead of overriding it.
 
 ::: code-group
 
