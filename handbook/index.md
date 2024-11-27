@@ -32,9 +32,9 @@ Now we can use this `Nav` component to build out our menu in our `Header` compon
 class Header < Phlex::HTML
   def view_template
     render Nav.new do |nav|
-      nav.item("/") { "Home "}
-      nav.item("/about") { "About" }
-      nav.item("/contact") { "Contact" }
+      nav.item("Home", "/")
+      nav.item("About", "/about")
+      nav.item("Contact", "/contact")
     end
   end
 end
