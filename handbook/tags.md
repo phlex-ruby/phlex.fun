@@ -1,6 +1,6 @@
 # Tags
 
-All non-depreacted HTML tags are defined as instance methods on `Phlex::HTML`. They take keyword arguments which get turned into HTML attributes, and blocks which become content for the tag.
+All non-deprecated HTML tags are defined as instance methods on `Phlex::HTML`. They take keyword arguments which get turned into HTML attributes, and blocks which become content for the tag.
 
 ## Attributes
 Attributes are normally symbol keys, which get dasherized. If you need a special attribute that has underscores in it, you can use a string key instead.
