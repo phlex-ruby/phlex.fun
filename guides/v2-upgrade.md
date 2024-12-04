@@ -109,6 +109,25 @@ script do
 end
 ```
 
+### Removed `DeferredRender`
+
+`DeferredRender` was an odd combination of something that is easy to implement, and hard to explain. We decided to remove it as a feature so that we don't have to explain it :innocent:
+
+To recreate the effect that `DeferredRender` had, you can define your own `before_template`:
+
+```ruby
+def before_template(&)
+	vanish(&)
+	super
+end
+```
+
+`vanish` is a newly public method, and it's what was being done via `DeferredRender` previously. It will execute the block it's given, but not allow any Phlex tag methods to push to the buffer.
+
+If you are someone who found yourself using `DeferredRender` a lot, and the absence of it will require you to add many `before_template` defintions, you're welcome to create your own module that can be included in your Phlex views that defines the `before_template` hook shown above.
+
+You could even call that module `DeferredRender` — but now it's your job to explain it to people :grimacing:
+
 ### New opinionated Rails generators
 
 We’ve made some significant changes to the Rails generators, which now assume a specific folder structure and naming convention for views and components.
