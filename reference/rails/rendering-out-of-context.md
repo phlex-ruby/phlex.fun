@@ -14,7 +14,7 @@ class Post < ApplicationRecord
     fake_rack_request = Rack::MockRequest.env_for("http://localhost", method: :get)
     controller.request = ActionDispatch::Request.new(fake_rack_request)
     html = controller.render_to_string(component, layout: false)
-    broadcast_prepend_to("my-streamable", html:)
+    broadcast_prepend_to("my-streamable", renderable: component)
   }
 end
 ```
