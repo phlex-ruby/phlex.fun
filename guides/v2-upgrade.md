@@ -59,7 +59,7 @@ end
 
 private
 
-def append_token(tokens, token)
+def __append_token__(tokens, token)
   case token
     when nil then nil
     when String then tokens << token
