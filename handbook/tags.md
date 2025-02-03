@@ -33,25 +33,42 @@ end
 ```
 :::
 
-The `class` and `style` attributes have special handling. If you use a hash value with the `class` key, it will work similarly to the Rails' `class_names` helper when passed a hash:
+### Token List Attributes
+
+Attribute values can be an array, which will be treated as a [token list](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList) and joined together with a space, skipping `nil` values.
+The values in the array can be strings, symbols, numerics, or another array of those types.
+This can be useful for the `class` attribute, where you may need to combine multiple sets of classes from different sources.
 
 ::: code-group
 ```ruby
-is_active = true
-is_disabled = false
+btn_classes = "rounded px-4 py-2 font-semibold"
+btn_primary_classes = "bg-blue-500 text-white"
+disabled_classes = "opacity-50 cursor-not-allowed"
+disabled = false
 
-div(class: { active: is_active, disabled: is_disabled }) do
-  "Hello!"
+a(class: [btn_classes, btn_primary_classes, (disabled_classes if disabled)]) do
+  "My Button"
 end
 ```
 ```html
-<div class="active">
-  Hello!
-</div>
+<a class="rounded px-4 py-2 font-semibold bg-blue-500 text-white">
+  My Button
+</a>
 ```
 :::
 
-If you use a hash value with the `style` key, it will be converted to a CSS string:
+Because `nil` values are skipped, we can use inline conditionals to conditionally include classes.
+
+```ruby
+classes = [
+	"always-has-this-class",
+	("only-has-this-class-on-tuesdays" if Time.now.wday == 2),
+]
+```
+
+### `style` Attribute
+
+The `style` attribute has special handling. If you use a hash value with the `style` key, it will be converted to a CSS string:
 
 ::: code-group
 ```ruby
