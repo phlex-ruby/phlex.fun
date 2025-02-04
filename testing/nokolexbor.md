@@ -1,4 +1,4 @@
-# `Phlex::Testing::Nokolexbor`
+# Testing Phlex with Nokolexbor
 
 `Phlex::Testing::Nokolexbor` is a test helper that makes it possible to test components in isolation using [Nokolexbor](https://github.com/serpapi/nokolexbor).
 

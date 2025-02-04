@@ -1,4 +1,4 @@
-# `Phlex::Testing::Capybara`
+# Testing Phlex with Capybara
 
 `Phlex::Testing::Capybara` is a test helper that makes it possible to test components in isolation using [Capybara](https://teamcapybara.github.io/capybara/).
 

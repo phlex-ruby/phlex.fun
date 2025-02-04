@@ -1,0 +1,1 @@
+# Doctype (HTML only)

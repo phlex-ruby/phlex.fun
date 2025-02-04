@@ -1,4 +1,4 @@
-# Setup
+# Getting started
 
 Let’s get Phlex up and running in your app.
 

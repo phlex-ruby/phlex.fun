@@ -8,11 +8,8 @@ hero:
   tagline: A little string concatenation library.
   actions:
     - theme: brand
-      text: Handbook
-      link: /handbook/
-    - theme: alt
-      text: Reference
-      link: /reference/
+      text: Docs
+      link: /introduction
 
 features:
   - title: Pure, beautiful Ruby
@@ -38,8 +35,8 @@ features:
     details: You can package up components into “kits” for easy reuse across projects. Kits can be shared with the community as Ruby gems or kept for internal use.
   - title: Selective rendering
     icon: 🔎
-    details: You can render a view targeting a specific DOM ID. Phlex only does the work to render just the parts you want. This is great for partial Hotwire updates like Turbo Frames.
+    details: You can render a view targeting a specific fragment of HTML. Phlex only does the work to render just the parts you want. This is great for partial Hotwire updates like Turbo Frames.
   - title: Streaming
     icon: 🌊
-    details: Phlex can stream responses to boost time to first byte (TTFB). In some cases users can see the first static content before the database has even responded.
+    details: Phlex can stream responses to improve time to first byte (TTFB). In some cases users can see the first static content before the database has even responded.
 ---

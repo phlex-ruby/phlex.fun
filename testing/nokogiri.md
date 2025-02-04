@@ -1,4 +1,4 @@
-# `Phlex::Testing::Nokogiri`
+# Testing Phlex with Nokogiri
 
 `Phlex::Testing::Nokogiri` is a test helper that makes it possible to test components in isolation using [Nokogiri](https://nokogiri.org).
 
