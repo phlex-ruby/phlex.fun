@@ -4,17 +4,15 @@ While we’ve tried to keep breaking changes to a minimum, there are a few thing
 
 The latest version of v1 contains a number of deprecations, so we recommend upgrading to the latest version of v1 first.
 
-## Breaking changes
-
-### Renamed `template` → `view_template`
+## `template` → `view_template` <Badge type="danger" text="breaking" />
 
 Instead of defining the `template` method for your component templates, you should instead define `view_template`.
 
-### Renamed `template_tag` → `template`
+## `template_tag` → `template` <Badge type="danger" text="breaking" />
 
 To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of the original `template_tag` method.
 
-### Removed `tokens` and `classes`
+## Removed `tokens` and `classes` <Badge type="danger" text="breaking" />
 
 There are [better ways to handle conditional tokens now](../handbook/attributes.md#attribute-values), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
 
@@ -73,13 +71,13 @@ end
 
 :::
 
-### `unsafe_raw` → `raw`
+## `unsafe_raw` → `raw` <Badge type="danger" text="breaking" />
 
 We've renamed `unsafe_raw` to `raw`, and we've made it so that it will only output content if it's marked as safe. You can use the new `safe` helper to mark content as safe. Additionally, if you're using Rails, `ActiveSupport::SafeBuffer` is also treated as safe, so any methods that return an `ActiveSupport::SafeBuffer` (like `String#html_safe`) can also be output by `raw`.
 
 With the addition of `safe`, we've also made it so that element blocks that return safe content will be output with `raw` instead of `plain`. This means if the only content inside an element was an `unsafe_raw` call, you can now just call `safe`.
 
-#### Before
+### Before
 
 ```ruby
 def markdown(content)
@@ -94,7 +92,7 @@ script do
 end
 ```
 
-#### After
+### After
 
 ```ruby
 def markdown(content)
@@ -109,7 +107,7 @@ script do
 end
 ```
 
-### Removed `DeferredRender`
+## Removed `DeferredRender` <Badge type="danger" text="breaking" />
 
 `DeferredRender` was an odd combination of something that is easy to implement, and hard to explain. We decided to remove it as a feature so that we don't have to explain it :innocent:
 
@@ -128,7 +126,63 @@ If you are someone who found yourself using `DeferredRender` a lot, and the abse
 
 You could even call that module `DeferredRender` — but now it's your job to explain it to people :grimacing:
 
-### New opinionated Rails generators
+## Selective Rendering Changes <Badge type="danger" text="breaking" />
+
+In Phlex 2.0, we've redesigned the Selective Rendering feature (introduced in [1.10](https://github.com/phlex-ruby/phlex/releases/tag/1.10.0)) to be more predictable and easier to understand.
+
+#### What's Changed
+
+Previously, selective rendering worked by targeting element IDs:
+```rb
+# Before (Phlex ~> 1.10)
+def view_template
+  section do
+    ul(id: "the-list") do  # Could target this by ID
+      li { "Item 1" }
+      li { "Item 2" }
+    end
+  end
+end
+
+# Usage:
+component.call(fragments: ["the-list"])
+```
+
+Now, selective rendering requires explicit fragment declarations:
+
+```rb
+# After (Phlex 2.0)
+def view_template
+  section do
+    fragment("the-list") do  # Explicitly declare renderable fragment [!code ++]
+      ul(id: "the-list") do
+        li { "Item 1" }
+        li { "Item 2" }
+      end
+    end # [!code ++]
+  end
+end
+
+# Usage remains the same:
+component.call(fragments: ["the-list"])
+```
+
+### Key Differences
+
+1. **Explicit Fragment Declaration**: Only content wrapped in `fragment(name) { ... }` can be selectively rendered
+2. **Decoupled from DOM**: Fragment names no longer need to match element IDs
+3. **More Predictable**: Eliminates edge cases where ID-based targeting wasn't supported
+
+### Common Use Case: Turbo Frames
+For applications using Turbo Frames, you can automatically make all frames selectively renderable by extending the `turbo_frame` method:
+```rb
+def turbo_frame(id:, **, &)
+  fragment(id) { super }
+end
+```
+This ensures any `<turbo-frame>` element can be selectively rendered using its ID.
+
+## New opinionated Rails generators <Badge type="danger" text="breaking" />
 
 We’ve made some significant changes to the Rails generators, which now assume a specific folder structure and naming convention for views and components.
 
@@ -191,14 +245,10 @@ end
 
 :::
 
-## New features
-
-### Kits
+## Kits <Badge type="tip" text="new" />
 
 Originally previewed in v1, kits are now out of beta and fully supported in v2. Kits are a way to package up a set of components into a module.
 
-### Selective rendering
-
-### A better cache
+## A better cache <Badge type="tip" text="new" />
 
 Phlex v2 introduces a new attribute cache that caches more things. We wrote about some of the technical details [here](/design/caching).
