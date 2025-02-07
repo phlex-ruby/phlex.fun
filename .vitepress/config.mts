@@ -40,12 +40,13 @@ export default defineConfig({
 				text: "Components",
 				collapsed: false,
 				items: [
-					{ text: "Rendering components", link: "/components/rendering" },
-					{ text: "Yielding an interface", link: "/components/yielding" },
+					{ text: "Rendering", link: "/components/rendering" },
+					{ text: "Yielding", link: "/components/yielding" },
 					{ text: "Caching", link: "/components/caching" },
 					{ text: "Fragments", link: "/components/fragments" },
 					{ text: "Streaming", link: "/components/streaming" },
 					{ text: "Kits", link: "/components/kits" },
+					{ text: "Snippets", link: "/components/snippets" },
 				],
 			},
 
