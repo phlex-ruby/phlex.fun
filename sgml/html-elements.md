@@ -322,7 +322,7 @@ Renders an [`<rt>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rt
 
 ## `#ruby`
 
-Renders a [`<ruby>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ element.
+Renders a [`<ruby>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) element.
 
 ## `#s`
 
