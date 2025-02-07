@@ -174,7 +174,7 @@ class Example < Phlex::HTML
 end
 ```
 
-The polymorphism here means this _renderable_ property could be any of the following:
+The polymorphism of `render` here means this _renderable_ property could be any of the following:
 
 | Type                           | Description                                           |
 | ------------------------------ | ----------------------------------------------------- |
