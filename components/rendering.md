@@ -189,7 +189,7 @@ The polymorphism of `render` here means this _renderable_ property could be any 
 | `Enumerable` (such as `Array`) | Iterates by calling `each` and renders each item.     |
 | Anything else                  | Raises a `Phlex::ArgumentError`                       |
 
-### Other renderables in Rails
+### Other renderables in Rails <Badge type="tip" text="Rails" />
 
 In Rails, ViewComponent components are also accepted as renderables and they are handled in a way that adapts Phlex for the slots.
 

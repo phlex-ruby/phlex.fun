@@ -42,10 +42,10 @@ export default defineConfig({
 				items: [
 					{ text: "Rendering", link: "/components/rendering" },
 					{ text: "Yielding", link: "/components/yielding" },
+					{ text: "Kits", link: "/components/kits" },
 					{ text: "Caching", link: "/components/caching" },
 					{ text: "Fragments", link: "/components/fragments" },
 					{ text: "Streaming", link: "/components/streaming" },
-					{ text: "Kits", link: "/components/kits" },
 					{ text: "Snippets", link: "/components/snippets" },
 				],
 			},
