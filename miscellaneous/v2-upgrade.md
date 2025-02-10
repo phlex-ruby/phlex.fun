@@ -1,20 +1,32 @@
-# Upgrading to v2
+# Upgrading to Phlex v2
 
 While we’ve tried to keep breaking changes to a minimum, there are a few things you will need to be aware of when upgrading from Phlex v1 to v2.
 
 The latest version of v1 contains a number of deprecations, so we recommend upgrading to the latest version of v1 first.
 
-## `template` → `view_template` <Badge type="danger" text="breaking" />
+## Kits <Badge type="tip" text="new" />
 
-Instead of defining the `template` method for your component templates, you should instead define `view_template`.
+Originally previewed in v1, Kits are now out of beta and fully supported in v2. Kits are a way to package up a set of components into a module, which makes them easier to render.
 
-## `template_tag` → `template` <Badge type="danger" text="breaking" />
+[More details…](/components/kits.html)
 
-To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of the original `template_tag` method.
+## A better cache <Badge type="tip" text="new" />
+
+Phlex v2 introduces a new attribute cache that caches more things.
+
+[More details…](/design/caching).
+
+## Renamed `template` → `view_template` <Badge type="danger" text="breaking" />
+
+Instead of defining the `template` method for your component templates, you should instead define `view_template`. This was renamed so that the `template` method can be used for `<template>` HTML tags.
+
+## Renamed `template_tag` → `template` <Badge type="danger" text="breaking" />
+
+To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of `template_tag`.
 
 ## Removed `tokens` and `classes` <Badge type="danger" text="breaking" />
 
-There are [better ways to handle conditional tokens now](/sgml/attributes.html#arrays-and-sets), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
+There are [better ways to handle conditional tokens now](/sgml/attributes.html#arrays-and-sets), so we removed these helpers. If you need them back to support your existing code, you can just copy the original implementation from below.
 
 ::: details Original `classes` and `tokens` implementation
 
@@ -71,66 +83,39 @@ end
 
 :::
 
-## `unsafe_raw` → `raw` <Badge type="danger" text="breaking" />
+## Renamed `unsafe_raw` → `raw` <Badge type="danger" text="breaking" />
 
-We've renamed `unsafe_raw` to `raw`, and we've made it so that it will only output content if it's marked as safe. You can use the new `safe` helper to mark content as safe. Additionally, if you're using Rails, `ActiveSupport::SafeBuffer` is also treated as safe, so any methods that return an `ActiveSupport::SafeBuffer` (like `String#html_safe`) can also be output by `raw`.
-
-With the addition of `safe`, we've also made it so that element blocks that return safe content will be output with `raw` instead of `plain`. This means if the only content inside an element was an `unsafe_raw` call, you can now just call `safe`.
-
-### Before
+We’ve renamed `unsafe_raw` to `raw`, and it will now only output strings that are branded as being HTML-safe. You can use the new `safe` helper to mark content as safe. If you’re using Rails, `ActiveSupport::SafeBuffer` is also treated as safe.
 
 ```ruby
-def markdown(content)
-  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
-  unsafe_raw(rendered_markdown)
-end
-```
-
-```ruby
-script do
-  unsafe_raw "alert('Hello!')"
-end
-```
-
-### After
-
-```ruby
-def markdown(content)
-  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
-  raw(safe(rendered_markdown))
-end
-```
-
-```ruby
-script do
-  safe "alert('Hello!')"
+def view_template
+  rendered_markdown = Commonmarker.to_html(@markdown) # [!code --]
+  unsafe_raw rendered_markdown # [!code --]
+  rendered_markdown = safe Commonmarker.to_html(@markdown) # [!code ++]
+  raw rendered_markdown # [!code ++]
 end
 ```
 
 ## Removed `DeferredRender` <Badge type="danger" text="breaking" />
 
-`DeferredRender` was an odd combination of something that is easy to implement, and hard to explain. We decided to remove it as a feature so that we don't have to explain it :innocent:
+`DeferredRender` was an odd combination of something that is easy to implement and hard to explain. We decided to remove it as a feature so that we don’t have to explain it. :innocent:
 
-To recreate the effect that `DeferredRender` had, you can define your own `before_template`:
+You can recreate the effect `DeferredRender` had with this module.
 
 ```ruby
-def before_template(&)
-	vanish(&)
-	super
+module DeferredRender
+  def before_template(&)
+  	vanish(&)
+  	super
+  end
 end
 ```
 
-`vanish` is a newly public method, and it's what was being done via `DeferredRender` previously. It will execute the block it's given, but not allow any Phlex tag methods to push to the buffer.
+See [Yielding](/components/yielding.html) for an explanation how how this works.
 
-If you are someone who found yourself using `DeferredRender` a lot, and the absence of it will require you to add many `before_template` defintions, you're welcome to create your own module that can be included in your Phlex views that defines the `before_template` hook shown above.
+## Changed selective rendering <Badge type="danger" text="breaking" />
 
-You could even call that module `DeferredRender` — but now it's your job to explain it to people :grimacing:
-
-## Selective Rendering Changes <Badge type="danger" text="breaking" />
-
-In Phlex 2.0, we've redesigned the Selective Rendering feature (introduced in [1.10](https://github.com/phlex-ruby/phlex/releases/tag/1.10.0)) to be more predictable and easier to understand.
-
-#### What's Changed
+We’ve redesigned the Selective Rendering feature (introduced in [1.10](https://github.com/phlex-ruby/phlex/releases/tag/1.10.0)) to be more predictable and easier to understand.
 
 Previously, selective rendering worked by targeting element IDs:
 
@@ -168,11 +153,11 @@ end
 component.call(fragments: ["the-list"])
 ```
 
-### Key Differences
+**Key Differences:**
 
 1. **Explicit Fragment Declaration**: Only content wrapped in `fragment(name) { ... }` can be selectively rendered
 2. **Decoupled from DOM**: Fragment names no longer need to match element IDs
-3. **More Predictable**: Eliminates edge cases where ID-based targeting wasn't supported
+3. **More Predictable**: Eliminates edge cases where ID-based targeting wasn’t supported
 
 ### Common Use Case: Turbo Frames
 
@@ -249,10 +234,6 @@ end
 
 :::
 
-## Kits <Badge type="tip" text="new" />
+You may want to run the new install generator in a fresh Rails app to see how the new folder structure works and assess if you want to adopt it.
 
-Originally previewed in v1, kits are now out of beta and fully supported in v2. Kits are a way to package up a set of components into a module.
-
-## A better cache <Badge type="tip" text="new" />
-
-Phlex v2 introduces a new attribute cache that caches more things. We wrote about some of the technical details [here](/design/caching).
+The folder structure is entirely optional — you can put Phlex components wherever you like — but guides and generators may assume this structure.
