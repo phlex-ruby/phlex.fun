@@ -14,7 +14,7 @@ To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Eleme
 
 ## Removed `tokens` and `classes` <Badge type="danger" text="breaking" />
 
-There are [better ways to handle conditional tokens now](../handbook/attributes.md#attribute-values), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
+There are [better ways to handle conditional tokens now](/sgml/attributes.html#arrays-and-sets), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
 
 ::: details Original `classes` and `tokens` implementation
 
@@ -133,6 +133,7 @@ In Phlex 2.0, we've redesigned the Selective Rendering feature (introduced in [1
 #### What's Changed
 
 Previously, selective rendering worked by targeting element IDs:
+
 ```rb
 # Before (Phlex ~> 1.10)
 def view_template
@@ -174,12 +175,15 @@ component.call(fragments: ["the-list"])
 3. **More Predictable**: Eliminates edge cases where ID-based targeting wasn't supported
 
 ### Common Use Case: Turbo Frames
+
 For applications using Turbo Frames, you can automatically make all frames selectively renderable by extending the `turbo_frame` method:
+
 ```rb
 def turbo_frame(id:, **, &)
   fragment(id) { super }
 end
 ```
+
 This ensures any `<turbo-frame>` element can be selectively rendered using its ID.
 
 ## New opinionated Rails generators <Badge type="danger" text="breaking" />
