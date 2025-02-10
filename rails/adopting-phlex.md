@@ -12,7 +12,7 @@ If you’re adopting Phlex into an existing codebase, you should start by extrac
 
 Eventually, you may decide to start building new views directly in Phlex or maybe even converting some of your existing views over.
 
-Although there is a [compatibility layer](/layouts.html#working-with-legacy-layouts) if you need to convert them early, your layouts should probably be the last things to convert to Phlex.
+Although there is a [compatibility layer](layouts.html#working-with-legacy-layouts) if you need to convert them early, your layouts should probably be the last things to convert to Phlex.
 
 ## Tracking progress
 
