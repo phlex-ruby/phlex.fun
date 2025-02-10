@@ -1,457 +1,479 @@
 # HTML elements
 
-## `#a`
+For every HTML element, there’s a Ruby method with the same name. Standard Elements that take a content block yield the current component by default. The one exception is [`svg`](#svg), which yields a [`Phlex::SVG`](svg-elements.html) component.
+
+## Custom elements
+
+If you need to register a custom HTML element (e.g. for a web component) you can use the class method `register_element`. This will define an instance method that you can use in your template. Underscores (`_`) will be replaced with dashes (`-`).
+
+```ruby
+class Example < Phlex::HTML
+  register_element :trix_editor
+
+  def view_template
+    trix_editor
+  end
+end
+```
+
+## `a`
 
 Renders an [`<a>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) element.
 
-## `#abbr`
+## `abbr`
 
 Renders an [`<abbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr) element.
 
-## `#address`
+## `address`
 
 Renders an [`<address>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address) element.
 
-## `#area`
+## `area`
 
 Renders an [`<area>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area) element.
 
-## `#article`
+## `article`
 
 Renders an [`<article>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article) element.
 
-## `#aside`
+## `aside`
 
 Renders an [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside) element.
 
-## `#audio`
+## `audio`
 
 Renders an [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio) element.
 
-## `#b`
+## `b`
 
 Renders a [`<b>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b) element.
 
-## `#base`
+## `base`
 
 Renders a [`<base>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base) element.
 
-## `#bdi`
+## `bdi`
 
 Renders a [`<bdi>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdi) element.
 
-## `#bdo`
+## `bdo`
 
 Renders a [`<bdo>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdo) element.
 
-## `#blockquote`
+## `blockquote`
 
 Renders a [`<blockquote>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote) element.
 
-## `#body`
+## `body`
 
 Renders a [`<body>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body) element.
 
-## `#br`
+## `br`
 
 Renders a [`<br>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br) element.
 
-## `#button`
+## `button`
 
 Renders a [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) element.
 
-## `#canvas`
+## `canvas`
 
 Renders a [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) element.
 
-## `#caption`
+## `caption`
 
 Renders a [`<caption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) element.
 
-## `#cite`
+## `cite`
 
 Renders a [`<cite>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite) element.
 
-## `#code`
+## `code`
 
 Renders a [`<code>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code) element.
 
-## `#col`
+## `col`
 
 Renders a [`<col>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col) element.
 
-## `#colgroup`
+## `colgroup`
 
 Renders a [`<colgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup) element.
 
-## `#data`
+## `data`
 
 Renders a [`<data>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data) element.
 
-## `#datalist`
+## `datalist`
 
 Renders a [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) element.
 
-## `#dd`
+## `dd`
 
 Renders a [`<dd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd) element.
 
-## `#del`
+## `del`
 
 Renders a [`<del>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del) element.
 
-## `#details`
+## `details`
 
 Renders a [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) element.
 
-## `#dfn`
+## `dfn`
 
 Renders a [`<dfn>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn) element.
 
-## `#dialog`
+## `dialog`
 
 Renders a [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element.
 
-## `#div`
+## `div`
 
 Renders a [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element.
 
-## `#dl`
+## `dl`
 
 Renders a [`<dl>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl) element.
 
-## `#dt`
+## `dt`
 
 Renders a [`<dt>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt) element.
 
-## `#em`
+## `em`
 
 Renders an [`<em>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em) element.
 
-## `#embed`
+## `embed`
 
 Renders an [`<embed>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed) element.
 
-## `#fieldset`
+## `fieldset`
 
 Renders a [`<fieldset>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset) element.
 
-## `#figcaption`
+## `figcaption`
 
 Renders a [`<figcaption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption) element.
 
-## `#figure`
+## `figure`
 
 Renders a [`<figure>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure) element.
 
-## `#footer`
+## `footer`
 
 Renders a [`<footer>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element.
 
-## `#form`
+## `form`
 
 Renders a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
-## `#h1`
+## `h1`
 
 Renders an [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1) element.
 
-## `#h2`
+## `h2`
 
 Renders an [`<h2>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h2) element.
 
-## `#h3`
+## `h3`
 
 Renders an [`<h3>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h3) element.
 
-## `#h4`
+## `h4`
 
 Renders an [`<h4>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h4) element.
 
-## `#h5`
+## `h5`
 
 Renders an [`<h5>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h5) element.
 
-## `#h6`
+## `h6`
 
 Renders an [`<h6>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h6) element.
 
-## `#head`
+## `head`
 
 Renders a [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) element.
 
-## `#header`
+## `header`
 
 Renders a [`<header>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header) element.
 
-## `#hgroup`
+## `hgroup`
 
 Renders a [`<hgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hgroup) element.
 
-## `#hr`
+## `hr`
 
-Renders a [`<hr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr) element.
+Renders an [`<hr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr) element.
 
-## `#html`
+## `html`
 
 Renders an [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) element.
 
-## `#i`
+## `i`
 
 Renders an [`<i>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i) element.
 
-## `#iframe`
+## `iframe`
 
 Renders an [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) element.
 
-## `#img`
+## `img`
 
 Renders an [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) element.
 
-## `#input`
+## `input`
 
 Renders an [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) element.
 
-## `#ins`
+## `ins`
 
 Renders an [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins) element.
 
-## `#kbd`
+## `kbd`
 
 Renders a [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd) element.
 
-## `#label`
+## `label`
 
 Renders a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) element.
 
-## `#legend`
+## `legend`
 
 Renders a [`<legend>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend) element.
 
-## `#li`
+## `li`
 
 Renders an [`<li>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li) element.
 
-## `#link`
+## `link`
 
 Renders a [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) element.
 
-## `#main`
+## `main`
 
 Renders a [`<main>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main) element.
 
-## `#map`
+## `map`
 
 Renders a [`<map>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map) element.
 
-## `#mark`
+## `mark`
 
 Renders a [`<mark>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark) element.
 
-## `#menu`
+## `menu`
 
 Renders a [`<menu>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu) element.
 
-## `#meta`
+## `meta`
 
 Renders a [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) element.
 
-## `#meter`
+## `meter`
 
 Renders a [`<meter>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter) element.
 
-## `#nav`
+## `nav`
 
 Renders a [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav) element.
 
-## `#noscript`
+## `noscript`
 
 Renders a [`<noscript>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript) element.
 
-## `#object`
+## `object`
 
 Renders an [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object) element.
 
-## `#ol`
+## `ol`
 
 Renders an [`<ol>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol) element.
 
-## `#optgroup`
+## `optgroup`
 
 Renders an [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup) element.
 
-## `#option`
+## `option`
 
 Renders an [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) element.
 
-## `#output`
+## `output`
 
 Renders an [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output) element.
 
-## `#p`
+## `p`
 
 Renders a [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p) element.
 
-## `#picture`
+## `picture`
 
 Renders a [`<picture>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
 
-## `#portal`
+## `portal`
 
-Renders a [`<portal>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ element.
+Renders a [`<portal>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) element.
 
-## `#pre`
+## `pre`
 
 Renders a [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) element.
 
-## `#progress`
+## `progress`
 
 Renders a [`<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress) element.
 
-## `#q`
+## `q`
 
 Renders a [`<q>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q) element.
 
-## `#rp`
+## `rp`
 
 Renders an [`<rp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rp) element.
 
-## `#rt`
+## `rt`
 
 Renders an [`<rt>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rt) element.
 
-## `#ruby`
+## `ruby`
 
 Renders a [`<ruby>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) element.
 
-## `#s`
+## `s`
 
 Renders an [`<s>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s) element.
 
-## `#samp`
+## `samp`
 
 Renders a [`<samp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp) element.
 
-## `#script`
+## `script`
 
 Renders a [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) element.
 
-## `#search`
+## `search`
 
 Renders a [`<search>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search) element.
 
-## `#section`
+## `section`
 
 Renders a [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section) element.
 
-## `#select`
+## `select`
 
 Renders a [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) element.
 
-## `#slot`
+## `slot`
 
 Renders a [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) element.
 
-## `#small`
+## `small`
 
 Renders a [`<small>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small) element.
 
-## `#source`
+## `source`
 
 Renders a [`<source>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source) element.
 
-## `#span`
+## `span`
 
 Renders a [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span) element.
 
-## `#strong`
+## `strong`
 
 Renders a [`<strong>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong) element.
 
-## `#style`
+## `style`
 
 Renders a [`<style>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style) element.
 
-## `#sub`
+## `sub`
 
 Renders a [`<sub>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub) element.
 
-## `#summary`
+## `summary`
 
 Renders a [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) element.
 
-## `#sup`
+## `sup`
 
 Renders a [`<sup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup) element.
 
-## `#svg`
+## `svg`
 
-Renders an [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg) element.
+Renders an [`<svg>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/svg) element. This method yields a new `Phlex::SVG` component.
 
-## `#table`
+```ruby
+svg do |s|
+  s.rect x: 10, y: 10, width: 100, height: 100
+end
+```
+
+## `table`
 
 Renders a [`<table>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element.
 
-## `#tbody`
+## `tbody`
 
 Renders a [`<tbody>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody) element.
 
-## `#td`
+## `td`
 
 Renders a [`<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) element.
 
-## `#template`
+## `template`
 
 Renders a [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) element.
 
-## `#textarea`
+## `textarea`
 
 Renders a [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) element.
 
-## `#tfoot`
+## `tfoot`
 
 Renders a [`<tfoot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot) element.
 
-## `#th`
+## `th`
 
 Renders a [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) element.
 
-## `#thead`
+## `thead`
 
 Renders a [`<thead>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead) element.
 
-## `#time`
+## `time`
 
 Renders a [`<time>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time) element.
 
-## `#title`
+## `title`
 
 Renders a [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) element.
 
-## `#tr`
+## `tr`
 
 Renders a [`<tr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) element.
 
-## `#track`
+## `track`
 
 Renders a [`<track>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track) element.
 
-## `#u`
+## `u`
 
 Renders a [`<u>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u) element.
 
-## `#ul`
+## `ul`
 
 Renders a [`<ul>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul) element.
 
-## `#var`
+## `var`
 
 Renders a [`<var>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var) element.
 
-## `#video`
+## `video`
 
 Renders a [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) element.
 
-## `#wbr`
+## `wbr`
 
 Renders a [`<wbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr) element.
