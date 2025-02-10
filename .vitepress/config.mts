@@ -72,7 +72,6 @@ export default defineConfig({
 					{ text: "Adopting Phlex", link: "/rails/adopting-phlex" },
 					{ text: "Helpers", link: "/rails/helpers" },
 					{ text: "Layouts", link: "/rails/layouts" },
-					{ text: "Streaming", link: "/rails/streaming" },
 				],
 			},
 
