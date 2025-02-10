@@ -4,7 +4,7 @@ In previous section, we learned how to render components and pass in a block of 
 
 We’ll also explore how you can yield an interface that allows the outer component to use behaviours defined on your inner component.
 
-## Yilding content
+## Yielding content
 
 When your component is rendered with a block of content, that block is received by the `view_template` method. Actually, the content block is wrapped in another block first, but you don’t need to think about that for the most part.
 
