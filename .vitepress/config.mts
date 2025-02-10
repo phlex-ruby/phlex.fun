@@ -71,6 +71,7 @@ export default defineConfig({
 				items: [
 					{ text: "Adopting Phlex", link: "/rails/adopting-phlex" },
 					{ text: "Helpers", link: "/rails/helpers" },
+					{ text: "Views", link: "/rails/views" },
 					{ text: "Layouts", link: "/rails/layouts" },
 				],
 			},
@@ -89,7 +90,7 @@ export default defineConfig({
 				text: "Miscellaneous",
 				collapsed: false,
 				items: [
-					{ text: "Literal properties", link: "/miscellaneous/literal-properties" },
+					{ text: "Literal Properties", link: "/miscellaneous/literal-properties" },
 					{ text: "Upgrading to v2", link: "/miscellaneous/v2-upgrade" },
 				],
 			},
