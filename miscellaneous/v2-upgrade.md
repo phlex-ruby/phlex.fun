@@ -1,0 +1,258 @@
+# Upgrading to v2
+
+While we’ve tried to keep breaking changes to a minimum, there are a few things you will need to be aware of when upgrading from Phlex v1 to v2.
+
+The latest version of v1 contains a number of deprecations, so we recommend upgrading to the latest version of v1 first.
+
+## `template` → `view_template` <Badge type="danger" text="breaking" />
+
+Instead of defining the `template` method for your component templates, you should instead define `view_template`.
+
+## `template_tag` → `template` <Badge type="danger" text="breaking" />
+
+To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of the original `template_tag` method.
+
+## Removed `tokens` and `classes` <Badge type="danger" text="breaking" />
+
+There are [better ways to handle conditional tokens now](/sgml/attributes.html#arrays-and-sets), so we removed these helpers. If you need them back to support your existing code, you can copy their original implementation from below.
+
+::: details Original `classes` and `tokens` implementation
+
+```ruby
+def classes(*tokens, **conditional_tokens)
+  tokens = self.tokens(*tokens, **conditional_tokens)
+
+  if tokens.empty?
+    {}
+  else
+    { class: tokens }
+  end
+end
+
+def tokens(*tokens, **conditional_tokens)
+  conditional_tokens.each do |condition, token|
+    truthy = case condition
+      when Symbol then send(condition)
+      when Proc then condition.call
+      else raise ArgumentError, "The class condition must be a Symbol or a Proc."
+    end
+
+    if truthy
+      case token
+        when Hash then __append_token__(tokens, token[:then])
+        else __append_token__(tokens, token)
+      end
+    else
+      case token
+        when Hash then __append_token__(tokens, token[:else])
+      end
+    end
+  end
+
+  tokens = tokens.select(&:itself).join(" ")
+  tokens.strip!
+  tokens.gsub!(/\s+/, " ")
+  tokens
+end
+
+private
+
+def __append_token__(tokens, token)
+  case token
+    when nil then nil
+    when String then tokens << token
+    when Symbol then tokens << token.name
+    when Array then tokens.concat(token)
+    else raise ArgumentError,
+      "Conditional classes must be Symbols, Strings, or Arrays of Symbols or Strings."
+  end
+end
+```
+
+:::
+
+## `unsafe_raw` → `raw` <Badge type="danger" text="breaking" />
+
+We've renamed `unsafe_raw` to `raw`, and we've made it so that it will only output content if it's marked as safe. You can use the new `safe` helper to mark content as safe. Additionally, if you're using Rails, `ActiveSupport::SafeBuffer` is also treated as safe, so any methods that return an `ActiveSupport::SafeBuffer` (like `String#html_safe`) can also be output by `raw`.
+
+With the addition of `safe`, we've also made it so that element blocks that return safe content will be output with `raw` instead of `plain`. This means if the only content inside an element was an `unsafe_raw` call, you can now just call `safe`.
+
+### Before
+
+```ruby
+def markdown(content)
+  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
+  unsafe_raw(rendered_markdown)
+end
+```
+
+```ruby
+script do
+  unsafe_raw "alert('Hello!')"
+end
+```
+
+### After
+
+```ruby
+def markdown(content)
+  rendered_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content)
+  raw(safe(rendered_markdown))
+end
+```
+
+```ruby
+script do
+  safe "alert('Hello!')"
+end
+```
+
+## Removed `DeferredRender` <Badge type="danger" text="breaking" />
+
+`DeferredRender` was an odd combination of something that is easy to implement, and hard to explain. We decided to remove it as a feature so that we don't have to explain it :innocent:
+
+To recreate the effect that `DeferredRender` had, you can define your own `before_template`:
+
+```ruby
+def before_template(&)
+	vanish(&)
+	super
+end
+```
+
+`vanish` is a newly public method, and it's what was being done via `DeferredRender` previously. It will execute the block it's given, but not allow any Phlex tag methods to push to the buffer.
+
+If you are someone who found yourself using `DeferredRender` a lot, and the absence of it will require you to add many `before_template` defintions, you're welcome to create your own module that can be included in your Phlex views that defines the `before_template` hook shown above.
+
+You could even call that module `DeferredRender` — but now it's your job to explain it to people :grimacing:
+
+## Selective Rendering Changes <Badge type="danger" text="breaking" />
+
+In Phlex 2.0, we've redesigned the Selective Rendering feature (introduced in [1.10](https://github.com/phlex-ruby/phlex/releases/tag/1.10.0)) to be more predictable and easier to understand.
+
+#### What's Changed
+
+Previously, selective rendering worked by targeting element IDs:
+
+```rb
+# Before (Phlex ~> 1.10)
+def view_template
+  section do
+    ul(id: "the-list") do  # Could target this by ID
+      li { "Item 1" }
+      li { "Item 2" }
+    end
+  end
+end
+
+# Usage:
+component.call(fragments: ["the-list"])
+```
+
+Now, selective rendering requires explicit fragment declarations:
+
+```rb
+# After (Phlex 2.0)
+def view_template
+  section do
+    fragment("the-list") do  # Explicitly declare renderable fragment [!code ++]
+      ul(id: "the-list") do
+        li { "Item 1" }
+        li { "Item 2" }
+      end
+    end # [!code ++]
+  end
+end
+
+# Usage remains the same:
+component.call(fragments: ["the-list"])
+```
+
+### Key Differences
+
+1. **Explicit Fragment Declaration**: Only content wrapped in `fragment(name) { ... }` can be selectively rendered
+2. **Decoupled from DOM**: Fragment names no longer need to match element IDs
+3. **More Predictable**: Eliminates edge cases where ID-based targeting wasn't supported
+
+### Common Use Case: Turbo Frames
+
+For applications using Turbo Frames, you can automatically make all frames selectively renderable by extending the `turbo_frame` method:
+
+```rb
+def turbo_frame(id:, **, &)
+  fragment(id) { super }
+end
+```
+
+This ensures any `<turbo-frame>` element can be selectively rendered using its ID.
+
+## New opinionated Rails generators <Badge type="danger" text="breaking" />
+
+We’ve made some significant changes to the Rails generators, which now assume a specific folder structure and naming convention for views and components.
+
+The `install` generator now create an _initializer_ file in `config/initializers/phlex.rb` where the modules: `Views` and `Components` are defined. It also autoloads the `app/views` and `app/components` directories with the `Views` and `Components` namespaces respectively.
+
+::: details `config/initializers/phlex.rb`
+
+```ruby
+# frozen_string_literal: true
+
+module Views
+end
+
+module Components
+  extend Phlex::Kit
+end
+
+Rails.autoloaders.main.push_dir(
+  "#{Rails.root}/app/views", namespace: Views
+)
+
+Rails.autoloaders.main.push_dir(
+  "#{Rails.root}/app/components", namespace: Components
+)
+```
+
+:::
+
+It also creates a `Base` class for both views and components.
+
+The `view` generator now creates views under `app/views`, namespaced under `Views`.
+
+::: details Example view
+
+```ruby
+# frozen_string_literal: true
+
+class Views::Articles::Index < Views::Base
+  def view_template
+    h1 { "Articles" }
+  end
+end
+```
+
+:::
+
+The `component` generator now creates components under `app/components`, namespaced under `Components`.
+
+::: details Example component
+
+```ruby
+# frozen_string_literal: true
+
+class Components::Button < Components::Base
+  def view_template
+    button { "Click me" }
+  end
+end
+```
+
+:::
+
+## Kits <Badge type="tip" text="new" />
+
+Originally previewed in v1, kits are now out of beta and fully supported in v2. Kits are a way to package up a set of components into a module.
+
+## A better cache <Badge type="tip" text="new" />
+
+Phlex v2 introduces a new attribute cache that caches more things. We wrote about some of the technical details [here](/design/caching).

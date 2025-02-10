@@ -14,8 +14,7 @@ export default defineConfig({
 
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Handbook", link: "/handbook" },
-			{ text: "Reference", link: "/reference" },
+			{ text: "Docs", link: "/introduction" },
 		],
 
 		sidebar: [
@@ -29,85 +28,81 @@ export default defineConfig({
 			},
 
 			{
-				text: "Handbook",
-				link: "/handbook/",
+				text: "Introduction",
 				collapsed: false,
 				items: [
-					{ text: "Intro", link: "/handbook/" },
-					{ text: "Setup", link: "/handbook/setup" },
-					{ text: "Your first component", link: "/handbook/first-component" },
-					{ text: "Under the hood", link: "/handbook/under-the-hood" },
-					{ text: "Attributes deep-dive", link: "/handbook/attributes" },
-					{
-						text: "Advanced components",
-						link: "/handbook/advanced-components",
-					},
-					{ text: "Tags", link: "/handbook/tags" },
-					{ text: "Layouts", link: "/handbook/layouts" },
-					{ text: "Helpers", link: "/handbook/helpers" },
-					{ text: "Testing", link: "/handbook/testing" },
+					{ text: "Overview", link: "/introduction/" },
+					{ text: "Getting started", link: "/introduction/getting-started" },
 				],
 			},
 
 			{
-				text: "Guides",
-				collapsed: true,
-				items: [{ text: "Upgrading to v2", link: "/guides/v2-upgrade" }],
-			},
-
-			{
-				text: "Reference",
-				link: "/reference/",
-				collapsed: true,
+				text: "Components",
+				collapsed: false,
 				items: [
-					{ text: "SGML", link: "/reference/sgml" },
-					{ text: "HTML", link: "/reference/html" },
-					{ text: "SVG", link: "/reference/svg" },
-					{ text: "Kits", link: "/reference/kits" },
-					{
-						text: "Testing",
-						items: [
-							{ text: "Capybara", link: "/reference/testing/capybara" },
-							{ text: "Nokogiri", link: "/reference/testing/nokogiri" },
-							{ text: "Nokolexbor", link: "/reference/testing/nokolexbor" },
-						],
-					},
-					{
-						text: "Rails",
-						collapsed: false,
-						items: [
-							{ text: "Helpers", link: "/reference/rails/helpers" },
-							{ text: "Generators", link: "/reference/rails/generators" },
-							{ text: "Streaming", link: "/reference/rails/streaming" },
-							{ text: "Testing", link: "/reference/rails/testing" },
-						],
-					},
+					{ text: "Rendering", link: "/components/rendering" },
+					{ text: "Yielding", link: "/components/yielding" },
+					{ text: "Kits", link: "/components/kits" },
+					{ text: "Caching", link: "/components/caching" },
+					{ text: "Fragments", link: "/components/fragments" },
+					{ text: "Streaming", link: "/components/streaming" },
+					{ text: "Snippets", link: "/components/snippets" },
 				],
 			},
 
-			// {
-			// 	text: "Compared to…",
-			// 	collapsed: true,
-			// 	items: [
-			// 		{ text: "ViewComponent", link: "/compare/view-component" },
-			// 		{ text: "ActionView & ERB", link: "/compare/action-view" },
-			// 		{ text: "React", link: "/compare/react" },
-			// 		{ text: "Slim", link: "/compare/slim" },
-			// 		{ text: "Haml", link: "/compare/haml" },
-			// 	],
-			// },
+			{
+				text: "HTML & SVG",
+				collapsed: false,
+				items: [
+					{ text: "HTML elements", link: "/sgml/html-elements" },
+					{ text: "SVG elements", link: "/sgml/svg-elements" },
+					{ text: "Attributes", link: "/sgml/attributes" },
+					{ text: "Text", link: "/sgml/text" },
+					{ text: "Whitespace", link: "/sgml/whitespace" },
+					{ text: "Comments", link: "/sgml/comments" },
+					{ text: "Raw output", link: "/sgml/raw" },
+					{ text: "Doctype (HTML only)", link: "/sgml/doctype" },
+				],
+			},
+
+			{
+				text: "Rails",
+				collapsed: false,
+				items: [
+					{ text: "Adopting Phlex", link: "/rails/adopting-phlex" },
+					{ text: "Helpers", link: "/rails/helpers" },
+					{ text: "Views", link: "/rails/views" },
+					{ text: "Layouts", link: "/rails/layouts" },
+				],
+			},
+
+			{
+				text: "Testing",
+				collapsed: false,
+				items: [
+					{ text: "Capybara", link: "/testing/capybara" },
+					{ text: "Nokogiri", link: "/testing/nokogiri" },
+					{ text: "Nokolexbor", link: "/testing/nokolexbor" },
+				],
+			},
+
+			{
+				text: "Miscellaneous",
+				collapsed: false,
+				items: [
+					{ text: "Literal Properties", link: "/miscellaneous/literal-properties" },
+					{ text: "Upgrading to v2", link: "/miscellaneous/v2-upgrade" },
+				],
+			},
 
 			{
 				text: "Technical Design",
 				collapsed: true,
 				items: [
-					{ text: "Intro", link: "/design/intro" },
 					{ text: "Caching", link: "/design/caching" },
-					{ text: "Performance", link: "/design/performance" },
-					{ text: "Component kits" },
-					{ text: "Rails integration" },
-					{ text: "Selective rendering" },
-					{ text: "Deferred Render" },
+					{ text: "Performance" },
+					{ text: "Kits" },
+					{ text: "Rails Integration" },
 				],
 			},
 			{
