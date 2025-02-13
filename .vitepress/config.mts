@@ -91,6 +91,7 @@ export default defineConfig({
 				collapsed: false,
 				items: [
 					{ text: "Literal Properties", link: "/miscellaneous/literal-properties" },
+					{ text: "How Phlex Works", link: "/miscellaneous/under-the-hood" },
 					{ text: "Upgrading to v2", link: "/miscellaneous/v2-upgrade" },
 				],
 			},
