@@ -2,7 +2,7 @@
 
 We mentioned you can pass a custom output buffer to `call` when rendering a component from the outside. Using this technique, each time the component flushes its internal buffer to the output buffer, you can stream the output over the network.
 
-## Streaming from Rails <Badge type="tip" text="Rails" />
+## Streaming from Rails <Badge type="danger" text="Rails" />
 
 You can include `Phlex::Rails::Streaming` into a Rails controller to stream Phlex views from Rails. This does not work if you need to use standard Rails layouts.
 

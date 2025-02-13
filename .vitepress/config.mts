@@ -47,6 +47,7 @@ export default defineConfig({
 					{ text: "Fragments", link: "/components/fragments" },
 					{ text: "Streaming", link: "/components/streaming" },
 					{ text: "Snippets", link: "/components/snippets" },
+					{ text: "Testing", link: "/components/testing" },
 				],
 			},
 

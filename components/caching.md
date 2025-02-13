@@ -67,7 +67,7 @@ end
 
 It’s important to store the FIFOCacheStore in a constant. If we had initialized it from inside the `cache_store` method, we would get a new store each time that method is called and we’d never have a cache hit.
 
-### Using the Rails cache <Badge type="tip" text="Rails" />
+### Using the Rails cache <Badge type="danger" text="Rails" />
 
 Since Phlex’ cache store interface is a subset of Rails’ cache store interface, any Rails cache store should be a valid Phlex cache store.
 

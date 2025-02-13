@@ -277,7 +277,7 @@ render Table.new(@people) do |t|
 end
 ```
 
-## Rendering interface-yielding components from ERB <Badge type="tip" text="Rails" />
+## Rendering interface-yielding components from ERB <Badge type="danger" text="Rails" />
 
 When you render a Phlex component from ERB, Phlex automatically wraps the yield in an adapter. The adapter essentially makes it as if each method called on the component was wrapped in a `capture`, which means you can use both techniques discussed above.
 

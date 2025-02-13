@@ -238,7 +238,7 @@ You may want to run the new install generator in a fresh Rails app to see how th
 
 The folder structure is entirely optional — you can put Phlex components wherever you like — but guides and generators may assume this structure.
 
-## Changed rendering partials from Phlex <Badge type="tip" text="Rails" /><Badge type="danger" text="breaking" />
+## Changed rendering partials from Phlex <Badge type="danger" text="Rails" /><Badge type="danger" text="breaking" />
 
 In order to support rendering plain strings, we removed the ability to render Rails partails like this:
 

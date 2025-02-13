@@ -38,7 +38,7 @@ While rendering, Phlex writes to an internal buffer, but `flush` will copy the i
 
 You could create an abstraction that calls `flush` while waiting on IO, for example.
 
-## Rendering from a Rails controller <Badge type="tip" text="Rails" />
+## Rendering from a Rails controller <Badge type="danger" text="Rails" />
 
 Typically, you won’t call the `call` method yourself. In Rails, you can render a Phlex component from a controller with the `render` method.
 
@@ -108,7 +108,7 @@ end
 
 In this example, because the Card component _yields_, the context in the block (`self`) is the instance of the Article component. That’s why the `@articles` instance variable is available in this block, even though it wasn’t passed down to the Card component.
 
-## Rendering Phlex components in ERB <Badge type="tip" text="Rails" />
+## Rendering Phlex components in ERB <Badge type="danger" text="Rails" />
 
 You can also render Phlex components from ERB and other Rails templating languages, such as [Slim](https://slim-template.github.io) and [HAML](https://haml.info). This works from views, partials or even [ViewComponent](https://viewcomponent.org) components.
 
@@ -120,7 +120,7 @@ You can also render Phlex components from ERB and other Rails templating languag
 
 When rendering from ERB, the block given to the component is expected to return an HTML safe string (an `ActiveSupport::SafeBuffer`). This happens automatically from ERB and Phlex confirms this as part of the integration.
 
-## Rendering Rails partials in Phlex <Badge type="tip" text="Rails" />
+## Rendering Rails partials in Phlex <Badge type="danger" text="Rails" />
 
 To render your existing Rails partials in Phlex, you need to use `render` and `partial` together. `partial` takes the partial name and parameters and returns a renderable object.
 
@@ -140,7 +140,7 @@ end
 
 The `partial` method is necessary because `render` will render plain strings as plain text.
 
-## Rendering ViewComponent components in Phlex <Badge type="tip" text="Rails" />
+## Rendering ViewComponent components in Phlex <Badge type="danger" text="Rails" />
 
 You can render ViewComponent components in much the same way that you’d render Phlex components.
 
@@ -189,7 +189,7 @@ The polymorphism of `render` here means this _renderable_ property could be any 
 | `Enumerable` (such as `Array`) | Iterates by calling `each` and renders each item.     |
 | Anything else                  | Raises a `Phlex::ArgumentError`                       |
 
-### Other renderables in Rails <Badge type="tip" text="Rails" />
+### Other renderables in Rails <Badge type="danger" text="Rails" />
 
 In Rails, ViewComponent components are also accepted as renderables and they are handled in a way that adapts Phlex for the slots.
 
