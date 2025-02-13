@@ -77,16 +77,6 @@ export default defineConfig({
 			},
 
 			{
-				text: "Testing",
-				collapsed: false,
-				items: [
-					{ text: "Capybara", link: "/testing/capybara" },
-					{ text: "Nokogiri", link: "/testing/nokogiri" },
-					{ text: "Nokolexbor", link: "/testing/nokolexbor" },
-				],
-			},
-
-			{
 				text: "Miscellaneous",
 				collapsed: false,
 				items: [
