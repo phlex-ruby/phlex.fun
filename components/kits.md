@@ -45,6 +45,16 @@ end
 
 The kit detected the definition of a component and defined a special method on the kit with the same name (`Card`). Calling this method means we don’t need to use `render` or `.new`.
 
+You can think of it like the kit has defined this:
+
+```ruby
+module Components
+  def Card(...)
+    render Card.new(...)
+  end
+end
+```
+
 Additionally, you can include the Kit to make all of its components available without the namespace.
 
 ```ruby
