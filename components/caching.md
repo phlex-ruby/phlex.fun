@@ -1,4 +1,4 @@
-# Caching
+# Caching <Badge type="tip" text="experimental" />
 
 Phlex uses an in-memory FIFO store to cache sets of HTML attributes to improve performance. This cache is limited to the bytesize of the Ruby files that define each of your Phlex components.
 
