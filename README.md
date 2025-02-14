@@ -12,14 +12,4 @@ You may need to [install bun](https://bun.sh/docs/installation) to run this proj
 
 ## Spellcheck
 
-To perform a spellcheck across all Markdown files,
-
-```shell
-bun run cspell "**/*.md"
-```
-
-To show the issues and suggestions,
-
-```shell
-bun run cspell --no-progress --show-suggestions --show-context "**/*.md"
-```
+To perform a spellcheck, run `bun run spellcheck`.
