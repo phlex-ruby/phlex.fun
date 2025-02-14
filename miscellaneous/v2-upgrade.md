@@ -240,7 +240,7 @@ The folder structure is entirely optional — you can put Phlex components where
 
 ## Changed rendering partials from Phlex <Badge type="danger" text="Rails" /><Badge type="danger" text="breaking" />
 
-In order to support rendering plain strings, we removed the ability to render Rails partails like this:
+In order to support rendering plain strings, we removed the ability to render Rails partials like this:
 
 ```ruby
 render "foo"

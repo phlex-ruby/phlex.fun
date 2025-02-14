@@ -6,7 +6,7 @@ Phlex supports all kinds of attributes including deeply-nested hashes, arrays, s
 
 Attributes need to be calculated thousands of times per render. One advantage we have is attributes are always calculated the same way. The same hash will always produce the same string of HTML.
 
-This problem lends itself well to caching. If we store the result of the first calculation, we can then resuse it the next time we get the same set of attributes.
+This problem lends itself well to caching. If we store the result of the first calculation, we can then reuse it the next time we get the same set of attributes.
 
 ## Keying the cache
 
@@ -83,7 +83,7 @@ The Phlex attribute cache is global, which allows for maximum reuse of calculate
 
 Inside the FIFO cache, we use a `Mutex` to make sure only one thread is writing to the cache or modifying its size at a time.
 
-Becuase we can expire keys we also need to be careful to not do something like this:
+Because we can expire keys we also need to be careful to not do something like this:
 
 ```ruby
 if CACHE[key]
