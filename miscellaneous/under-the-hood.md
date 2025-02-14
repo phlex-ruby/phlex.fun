@@ -4,7 +4,7 @@ You’ve successfully installed Phlex and rendered your first component. Now let
 
 It won’t have advanced features, performance optimizations or HTML safety, but I think it’ll give you a good sense of things.
 
-## Buffers and hirearchy
+## Buffers and hierarchy
 
 We’ll start by creating a `Component` class with a `@buffer` instance variable. Phlex uses a mutable String for its buffer, but we’ll use an Array since it’s easier to debug.
 

@@ -2,7 +2,7 @@
 
 [Slim](https://slim-template.github.io)’s goal is reduce templating syntax to just the essential parts without becoming cryptic.
 
-We can’t really make a direct comparison between Phlex and Slim becuase Slim is not a component framework and Phlex is not a templating language. However, there are some similarities between the two that we can look at. We can also get into why Phlex is designed around this idea of a “component”.
+We can’t really make a direct comparison between Phlex and Slim because Slim is not a component framework and Phlex is not a templating language. However, there are some similarities between the two that we can look at. We can also get into why Phlex is designed around this idea of a “component”.
 
 ### Minimal templating syntax
 

@@ -12,10 +12,10 @@ class Components::Base < Phlex::HTML
 end
 ```
 
-Not in your components, you can use `prop`.
+Now in your components, you can use `prop`.
 
 ```ruby
-class Components::LinkButton < Phlex::HTML
+class Components::LinkButton < Components::Base
   Size = _Union(:small, :medium, :large)
   Variant = _Union(:primary, :success, :danger)
 

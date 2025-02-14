@@ -26,7 +26,7 @@ cache(@article, expires_in: 12.hours) do
 end
 ```
 
-Phlex will suppliment your cache keys with a few of its own:
+Phlex will supplement your cache keys with a few of its own:
 
 1. The time in milliseconds that the app was booted and Phlex was loaded. This invalidates the cache on each deploy in case a template has changed.
 2. The name of the current class. This prevents collisions between classes.
@@ -35,7 +35,7 @@ Phlex will suppliment your cache keys with a few of its own:
 
 ## Low-level fragment caching
 
-`low_level_cache` is the same as `cache` except you control the entire cache key. Phlex will not suppliment its own keys so it’s up to you to make sure your cache will be invalidated correctly. This method takes only one cache key, but you can pass an Array. This allows you maximum control.
+`low_level_cache` is the same as `cache` except you control the entire cache key. Phlex will not supplement its own keys so it’s up to you to make sure your cache will be invalidated correctly. This method takes only one cache key, but you can pass an Array. This allows you maximum control.
 
 ```ruby
 low_level_cache([@article], expires_in: 12.hours) do

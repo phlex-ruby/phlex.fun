@@ -1,6 +1,6 @@
 # Fragments
 
-The `fragment` helper allows you to define named template fragments which can be targetted while rendering.
+The `fragment` helper allows you to define named template fragments which can be targeted while rendering.
 
 ```rb
 class MyComponent < Phlex::HTML

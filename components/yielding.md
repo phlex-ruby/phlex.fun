@@ -162,7 +162,7 @@ render Table.new(@people) do |t|
 end
 ```
 
-So how would we build this component? The `column` method can’t output HTML becuase we need to iterate over the columns once for the headers and then once for each row in our `@people` enumerable.
+So how would we build this component? The `column` method can’t output HTML because we need to iterate over the columns once for the headers and then once for each row in our `@people` enumerable.
 
 What we want to do here is yield the block early, allowing the parent component to add the columns, then we want to iterate over those columns several times when rendering. Let’s build this component step-by-step and then put it all together.
 
