@@ -12,7 +12,7 @@ Phlex components are Ruby classes that describe discrete parts of your view. You
 
 When your browser parses an HTML file, it builds up a tree of elements, attributes, comments and text nodes.
 
-HTML in this sense is something beyond the specific syntax of a text file. The HTML text file is just a way of serialising a HTML tree so it can be stored and delivered over the network.
+HTML in this sense is something beyond the specific syntax of a text file. The HTML text file is just a way of serializing a HTML tree so it can be stored and delivered over the network.
 
 When you think about it from this perspective, it doesn’t matter how the HTML tree is stored in source code, as long as there’s a reliable path to the browser.
 

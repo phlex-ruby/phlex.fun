@@ -110,7 +110,7 @@ In this example, because the Card component _yields_, the context in the block (
 
 ## Rendering Phlex components in ERB <Badge type="danger" text="Rails" />
 
-You can also render Phlex components from ERB and other Rails templating languages, such as [Slim](https://slim-template.github.io) and [HAML](https://haml.info). This works from views, partials or even [ViewComponent](https://viewcomponent.org) components.
+You can also render Phlex components from ERB and other Rails templating languages, such as [Slim](https://slim-template.github.io) and [Haml](https://haml.info). This works from views, partials or even [ViewComponent](https://viewcomponent.org) components.
 
 ```erb
 <%= render Card.new(title: "Hello") do %>

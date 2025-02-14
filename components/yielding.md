@@ -54,7 +54,7 @@ end
 
 ## Yielding an interface
 
-I mentioned earlier that `yield` is automatically upgraded to `yield(self)`. This makes it convenient to yield a specialised interface that the parent component can use. Let’s say we want an abstract `Nav` component that allows you to add nav items.
+I mentioned earlier that `yield` is automatically upgraded to `yield(self)`. This makes it convenient to yield a specialized interface that the parent component can use. Let’s say we want an abstract `Nav` component that allows you to add nav items.
 
 One way to do this is to serialize the nav items as data.
 

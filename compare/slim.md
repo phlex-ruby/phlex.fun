@@ -24,7 +24,7 @@ def MyButton(...)
 end
 ```
 
-When you realise you need more options, you can upgrade that to a class.
+When you realize you need more options, you can upgrade that to a class.
 
 ```ruby
 class Components::MyButton < Components::Base

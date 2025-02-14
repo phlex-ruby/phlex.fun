@@ -1,6 +1,7 @@
 {
   "dependencies": {},
   "devDependencies": {
+    "cspell": "^8.17.3",
     "vitepress": "^1.6.3"
   },
   "scripts": {
