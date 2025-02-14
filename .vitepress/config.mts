@@ -15,6 +15,7 @@ export default defineConfig({
 		nav: [
 			{ text: "Home", link: "/" },
 			{ text: "Docs", link: "/introduction" },
+			{ text: "v1 Docs", link: "https://v1.phlex.fun" },
 		],
 
 		sidebar: [
