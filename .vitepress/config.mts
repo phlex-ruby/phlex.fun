@@ -93,9 +93,9 @@ export default defineConfig({
 				collapsed: true,
 				items: [
 					{ text: "Caching", link: "/design/caching" },
-					{ text: "Performance" },
-					{ text: "Kits" },
-					{ text: "Rails Integration" },
+					// { text: "Performance" },
+					// { text: "Kits" },
+					// { text: "Rails Integration" },
 				],
 			},
 			{
