@@ -15,7 +15,7 @@ To install Phlex in a Rails app, you’ll need to add the `phlex-rails` gem to y
 Start by running:
 
 ```
-bundle add phlex-rails --version=2.0.0.rc2
+bundle add phlex-rails
 ```
 
 This will install the latest version of `phlex` and `phlex-rails` and add `phlex-rails` to your `Gemfile`. Once that’s finished, you’ll want to run the install generator to kick things off:
