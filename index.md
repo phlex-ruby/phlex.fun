@@ -8,8 +8,11 @@ hero:
   tagline: A little string concatenation library.
   actions:
     - theme: brand
-      text: Docs
+      text: Documentation
       link: /introduction
+    - theme: alt
+      text: GitHub Repo
+      link: https://github.com/phlex-ruby/phlex
 
 features:
   - title: Pure, beautiful Ruby
