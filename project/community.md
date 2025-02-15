@@ -34,7 +34,6 @@ next: false
 - [Phlex Icons](https://github.com/AliOsm/phlex-icons)
 - [NitroKit](https://nitrokit.dev)
 - [PhlexyUI](https://phlexyui.com)
-- [Phlex Icons](https://phlex-icons.fun)
 
 ## Prior art 🎨
 
