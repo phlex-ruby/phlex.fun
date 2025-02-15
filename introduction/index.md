@@ -6,7 +6,7 @@ prev: false
 
 Phlex is a Ruby gem for building object-oriented views directly in Ruby. It supports **HTML**, **SVG** and **CSV** views, but we’ll mostly focus on HTML views in this guide.
 
-Phlex components are Ruby classes that describe discrete parts of your view. You may have a components for your _layout_, _header_ and _footer_ as well as abstract parts like _buttons_, _tables_, _form inputs_.
+Phlex components are Ruby classes that describe discrete parts of your view. You may have a components for your _layout_, _header_ and _footer_ as well as abstract parts like _buttons_, _tables_, and _form inputs_.
 
 ## HTML in Ruby?
 
