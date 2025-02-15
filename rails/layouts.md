@@ -256,3 +256,17 @@ class ArticlesController
   layout { Components::Layout }
 end
 ```
+
+## Passing parameters to layouts
+
+You can pass parameters to your layout components directly when specifying the layout in your Rails controller. This allows you to customize the layout based on data available in the controller.
+
+```ruby
+class ApplicationController < ActionController::Base
+  layout -> { Components::Layout.new(banner: show_banner?) }
+
+  def show_banner?
+    cookies[:accepted] != "true"
+  end
+end
+```
