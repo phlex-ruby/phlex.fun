@@ -59,6 +59,7 @@ mix({ class: "default classes" }, { class!: "only-use-this-class" })
 ```
 
 ::: details `mix` source code
+
 ```rb
 def mix(*args)
   args.each_with_object({}) do |object, result|
@@ -95,6 +96,7 @@ def mix(*args)
   end
 end
 ```
+
 :::
 
 ## `grab`
@@ -117,7 +119,7 @@ def initialize(class:)
 end
 ```
 
-It can also return multiple values if you're in the prediciment of needing multiple things named after reserved words.
+It can also return multiple values if you're in the predicament of needing multiple things named after reserved words.
 
 ```rb
 def initialize(class:, if:,)
@@ -126,6 +128,7 @@ end
 ```
 
 ::: details `grab` source code
+
 ```rb
 def grab(**bindings)
   if bindings.size > 1
@@ -135,4 +138,5 @@ def grab(**bindings)
   end
 end
 ```
+
 :::
