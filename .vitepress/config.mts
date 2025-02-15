@@ -65,6 +65,7 @@ export default defineConfig({
 					{ text: "Comments", link: "/sgml/comments" },
 					{ text: "Raw output", link: "/sgml/raw" },
 					{ text: "Doctype (HTML only)", link: "/sgml/doctype" },
+					{ text: "Helpers", link: "/sgml/helpers" },
 				],
 			},
 
