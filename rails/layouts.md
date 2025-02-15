@@ -1,4 +1,4 @@
-# Layouts
+# Rails Layouts in Phlex
 
 In this world of components, where do _layouts_ fit in? Rails, has a special concept for layouts where they are separate from the rest of your views and partials. ActionView renders the the inner parts of your view first and then wraps it up in a layout at the last moment.
 
