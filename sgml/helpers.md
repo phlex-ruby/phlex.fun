@@ -4,7 +4,7 @@ Phlex provides two helpers for combining attribute hashes, and accessing keyword
 
 ## `mix`
 
-It's not uncommon that when building an abstract component like a Button or Card, that you will want to expose some level of control over the resulting HTML to the caller of your component. Possibly for the purpose of adding an ID, or some additional classes. Or maybe to attach behavior using a JS library like Stimulus or Alpine.js. All of this requires being able to modify the attributes being applied to the HTML _inside_ the component, from the _outside_.
+It’s not uncommon that when building an abstract component like a Button or Card, that you will want to expose some level of control over the resulting HTML to the caller of your component. Possibly for the purpose of adding an ID, or some additional classes. Or maybe to attach behavior using a JS library like Stimulus or Alpine.js. All of this requires being able to modify the attributes being applied to the HTML _inside_ the component, from the _outside_.
 
 We could do this by exposing every possible attribute that we want to allow being modified, and handling it manually.
 
@@ -23,7 +23,7 @@ class Card < Phlex::HTML
 end
 ```
 
-But you can imagine how this can get out of hand quickly. This method does provide the most control of _what_ is allowed to be configured, and exactly _how_ that configuration gets applied. But many times it's easiest to be hands-off and allow access to the attributes from the caller, and the `mix` helper can help you do that.
+But you can imagine how this can get out of hand quickly. This method does provide the most control of _what_ is allowed to be configured, and exactly _how_ that configuration gets applied. But many times it’s easiest to be hands-off and allow access to the attributes from the caller, and the `mix` helper can help you do that.
 
 ```rb
 class Card < Phlex::HTML
@@ -101,7 +101,7 @@ end
 
 ## `grab`
 
-Sometimes when you're designing a component's API, you want a keyword argument whose name _is_ a keyword. This presents a problem when you're trying to access that keyword argument.
+Sometimes when you’re designing a component’s API, you want a keyword argument whose name _is_ a keyword. This presents a problem when you’re trying to access that keyword argument.
 
 ```rb
 def initialize(class:)
@@ -119,7 +119,7 @@ def initialize(class:)
 end
 ```
 
-It can also return multiple values if you're in the predicament of needing multiple things named after reserved words.
+It can also return multiple values if you’re in the predicament of needing multiple things named after reserved words.
 
 ```rb
 def initialize(class:, if:,)
