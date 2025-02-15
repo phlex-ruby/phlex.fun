@@ -1,4 +1,4 @@
-# Adopting Phlex
+# Adopting Phlex in a Rails app
 
 ## Starting from scratch
 
@@ -6,7 +6,7 @@ If you’re starting a new Rails app from scratch, you may want to go all-in wit
 
 You should also consider using [Literal Properties](/miscellaneous/literal-properties.html), which will reduce the amount of boilerplate required for each component and add data validations at the component layer.
 
-## Adopting Phlex in an existing codebase
+## Adopting Phlex in an existing Rails codebase
 
 If you’re adopting Phlex into an existing codebase, you should start by extracting components and using them in your existing Rails views. This will help you get the most out of Phlex early on without too much effort.
 
