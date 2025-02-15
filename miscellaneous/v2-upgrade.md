@@ -196,7 +196,7 @@ component.call(fragments: ["the-list"])
 For applications using Turbo Frames, you can automatically make all frames selectively renderable by extending the `turbo_frame` method:
 
 ```rb
-def turbo_frame(id:, **, &)
+def turbo_frame(id:, ...)
   fragment(id) { super }
 end
 ```
