@@ -46,7 +46,7 @@ end
 
 Phlex v2 introduces a new attribute cache that caches more things.
 
-[More details…](/design/caching).
+[More details…](/design/attribute-caching).
 
 ## Renamed `template` → `view_template` <Badge type="danger" text="breaking" />
 
