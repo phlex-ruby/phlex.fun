@@ -278,10 +278,12 @@ In order to support rendering plain strings, we removed the ability to render Ra
 render "foo"
 ```
 
-Now, you must use the `partial` method to create a partial reference.
+Now, you must use the `partial` method to create a partial reference object.
 
 ```ruby
 render partial("foo")
 ```
+
+These partial reference objects are also renderable outside of Phlex. You can pass them to ViewComponent components or other Rails partials.
 
 [More details…](/components/rendering.html#rendering-rails-partials-in-phlex)
