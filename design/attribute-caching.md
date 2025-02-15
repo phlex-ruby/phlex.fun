@@ -1,4 +1,4 @@
-# Caching
+# Attribute Caching
 
 The most expensive (performance-wise) process in Phlex is building attributes, where we turn a Ruby Hash into an String of valid HTML attributes.
 

@@ -94,7 +94,7 @@ export default defineConfig({
 				text: "Technical Design",
 				collapsed: true,
 				items: [
-					{ text: "Caching", link: "/design/caching" },
+					{ text: "Attribute Caching", link: "/design/attribute-caching" },
 					// { text: "Performance" },
 					// { text: "Kits" },
 					// { text: "Rails Integration" },
