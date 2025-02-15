@@ -20,6 +20,7 @@ next: false
 It’s impossible to know how many people are using Phlex in production, but here’s a few that we do know about:
 
 - **[RubyGems.org](https://rubygems.org)**
+- **[Owl](https://owl.so)** (at least 263 components)
 - **[Feedbin](https://feedbin.com/)**
 - **[Clearscope](https://www.clearscope.io)**
 - **[Benchmark Wine Group](https://www.benchmarkwine.com)**
