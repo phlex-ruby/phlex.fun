@@ -42,7 +42,7 @@ end
 
 [More details…](/components/kits.html)
 
-## A better cache <Badge type="tip" text="new" />
+## A better attribute cache <Badge type="tip" text="new" />
 
 Phlex v2 introduces a new attribute cache that caches more things.
 
