@@ -15,6 +15,17 @@ next: false
 - [Phlex Rails](https://github.com/phlex-ruby/phlex-rails) - The Rails engine for Phlex
 - [Phlex.fun](https://github.com/phlex-ruby/phlex.fun) - This website
 
+## Who’s using Phlex?
+
+It’s impossible to know how many people are using Phlex in production, but here’s a few that we do know about:
+
+- **[RubyGems.org](https://rubygems.org)**
+- **[Feedbin](https://feedbin.com/)**
+- **[Clearscope](https://www.clearscope.io)**
+- **[Benchmark Wine Group](https://www.benchmarkwine.com)**
+- **[Judoscale](https://judoscale.com/)**
+- **[Uscreen](https://www.uscreen.tv)**
+
 ## Video tutorials 📺
 
 - [Components with Phlex in Rails](https://www.youtube.com/watch?v=l4bQSfqZZfQ)
