@@ -65,7 +65,7 @@ class Components::Base
 end
 ```
 
-It’s important to store the FIFOCacheStore in a constant. If we had initialized it from inside the `cache_store` method, we would get a new store each time that method is called and we’d never have a cache hit.
+It’s important to store the FIFOCacheStore in a constant. If we had initialized it from inside the `cache_store` method, we would get a new store each time that method is called and we’d never cache anything.
 
 ### Using the Rails cache <Badge type="danger" text="Rails" />
 
@@ -84,7 +84,13 @@ end
 It’s up to the cache store which keys they support. The `Phlex::FIFOCacheStore` supports the following:
 
 1. `String`, `Symbol`, `Integer`, `Float`, `Time`, `true`, `false`, `nil`
-2. Objects that respond to `cache_key`
+2. Objects that respond to `cache_key_with_version` or `cache_key`
 3. `Array` and `Hash` collections of the above
 
-Since Rails also uses the `cache_key` interface, it should be possible to cache things like ActiveRecord models using the `Phlex::FIFOCacheStore`. However, if you’re using Rails, you should probably just configure your Rails cache store.
+Since Rails also uses the `cache_key_with_version`/`cache_key` interface, it should be possible to cache things like ActiveRecord models using the `Phlex::FIFOCacheStore`. However, if you’re using Rails, you should probably just configure your Rails cache store.
+
+## Reloading the cache during development
+
+Phlex has an `enable_cache_reloading?` method that defaults to returning `false`. When this returns `true`, the cache method will include the class’ `object_id` as one of its keys. When Zeitwerk reloads your application, each autoloaded Ruby class is redefined and gets a new `object_id`.
+
+`phlex-rails` overrides `enable_cache_reloading?` to return `true` if your Rails application environment is `development`.
