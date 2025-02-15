@@ -4,10 +4,10 @@ next: false
 
 # Community
 
-## Forums
+## Support
 
-- [GitHub discussions](https://github.com/orgs/phlex-ruby/discussions) — this is the best place to get help with specific issues.
-- [Discord](https://discord.gg/p7C9SWS8Sa) — we have a channel in the Naming Things discord server.
+- [GitHub discussions](https://github.com/orgs/phlex-ruby/discussions) — this is the best place to get help with specific issues.
+- [Discord](https://discord.gg/p7C9SWS8Sa) — we have a channel in the Naming Things discord server.
 
 ## GitHub repositories 📦
 
@@ -25,12 +25,16 @@ next: false
 
 - [Say No To Partials And Helpers For A Maintainable Rails Front-End](https://judoscale.com/blog/phlex-not-erb)
 - [A Tale of two Phlexes](https://blog.willcosgrove.com/a-tale-of-two-phlexes)
+- [On Using Phlex](https://katafrakt.me/2023/10/03/on-using-phlex/)
 
 ## Third-party component libraries 📚
 
-- [PhlexUI](https://phlexui.com)
+- [RubyUI](https://rubyui.com)
 - [ZestUI](https://zestui.com)
 - [Phlex Icons](https://github.com/AliOsm/phlex-icons)
+- [NitroKit](https://nitrokit.dev)
+- [PhlexyUI](https://phlexyui.com)
+- [Phlex Icons](https://phlex-icons.fun)
 
 ## Prior art 🎨
 
