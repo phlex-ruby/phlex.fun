@@ -4,9 +4,41 @@ While we’ve tried to keep breaking changes to a minimum, there are a few thing
 
 The latest version of v1 contains a number of deprecations, so we recommend upgrading to the latest version of v1 first.
 
+## Dropping SemVer for BreakVer
+
+Phlex v1 used [SemVer](https://semver.org) (semantic versioning). Going forward, Phlex v2 and up will use [BreakVer](https://www.taoensso.com/break-versioning) instead. BreakVer will allow us to release changes more frequently because we can distinguish between _major_ breaking changes and _minor_ breaking changes.
+
+The version scheme is:
+
+```
+MAJOR . MINOR . NON_BREAKING
+```
+
+- `NON_BREAKING` changes should always be safe to apply. They can include new features, enhancements, refactors and bug fixes, but they should never include any breaking changes.
+- `MINOR` changes might break code in a _minor_ way — usually in a way that can be easily accommodated with a few minutes of mostly find/replace-type work.
+- `MAJOR` changes might break code in a _major_ way. These are milestone releases.
+
+We try to avoid breaking changes altogether, but they are sometimes necessary for progress. We’ve come to realize if we’re going to make a breaking change, we should make it _as quickly as possible_. Any delay means more work for users.
+
 ## Kits <Badge type="tip" text="new" />
 
 Originally previewed in v1, Kits are now out of beta and fully supported in v2. Kits are a way to package up a set of components into a module, which makes them easier to render.
+
+In v2, Kits also extend to modules (but not classes) defined under them.
+
+```ruby
+module Components
+  extend Phlex::Kit
+
+  module Articles
+    # this is automatically upgraded to a kit
+
+    class List < Phlex::HTML
+      # this is available on the `Components::Articles` kit
+    end
+  end
+end
+```
 
 [More details…](/components/kits.html)
 
