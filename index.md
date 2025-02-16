@@ -54,5 +54,5 @@ features:
     details: Rails-compatible fragment caching lets you control how different parts of your view are cached.
   - title: HTML / SVG string-builder
     icon: 🧵
-    details: You can also the Phlex DSL to build HTML and SVG strings directly, without creating a component class.
+    details: You can also use the Phlex DSL to build HTML and SVG strings directly, without creating a component class.
 ---
