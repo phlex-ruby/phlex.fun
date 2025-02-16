@@ -312,10 +312,6 @@ Renders a [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p) e
 
 Renders a [`<picture>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
 
-## `portal`
-
-Renders a [`<portal>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) element.
-
 ## `pre`
 
 Renders a [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) element.
