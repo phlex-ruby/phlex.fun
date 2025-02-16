@@ -31,7 +31,7 @@ When you call this component with a content block, it will be output at the yiel
 
 ```ruby
 render Card.new("Hello") do
-  p "Hello, World"
+  p { "Hello, World" }
 end
 ```
 
