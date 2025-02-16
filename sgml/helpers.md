@@ -140,3 +140,14 @@ end
 ```
 
 :::
+
+::: tip
+
+You’ll probably never need to use `grab` if you use [Literal Properties](/miscellaneous/literal-properties) to generate your initializers, since it automatically escapes reserved keywords by default.
+
+```ruby
+prop :class, String
+prop :if, Proc
+```
+
+:::
