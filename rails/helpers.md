@@ -18,11 +18,11 @@ To handle these differences, `phlex-rails` uses adapters, which know what kind o
 
 `phlex-rails` comes with adapters for all of Rails’ built-in view helpers. If we’re missing one, please [open an issue](https://github.com/phlex-ruby/phlex-rails/issues/new). None of the adapters are included by default because you probably don’t need that many helpers if you’re using Phlex. For example, do you really need `link_to` when you have `a`?
 
-The one you probably _will_ need is the routing adapter, which makes all the routing helpers available. It’s a good idea to include this in your base component so it’s available everywhere.
+The one you probably _will_ need is the routes adapter, which makes all the routes helpers available. It’s a good idea to include this in your base component so it’s available everywhere.
 
 ```ruby
 class Components::Base < Phlex::HTML
-  include Phlex::Rails::Helpers::Routing
+  include Phlex::Rails::Helpers::Routes
 end
 ```
 
