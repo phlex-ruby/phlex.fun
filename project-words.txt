@@ -24,11 +24,13 @@ behaviour
 behaviours
 bytesize
 cloc
+dynsrc
 frontmatter
 gbps
 gsub
 hoshi
 hyperstack
+lowsrc
 markaby
 matestack
 nokogiri
@@ -38,5 +40,6 @@ papercraft
 phlex
 renderable
 renderables
+srcdoc
 tagz
 trix

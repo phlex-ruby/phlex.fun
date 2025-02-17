@@ -92,6 +92,7 @@ export default defineConfig({
 					{ text: "Literal Properties", link: "/miscellaneous/literal-properties" },
 					{ text: "Under the hood", link: "/miscellaneous/under-the-hood" },
 					{ text: "Upgrading to v2", link: "/miscellaneous/v2-upgrade" },
+					{ text: "Structural Safety", link: "/miscellaneous/structural-safety" },
 				],
 			},
 

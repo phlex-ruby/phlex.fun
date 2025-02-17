@@ -28,10 +28,11 @@ features:
     icon: 🧰
     details: Use tools like RubyLSP, RuboCop and SimpleCov.
   - title: Kits
-    link: /components/kits.html
+    link: /components/kits
     icon: 🎒
     details: Package up components into Kits (Ruby modules) for easy reuse across projects.
   - title: Structural safety
+    link: /miscellaneous/structural-safety
     icon: 🛡️
     details: Phlex is designed to structurally prevent cross-site-scripting (XSS) attacks.
   - title: Sensible isolation
@@ -41,15 +42,15 @@ features:
     icon: 📦
     details: Phlex has no dependencies and the Rails extension only depends on Rails itself.
   - title: Selective rendering
-    link: /components/fragments.html
+    link: /components/fragments
     icon: 🔎
     details: Render a view targeting a specific fragment of HTML and Phlex only does the work to render just the parts you want.
   - title: Streaming
-    link: /components/streaming.html
+    link: /components/streaming
     icon: 🌊
     details: Phlex can stream responses to improve time-to-first-byte (TTFB). Let users see content before the database has even responded.
   - title: Fragment caching
-    link: /components/caching.html
+    link: /components/caching
     icon: 💵
     details: Rails-compatible fragment caching lets you control how different parts of your view are cached.
   - title: HTML / SVG string-builder
