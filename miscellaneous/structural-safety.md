@@ -89,7 +89,7 @@ Phlex strips the JavaScript protocol from the following ref attributes:
 7. `background`
 8. `ping`
 
-Browsers are incredibly lenient in what they count as the JavaScript protocol so Phlex takes care to ignore whitespace, to match uppercase, lowercase or mixed case and to prevent ticks like `javascript:javascript:alert(1)`.
+Browsers are incredibly lenient in what they count as the JavaScript protocol so Phlex takes care to ignore whitespace, to match uppercase, lowercase or mixed case and to prevent tricks like `javascript:javascript:alert(1)`.
 
 ::: tip
 
