@@ -115,6 +115,16 @@ The `safe` method — and in Rails, calling `.html_safe` on a String — brand t
 
 While it’s sometimes necessary to use this feature, it should be used carefully and kept close to the escaping/sanitization logic.
 
+## How is this different to ERB?
+
+Since ERB is string-based, it cannot follow the structure of your HTML. ERB performs basic HTML-escaping, but it doesn’t know if you’re outputting a value as part of a specific attribute.
+
+For example, here ERB doesn’t know that `@user.bio_link` is being rendered in an `href` attribute.
+
+```erb
+<a href="<%= @user.bio_link %>">
+```
+
 ## Reporting security vulnerabilities
 
 If you believe you have found a security vulnerability in Phlex, please do not open an issue or pull request. Instead, please [send us a private advisory](https://github.com/phlex-ruby/phlex/security/advisories/new) via GitHub.
