@@ -31,7 +31,7 @@ It’s impossible to know how many people are using Phlex in production, but her
 
 - [Components with Phlex in Rails](https://www.youtube.com/watch?v=l4bQSfqZZfQ)
 - [How I Built It: Calendar UI with Turbo Frames, Tailwind, and Alpine.js](https://www.youtube.com/watch?v=KWA3qCGRP5g&t=1s)
-- [Iterating On Our Calendar UI - "Current Time" Marker](https://www.youtube.com/watch?v=wNnRpmhw_Ks)
+- [Iterating On Our Calendar UI - “Current Time” Marker](https://www.youtube.com/watch?v=wNnRpmhw_Ks)
 
 ## Articles 📝
 
