@@ -72,10 +72,10 @@ button onclick: safe("alert(1)")
 
 ### Ref attributes
 
-Attributes that reference URLs can be used to execute JavaScript code by using the `javascript:` protocol. For example, if your Content Security Policy allows for unsafe inline JavaScript, this link will trigger a JavaScript alert when clicked:
+Attributes that reference URLs can be used to execute JavaScript code by using the `javascript:` protocol. For example, if your Content Security Policy allows for unsafe inline JavaScript, this link would trigger a JavaScript alert when clicked:
 
-```ruby
-a(href: "javascript:alert(1)") { "Click me" }
+```html
+<a href="javascript:alert(1)">Click me</a>
 ```
 
 Phlex strips the JavaScript protocol from the following ref attributes:
