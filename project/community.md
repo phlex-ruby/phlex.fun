@@ -21,7 +21,7 @@ It’s impossible to know how many people are using Phlex in production, but her
 
 - **[RubyGems.org](https://rubygems.org)**
 - **[Owl](https://owl.so)** (at least 263 components)
-- **[Feedbin](https://feedbin.com/)**
+- **[Feedbin](https://feedbin.com/)** (at least 92 components)
 - **[Clearscope](https://www.clearscope.io)** (at least 454 components)
 - **[Benchmark Wine Group](https://www.benchmarkwine.com)**
 - **[Judoscale](https://judoscale.com/)**
