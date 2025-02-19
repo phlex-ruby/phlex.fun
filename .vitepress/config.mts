@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import footnote from "markdown-it-footnote";
 
 export default defineConfig({
 	title: "Phlex",
@@ -89,6 +90,7 @@ export default defineConfig({
 				text: "Miscellaneous",
 				collapsed: false,
 				items: [
+					{ text: "CSV", link: "/miscellaneous/csv" },
 					{ text: "Literal Properties", link: "/miscellaneous/literal-properties" },
 					{ text: "Under the hood", link: "/miscellaneous/under-the-hood" },
 					{ text: "Upgrading to v2", link: "/miscellaneous/v2-upgrade" },
@@ -121,6 +123,11 @@ export default defineConfig({
 			message: "Released under the MIT License.",
 			copyright:
 				'Made by <a href="https://github.com/joeldrapper">Joel Drapper</a>, <a href="https://github.com/willcosgrove">Will Cosgrove</a> and dozens of other <a href="https://github.com/phlex-ruby/phlex/graphs/contributors">contributors</a>.',
+		},
+	},
+	markdown: {
+		config: (md) => {
+			md.use(footnote);
 		},
 	},
 });

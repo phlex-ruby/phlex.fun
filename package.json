@@ -1,6 +1,6 @@
 {
-	"dependencies": {},
 	"devDependencies": {
+		"markdown-it-footnote": "^4.0.0",
 		"cspell": "^8.17.3",
 		"vitepress": "^1.6.3"
 	},
