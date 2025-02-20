@@ -1,0 +1,5 @@
+[tasks.setup]
+run = ["bun update"]
+
+[tasks.integrate]
+run = ["bun run spellcheck", "bun run docs:build"]
