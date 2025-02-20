@@ -5,12 +5,12 @@ export default defineConfig({
 	description: "Ruby views",
 	themeConfig: {
 		search: {
-			provider: "algolia",
-			options: {
-				appId: "9KRQLH6PAZ",
-				apiKey: "ad1d773445156475c945970616b76760",
-				indexName: "phlex",
-			},
+			provider: "local",
+			// options: {
+			// 	appId: "9KRQLH6PAZ",
+			// 	apiKey: "ad1d773445156475c945970616b76760",
+			// 	indexName: "phlex",
+			// },
 		},
 
 		editLink: {
