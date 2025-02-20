@@ -1,3 +1,7 @@
+---
+title: Snippets in Phlex components
+---
+
 # Snippets
 
 In some component systems — e.g. [Svelte](https://svelte.dev/docs/svelte/snippet) — snippets are a framework feature. They allow you to extract a small part of your template into a reusable snippet without extracting a whole component.

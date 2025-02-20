@@ -1,3 +1,7 @@
+---
+title: Component UI Kits in Phlex
+---
+
 # Kits
 
 In the previous sections, we looked at how to render components and yield interfaces. Kits add some Ruby magic to make this even cleaner.

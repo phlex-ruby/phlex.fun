@@ -1,3 +1,7 @@
+---
+title: Rendering plain text in Phlex
+---
+
 # Text
 
 You can output plain text with the `plain` method.

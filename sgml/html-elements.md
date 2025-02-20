@@ -1,3 +1,7 @@
+---
+title: HTML elements DSL in Phlex
+---
+
 # HTML elements
 
 For every HTML element, there’s a Ruby method with the same name. Standard Elements that take a content block yield the current component by default. The one exception is [`svg`](#svg), which yields a [`Phlex::SVG`](svg-elements.html) component.

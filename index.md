@@ -2,6 +2,10 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
+title: Phlex
+titleTemplate: View components in Ruby
+description: Phlex is a Ruby gem for building stunning server-side rendered object-oriented view components.
+
 hero:
   name: "Phlex 2.0"
   text: "Stunning server-side rendered views in Ruby"

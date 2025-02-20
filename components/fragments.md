@@ -1,3 +1,7 @@
+---
+title: Fragments and selective rendering in Phlex
+---
+
 # Fragments <Badge type="tip" text="experimental" />
 
 The `fragment` helper allows you to define named template fragments which can be targeted while rendering.

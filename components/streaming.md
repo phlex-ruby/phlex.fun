@@ -1,3 +1,7 @@
+---
+title: Streaming Phlex components
+---
+
 # Streaming
 
 We mentioned you can pass a custom output buffer to `call` when rendering a component from the outside. Using this technique, each time the component flushes its internal buffer to the output buffer, you can stream the output over the network.

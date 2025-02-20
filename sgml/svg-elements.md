@@ -1,3 +1,7 @@
+---
+title: SVG elements DSL in Phlex
+---
+
 # SVG elements
 
 ## `a`

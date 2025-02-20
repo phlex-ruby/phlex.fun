@@ -1,3 +1,7 @@
+---
+title: Inserting whitespace in Phlex HTML and SVG DSLs
+---
+
 # Whitespace
 
 Phlex doesn’t render any whitespace around elements by default, but sometimes you need whitespace around inline elements so they can wrap. For this, you can use the `whitespace` method, which outputs a single space character.

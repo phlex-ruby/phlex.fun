@@ -1,3 +1,7 @@
+---
+title: Rendering HTML comments in Phlex
+---
+
 # Comments
 
 Phlex is just Ruby, so you can use regular Ruby comments to add context or disable part of your Phlex template. But if you want to output an HTML comment, you can use the `comment` method.

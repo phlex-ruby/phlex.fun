@@ -1,3 +1,7 @@
+---
+title: Testing Phlex components
+---
+
 # Testing
 
 Because Phlex components are just Ruby objects, you can unit-test them like any other Ruby object.

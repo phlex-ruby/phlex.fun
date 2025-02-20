@@ -1,3 +1,7 @@
+---
+title: Getting started with Phlex Components
+---
+
 # Getting started
 
 Let’s get Phlex up and running in your app.

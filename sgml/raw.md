@@ -1,3 +1,7 @@
+---
+title: Raw HTML output in Phlex
+---
+
 # Raw output
 
 For the most part, you should be able to build your views using Phlex’ element methods. But sometimes you need to output raw HTML. Maybe it’s from another Gem such as a Markdown renderer.

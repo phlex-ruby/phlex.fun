@@ -1,3 +1,7 @@
+---
+title: Rendering Phlex Components
+---
+
 # Rendering
 
 Since Phlex components are just Ruby classes, you can create a component by calling `new` on your component class and passing in your properties.

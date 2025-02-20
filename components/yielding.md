@@ -1,3 +1,7 @@
+---
+title: Yielding content in Phlex Components
+---
+
 # Yielding
 
 In previous section, we learned how to render components and pass in a block of content. In this section will look at how to yield that block of content.

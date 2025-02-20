@@ -1,3 +1,7 @@
+---
+title: Rendering HTML attributes from Phlex
+---
+
 # Attributes
 
 In Phlex, HTML elements are rendered via method calls and the keyword arguments are the attributes. Phlex has an attribute builder that handles a number of different kinds of keys and values. Let’s start by looking at the keys.
