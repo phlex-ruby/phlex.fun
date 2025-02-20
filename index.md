@@ -7,9 +7,9 @@ titleTemplate: View components in Ruby
 description: Phlex is a Ruby gem for building stunning server-side rendered object-oriented view components.
 
 hero:
-  name: "Phlex 2.0"
-  text: "Stunning server-side rendered views in Ruby"
-  tagline: A little string concatenation library.
+  name: "Phlex"
+  text: "Stunning server-side rendered views"
+  tagline: A little Ruby gem for building HTML and SVG view components.
   actions:
     - theme: brand
       text: Documentation
