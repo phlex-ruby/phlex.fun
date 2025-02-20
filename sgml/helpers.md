@@ -143,9 +143,6 @@ def grab(**bindings)
 end
 ```
 
-<<<<<<< Updated upstream
-:::
-
 ::: tip
 
 You’ll probably never need to use `grab` if you use [Literal Properties](/miscellaneous/literal-properties) to generate your initializers, since it automatically escapes reserved keywords by default.
@@ -154,7 +151,3 @@ You’ll probably never need to use `grab` if you use [Literal Properties](/misc
 prop :class, String
 prop :if, Proc
 ```
-
-=======
->>>>>>> Stashed changes
-:::
