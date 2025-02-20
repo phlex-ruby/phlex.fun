@@ -1,3 +1,7 @@
+---
+title: Phlex component helpers
+---
+
 # Helpers
 
 Phlex provides two helpers for combining attribute hashes, and accessing keyword arguments.
@@ -139,6 +143,7 @@ def grab(**bindings)
 end
 ```
 
+<<<<<<< Updated upstream
 :::
 
 ::: tip
@@ -150,4 +155,6 @@ prop :class, String
 prop :if, Proc
 ```
 
+=======
+>>>>>>> Stashed changes
 :::

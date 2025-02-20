@@ -2,7 +2,9 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
 	title: "Phlex",
-	description: "Ruby views",
+	description: "object oriented view components in Ruby.",
+	sitemap: { hostname: "https://www.phlex.fun" },
+	lastUpdated: true,
 	themeConfig: {
 		search: {
 			provider: "local",
