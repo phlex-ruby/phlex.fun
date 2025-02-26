@@ -179,11 +179,12 @@ def initialize(rows)
 end
 ```
 
-Then we’re going to need a `column` method that takes a header and content and stores them in the columns array.
+Then we’re going to need a `column` method that takes a header and content and stores them in the columns array. We’ll return `nil` to prevent any output in case the return value is unintentionally rendered with `<%=` in ERB.
 
 ```ruby
 def column(header, &content)
   @columns << { header:, content: }
+  nil
 end
 ```
 
@@ -268,6 +269,7 @@ class Table < Phlex::HTML
 
   def column(header, &content)
     @columns << { header:, content: }
+    nil
   end
 end
 ```
@@ -289,17 +291,17 @@ The Nav component can be rendered like this:
 
 ```erb
 <%= render Nav do |nav| %>
-  <%= nav.item("/") do %>
+  <% nav.item("/") do %>
     <strong>Home</strong>
   <% end %>
 
-  <%= nav.item("/about") do %>
+  <% nav.item("/about") do %>
     About
   <% end %>
 
-  <%= nav.divider %>
+  <% nav.divider %>
 
-  <%= nav.item("/contact") do %>
+  <% nav.item("/contact") do %>
     Contact
   <% end %>
 <% end %>
@@ -329,5 +331,3 @@ Or like this
   <% end %>
 <% end %>
 ```
-
-Note we don’t need to use `<%=` tags on `t.column` since it is not expected to return HTML. It’s just building up the columns list ready to be rendered at the end. If we did use `<%=`, that would also be fine, since `capture` returns an empty string if there is no HTML output during the capture.
