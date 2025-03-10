@@ -56,6 +56,10 @@ Instead of defining the `template` method for your component templates, you shou
 
 To render [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) elements in a `Phlex::HTML` component, you need to call the `template` method instead of `template_tag`.
 
+## Made `yield_content` private
+
+You can replace it with `render`, which [now accepts blocks](https://github.com/phlex-ruby/phlex/pull/798).
+
 ## Removed `tokens` and `classes` <Badge type="danger" text="breaking" />
 
 There are [better ways to handle conditional tokens now](/sgml/attributes.html#arrays-and-sets), so we removed these helpers. If you need them back to support your existing code, you can just copy the original implementation from below.
