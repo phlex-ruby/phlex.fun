@@ -38,6 +38,11 @@ Sometimes you need to register an adapter for your own view helpers, or those pr
 
 ```ruby
 class Components::Base < Phlex::HTML
+  # Register a Rails helper that returns a value that shouldn’t be pushed to the output buffer.
+  # e.g. if you want to use it like `div { format_release_date(book.date) }`
+  register_value_helper :format_release_date
+
+  # Register a Rails helper that returns safe HTML to be pushed to the output buffer.
   register_output_helper :pagy_nav
 end
 ```
