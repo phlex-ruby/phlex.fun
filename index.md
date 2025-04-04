@@ -42,9 +42,6 @@ features:
   - title: Sensible isolation
     icon: 🧪
     details: Phlex components only depend on the data you pass in, making them easier to test and reuse.
-  - title: Zero dependencies
-    icon: 📦
-    details: Phlex has no dependencies and the Rails extension only depends on Rails itself.
   - title: Selective rendering
     link: /components/fragments
     icon: 🔎
