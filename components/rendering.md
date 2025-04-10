@@ -110,7 +110,7 @@ class Components::Article < Phlex::HTML
 end
 ```
 
-In this example, because the Card component _yields_, the context in the block (`self`) is the instance of the Article component. That’s why the `@articles` instance variable is available in this block, even though it wasn’t passed down to the Card component.
+In this example, because the Card component _yields_, the context in the block (`self`) is the instance of the Article component. That’s why the `@article` instance variable is available in this block, even though it wasn’t passed down to the Card component.
 
 ## Rendering Phlex components in ERB <Badge type="danger" text="Rails" />
 
