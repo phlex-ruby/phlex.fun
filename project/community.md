@@ -7,7 +7,6 @@ next: false
 ## Support 👋
 
 - [GitHub discussions](https://github.com/orgs/phlex-ruby/discussions) — this is the best place to get help with specific issues.
-- [Discord](https://discord.gg/p7C9SWS8Sa) — we have a channel in the Naming Things discord server.
 
 ## GitHub repositories 📦
 
