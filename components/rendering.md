@@ -200,3 +200,29 @@ In Rails, ViewComponent components are also accepted as renderables and they are
 In the else condition, instead of raising a `Phlex::ArgumentError`, Phlex delegates to Rails’ own `render` method.
 
 The inputs and outputs are adapted. For example, Rails expects renderable blocks to return an HTML safe string (an `ActiveSupport::SafeBuffer`) so Phlex automatically wraps your block in a `capture` before passing it down.
+
+## Conditional rendering
+
+Phlex components can implement a #render? method. If this method returns false, the component will not be rendered. This allows you to move conditional logic out of the component's consumer and encapsulate it within the component itself.
+
+```ruby
+class NotificationsBadge < Phlex::HTML
+  def initialize(notifications:)
+    @notifications = notifications
+  end
+
+  def view_template
+    span(class: "badge badge-primary") { @notifications.size }
+  end
+
+  def render?
+    @notifications.size > 0
+  end
+end
+
+NotificationsBadge.new(notifications: ["You are awesome!"]).call
+# => "<span class="badge badge-primary">1</span>
+
+NotificationsBadge.new(notifications: []).call
+# => "" 
+```
