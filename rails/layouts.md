@@ -249,11 +249,11 @@ class Components::Layout < Components::Base
 end
 ```
 
-In the controller, you need to specify the layout with a block like this.
+In the controller, you need to specify the layout with a Proc like this.
 
 ```ruby
 class ArticlesController
-  layout { Components::Layout }
+  layout -> { Components::Layout }
 end
 ```
 
