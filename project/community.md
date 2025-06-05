@@ -31,6 +31,7 @@ It’s impossible to know how many people are using Phlex in production, but her
 - [Components with Phlex in Rails](https://www.youtube.com/watch?v=l4bQSfqZZfQ)
 - [How I Built It: Calendar UI with Turbo Frames, Tailwind, and Alpine.js](https://www.youtube.com/watch?v=KWA3qCGRP5g&t=1s)
 - [Iterating On Our Calendar UI - “Current Time” Marker](https://www.youtube.com/watch?v=wNnRpmhw_Ks)
+- [Phlex on Rails](https://beautifulruby.com/phlex)
 
 ## Articles 📝
 
@@ -45,6 +46,8 @@ It’s impossible to know how many people are using Phlex in production, but her
 - [Phlex Icons](https://github.com/AliOsm/phlex-icons)
 - [NitroKit](https://nitrokit.dev)
 - [PhlexyUI](https://phlexyui.com)
+- [Superform](https://github.com/rubymonolith/superform) - A form helper library for Rails built entirely from Phlex components.
+- [Superview](https://github.com/rubymonolith/superview) - Implicitly render Phlex views from controllers
 
 ## Prior art 🎨
 
