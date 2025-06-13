@@ -22,7 +22,7 @@ export default defineConfig({
 		nav: [
 			{ text: "Home", link: "/" },
 			{ text: "Docs", link: "/introduction" },
-			{ text: "Support", link: "https://github.com/orgs/phlex-ruby/discussions" },
+			{ text: "Support", link: "https://github.com/yippee-fun/phlex/discussions" },
 			{ text: "v1 Docs", link: "https://v1.phlex.fun" },
 		],
 
